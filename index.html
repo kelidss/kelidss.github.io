@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keliane Soares | Desenvolvedora Full Stack</title>
+    <link rel="stylesheet" href="styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="grid-bg"></div>
+    <div class="noise-overlay"></div>
+    <div class="scan-line"></div>
+
+    <header class="header">
+        <nav class="nav">
+            <a href="#home" class="nav-logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-name">KS</span>
+                <span class="logo-bracket">]</span>
+            </a>
+
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#home" class="nav-link active"><span>01.</span>Home</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link"><span>02.</span>Sobre</a></li>
+                    <li class="nav-item"><a href="#experience" class="nav-link"><span>03.</span>Experiência</a></li>
+                    <li class="nav-item"><a href="#projects" class="nav-link"><span>04.</span>Projetos</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link"><span>05.</span>Contato</a></li>
+                </ul>
+            </div>
+
+            <button class="nav-toggle" id="nav-toggle">
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+
+
+                <div class="hero-title-wrapper">
+                    <p class="hero-greeting">Olá, meu nome é</p>
+                    <h1 class="hero-name" data-text="KELIANE SOARES">
+                        <span class="name-line">KELIANE</span>
+                        <span class="name-line accent">SOARES</span>
+                    </h1>
+                    <div class="hero-role-wrapper">
+                        <span class="role-prefix">&gt;</span>
+                        <span class="hero-role" id="typed-role"></span>
+                        <span class="typed-cursor">_</span>
+                    </div>
+                </div>
+
+                <p class="hero-description">
+                    Desenvolvedora <span class="text-accent">Full Stack</span> especializada em arquitetura de
+                    sistemas escaláveis, com ênfase em backend robusto: desenho de APIs (REST/GraphQL),
+                    microsserviços, bancos de dados relacionais e NoSQL, mensageria, cache e estratégias de
+                    performance. Trabalho com testes automatizados, observabilidade, CI/CD e infraestrutura
+                    em containerização (Docker/Kubernetes) para entregar produtos sistemas
+                    performáticos e escaláveis.
+                </p>
+
+                <div class="hero-cta">
+                    <a href="#projects" class="btn-primary">
+                        <span class="btn-text">Ver Projetos</span>
+                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="https://github.com/kelidss" target="_blank" class="btn-outline">
+                        <span class="btn-icon"><i class="fab fa-github"></i></span>
+                        <span class="btn-text">GitHub</span>
+                    </a>
+                </div>
+
+                <div class="hero-metrics">
+                    <div class="metric">
+                        <span class="metric-value" data-count="3">0</span>
+                        <span class="metric-label">Anos de exp.</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric">
+                        <span class="metric-value" data-count="15">0</span>
+                        <span class="metric-label">Projetos</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric">
+                        <span class="metric-value" data-count="500">0</span>
+                        <span class="metric-label">Commits</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="profile-frame">
+                    <div class="frame-corner tl"></div>
+                    <div class="frame-corner tr"></div>
+                    <div class="frame-corner bl"></div>
+                    <div class="frame-corner br"></div>
+                    <div class="frame-line top"></div>
+                    <div class="frame-line bottom"></div>
+                    <div class="frame-line left"></div>
+                    <div class="frame-line right"></div>
+                    <img src="assets/eu.jpeg" alt="Keliane Soares" class="profile-image">
+                    <div class="profile-glitch"></div>
+                </div>
+
+                <div class="tech-orbit">
+                    <div class="orbit-ring ring-1"></div>
+                    <div class="orbit-ring ring-2"></div>
+                    <div class="orbit-ring ring-3"></div>
+                    <div class="orbit-item" style="--angle: 0deg; --delay: 0s;">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <div class="orbit-item" style="--angle: 60deg; --delay: 0.5s;">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="orbit-item" style="--angle: 120deg; --delay: 1s;">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <div class="orbit-item" style="--angle: 180deg; --delay: 1.5s;">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <div class="orbit-item" style="--angle: 240deg; --delay: 2s;">
+                        <i class="fab fa-docker"></i>
+                    </div>
+                    <div class="orbit-item" style="--angle: 300deg; --delay: 2.5s;">
+                        <i class="fas fa-code"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-hint">
+            <div class="scroll-line"></div>
+        </div>
+
+        <div class="hero-decoration">
+            <span class="deco-text">FULL_STACK.DEV</span>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">
+                    Sobre Mim
+                </h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-image-wrapper">
+                    <div class="about-image-frame">
+                        <img src="assets/perfil.jpeg" alt="Keliane em evento" class="about-image">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="about-image-label">
+                        <span class="label-icon"><i class="fas fa-terminal"></i></span>
+                        <span>Mentora & Dev</span>
+                    </div>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-intro">
+                        <p class="intro-text">
+                            <span class="code-comment">/** Desenvolvedora Full Stack */</span>
+                            Desenvolvedora especializada em criar soluções escaláveis com <strong>React, TypeScript,
+                                Python e Node.js</strong>.
+                            Experiência sólida em arquitetura de sistemas, integração de <strong>serviços e
+                                APIs</strong> e práticas DevOps (Docker, AWS).
+                        </p>
+                    </div>
+
+                    <div class="about-details">
+                        <p>
+                            Trabalho com desenvolvimento full-stack há mais de 3 anos, construindo desde interfaces
+                            modernas até
+                            APIs de alta performance. Domínio de bancos relacionais e NoSQL, CI/CD, containerização e
+                            cloud computing.
+                        </p>
+                    </div>
+
+                    <div class="about-info-grid">
+                        <div class="info-card info-card--compact">
+                            <span class="info-icon"><i class="fas fa-graduation-cap"></i></span>
+                            <div class="info-content">
+                                <span class="info-label">Formação</span>
+                                <span class="info-value">Ciência da Computação</span>
+                                <!-- instituição e ano removidos -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-tech">
+                        <span class="tech-label">Tech Stack:</span>
+                        <div class="tech-tags">
+                            <span class="tech-tag"><i class="fab fa-react"></i> React</span>
+                            <span class="tech-tag"><i class="fab fa-js"></i> TypeScript</span>
+                            <span class="tech-tag"><i class="fab fa-python"></i> Python</span>
+                            <span class="tech-tag"><i class="fas fa-bolt"></i> FastAPI</span>
+                            <span class="tech-tag"><i class="fab fa-node-js"></i> Node.js</span>
+                            <span class="tech-tag"><i class="fas fa-database"></i> PostgreSQL</span>
+                            <span class="tech-tag"><i class="fab fa-docker"></i> Docker</span>
+                            <span class="tech-tag"><i class="fab fa-aws"></i> AWS</span>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">
+                    Experiência
+                </h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="exp-layout">
+                <div class="exp-tabs">
+                    <button class="exp-tab active" data-tab="orfeu">
+                        <span class="tab-indicator"></span>
+                        <span class="tab-company">Orfeu</span>
+                    </button>
+                    <button class="exp-tab" data-tab="aquabit">
+                        <span class="tab-indicator"></span>
+                        <span class="tab-company">Aquabit</span>
+                    </button>
+                    <button class="exp-tab" data-tab="kompa">
+                        <span class="tab-indicator"></span>
+                        <span class="tab-company">Kompa Saúde</span>
+                    </button>
+                    <button class="exp-tab" data-tab="passamanaria">
+                        <span class="tab-indicator"></span>
+                        <span class="tab-company">Passamanaria</span>
+                    </button>
+                    <button class="exp-tab" data-tab="vida">
+                        <span class="tab-indicator"></span>
+                        <span class="tab-company">Vida Premium</span>
+                    </button>
+                </div>
+
+                <div class="exp-content">
+                    <div class="exp-panel active" id="orfeu">
+                        <div class="exp-header">
+                            <h3 class="exp-title">Full Stack Developer</h3>
+                            <span class="exp-company">@ Orfeu</span>
+                        </div>
+                        <div class="exp-meta">
+                            <span class="exp-date"><i class="far fa-calendar"></i> Nov 2025 - Presente</span>
+                            <span class="exp-badge current">Atual</span>
+                        </div>
+                        <ul class="exp-list">
+                            <li><span class="list-marker">▹</span>Desenvolvimento de interfaces ricas e responsivas com
+                                React e TypeScript</li>
+                            <li><span class="list-marker">▹</span>Implementação de serviços backend robustos com Node.js
+                            </li>
+                            <li><span class="list-marker">▹</span>Integração de soluções e automações para
+                                funcionalidades avançadas</li>
+                            <li><span class="list-marker">▹</span>Otimização de performance e gerenciamento de estados
+                                complexos</li>
+                        </ul>
+                        <div class="exp-stack">
+                            <span>React</span><span>TypeScript</span><span>Node.js</span>
+                        </div>
+                    </div>
+
+                    <div class="exp-panel" id="aquabit">
+                        <div class="exp-header">
+                            <h3 class="exp-title">Backend Software Engineer</h3>
+                            <span class="exp-company">@ Aquabit</span>
+                        </div>
+                        <div class="exp-meta">
+                            <span class="exp-date"><i class="far fa-calendar"></i> Nov 2024 - Mai 2025</span>
+                        </div>
+                        <ul class="exp-list">
+                            <li><span class="list-marker">▹</span>APIs de alta performance e escaláveis com FastAPI e
+                                Django</li>
+                            <li><span class="list-marker">▹</span>Modelagem avançada de dados com PostgreSQL e
+                                SQLAlchemy</li>
+                            <li><span class="list-marker">▹</span>Containerização e gerenciamento de infraestrutura com
+                                Docker</li>
+                            <li><span class="list-marker">▹</span>Implementação de observabilidade e monitoramento</li>
+                        </ul>
+                        <div class="exp-stack">
+                            <span>FastAPI</span><span>Django</span><span>PostgreSQL</span><span>Docker</span>
+                        </div>
+                    </div>
+
+                    <div class="exp-panel" id="kompa">
+                        <div class="exp-header">
+                            <h3 class="exp-title">Backend Developer</h3>
+                            <span class="exp-company">@ Kompa Saúde</span>
+                        </div>
+                        <div class="exp-meta">
+                            <span class="exp-date"><i class="far fa-calendar"></i> Ago 2024 - Nov 2024</span>
+                        </div>
+                        <ul class="exp-list">
+                            <li><span class="list-marker">▹</span>APIs RESTful em Python/Flask com integração de modelos
+                                de IA</li>
+                            <li><span class="list-marker">▹</span>Funcionalidades em tempo real com WebSockets/Socket.IO
+                            </li>
+                            <li><span class="list-marker">▹</span>DevOps com deploy em AWS (EC2, S3) e Docker Swarm</li>
+                            <li><span class="list-marker">▹</span>Sistemas de notificações push e análise de risco</li>
+                        </ul>
+                        <div class="exp-stack">
+                            <span>Python</span><span>Flask</span><span>AWS</span><span>WebSockets</span>
+                        </div>
+                    </div>
+
+                    <div class="exp-panel" id="passamanaria">
+                        <div class="exp-header">
+                            <h3 class="exp-title">Jr Full-Stack Developer</h3>
+                            <span class="exp-company">@ Passamanaria do Nordeste</span>
+                        </div>
+                        <div class="exp-meta">
+                            <span class="exp-date"><i class="far fa-calendar"></i> Nov 2023 - Mai 2024</span>
+                        </div>
+                        <ul class="exp-list">
+                            <li><span class="list-marker">▹</span>Dashboards gerenciais dinâmicos com Flask</li>
+                            <li><span class="list-marker">▹</span>Aplicativo mobile em Flutter para controle de estoque
+                            </li>
+                            <li><span class="list-marker">▹</span>Integração e manutenção de banco de dados SQL Server
+                            </li>
+                        </ul>
+                        <div class="exp-stack">
+                            <span>Flask</span><span>Flutter</span><span>SQL Server</span>
+                        </div>
+                    </div>
+
+                    <div class="exp-panel" id="vida">
+                        <div class="exp-header">
+                            <h3 class="exp-title">Data Analysis Intern</h3>
+                            <span class="exp-company">@ Vida Premium</span>
+                        </div>
+                        <div class="exp-meta">
+                            <span class="exp-date"><i class="far fa-calendar"></i> Mai 2023 - Out 2023</span>
+                        </div>
+                        <ul class="exp-list">
+                            <li><span class="list-marker">▹</span>Extração e tratamento de dados com SQL</li>
+                            <li><span class="list-marker">▹</span>Relatórios estratégicos e dashboards interativos</li>
+                            <li><span class="list-marker">▹</span>Automações web para otimização de rotinas</li>
+                        </ul>
+                        <div class="exp-stack">
+                            <span>SQL</span><span>Data Analysis</span><span>Automation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title">
+                    Projetos
+                </h2>
+                <div class="section-line"></div>
+            </div>
+
+            <p class="projects-subtitle">
+                <span class="code-comment">// Soluções que transformam ideias em realidade digital</span>
+            </p>
+
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">
+                    <span class="filter-indicator"></span>
+                    <span class="filter-icon">&lt;/&gt;</span>
+                    <span>Todos</span>
+                </button>
+                <button class="filter-btn" data-filter="web">
+                    <span class="filter-indicator"></span>
+                    <span class="filter-icon"><i class="fas fa-globe"></i></span>
+                    <span>Web</span>
+                </button>
+                <button class="filter-btn" data-filter="mobile">
+                    <span class="filter-indicator"></span>
+                    <span class="filter-icon"><i class="fas fa-mobile-alt"></i></span>
+                    <span>Mobile</span>
+                </button>
+
+            </div>
+
+            <div class="projects-grid">
+                <!-- Projetos Web -->
+
+                <!-- Orfeu -->
+                <article class="project-card" data-category="web">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/orfeu/image.png" alt="Orfeu - Orquestrador de inovação" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-project-diagram"></i> Orquestrador</span>
+                            <div class="project-links">
+                                <a href="https://orfeu.app" target="_blank" class="link-icon" title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Orfeu</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Funciona como um orquestrador de jornadas de inovação corporativa global. A ferramenta
+                                ajuda empresas a gerenciar e transformar iniciativas de inovação dispersas em vantagens
+                                estratégicas reais.
+                            </p>
+                            <div class="project-stack">
+                                <span>React</span>
+                                <span>TypeScript</span>
+                                <span>Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Aquabit System -->
+                <article class="project-card" data-category="web">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/aquabit/image.png" alt="Aquabit System" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-fish"></i> Agritech</span>
+                            <div class="project-links">
+
+                                <a href="https://web.aquabit.com.br" target="_blank" class="link-icon"
+                                    title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Aquabit</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Plataforma de inteligência e gestão para aquicultura (produção de peixes e camarões). O
+                                site e o aplicativo oferecem controle de biometrias e mortalidade, gestão de estoque por
+                                tanques e lotes, além de acompanhar custos e rentabilidade da produção.
+                            </p>
+                            <div class="project-stack">
+                                <span>FastAPI</span>
+                                <span>Django</span>
+                                <span>PostgreSQL</span>
+                                <span>Docker</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Comunidade Aqua -->
+                <article class="project-card" data-category="web">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/comunidade aqua/image.png" alt="Comunidade Aqua" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-users"></i> Social</span>
+                            <div class="project-links">
+                                <a href="https://comunidadeaqua.com.br" target="_blank" class="link-icon"
+                                    title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Comunidade Aqua</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Plataforma de interação para a comunidade de aquicultura, conectando produtores e
+                                técnicos. Desenvolvida em Django, traz autenticação, feed em tempo real e recursos
+                                colaborativos para troca de conhecimento e suporte técnico.
+                            </p>
+                            <div class="project-stack">
+                                <span>Python</span>
+                                <span>FastAPI</span>
+                                <span>PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- NordDev -->
+                <article class="project-card" data-category="web">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/norddev/image.png" alt="NordDev" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-building"></i> Institucional</span>
+                            <div class="project-links">
+                                <a href="https://www.norddev.com.br" target="_blank" class="link-icon"
+                                    title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">NordDev</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Portal institucional para empresa de tecnologia que cria sites, plataformas e sistemas
+                                para outras empresas. Projetado para apresentar serviços, portfólio e facilitar a
+                                captura de leads.
+                            </p>
+                            <div class="project-stack">
+                                <span>React</span>
+                                <span>TypeScript</span>
+                                <span>Framer</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Amevis -->
+                <article class="project-card" data-category="web">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/amevi/image.png" alt="Amevis" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-briefcase"></i> Corporativo</span>
+                            <div class="project-links">
+                                <a href="https://amevis.com.br" target="_blank" class="link-icon" title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Amevis</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Site de e-commerce/loja de perfumes, especializado em fragrâncias similares e orientais.
+                                Estruturado para exibir produtos, facilitar compras e promover a marca.
+                            </p>
+                            <div class="project-stack">
+                                <span>React</span>
+                                <span>TypeScript</span>
+                                <span>Next.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Marília Dantas -->
+                <article class="project-card" data-category="web">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/mariliadantas/image.png" alt="Marília Dantas" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-palette"></i> Portfolio</span>
+                            <div class="project-links">
+                                <a href="https://www.mariliadantas.com" target="_blank" class="link-icon"
+                                    title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Marília Dantas</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Site institucional de um estúdio de beleza e estética, apresentando serviços,
+                                tratamentos e informações de contato para clientes.
+                            </p>
+                            <div class="project-stack">
+                                <span>React</span>
+                                <span>TypeScript</span>
+                                <span>Next.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Leticia -->
+                <article class="project-card" data-category="web">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/blogleticia/image.png" alt="Blog da Leticia" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-blog"></i> Blog</span>
+                            <div class="project-links">
+                                <a href="https://blogleticia.fly.dev/" target="_blank" class="link-icon" title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Blog da Leticia</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Blog pessoal da Letícia, psicóloga, dedicado a artigos, reflexões e recursos sobre o
+                                luto e processos de perda.
+                            </p>
+                            <div class="project-stack">
+                                <span>PHP</span>
+                                <span>HTML</span>
+                                <span>CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+
+                <!-- Projetos Mobile -->
+
+                <!-- Kompa Saúde -->
+                <article class="project-card" data-category="mobile" data-image-type="mobile">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/kompa/unnamed.webp" alt="Kompa Saúde" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-heartbeat"></i> HealthTech</span>
+                            <div class="project-links">
+                                <a href="https://manager.kompa.com.br" target="_blank" class="link-icon"
+                                    title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Kompa Saúde</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Ecossistema de saúde digital com APIs Python/Flask, integração para análise preditiva e
+                                infraestrutura AWS.
+                            </p>
+                            <div class="project-stack">
+                                <span>Python</span>
+                                <span>Flask</span>
+                                <span>AWS</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- MentalClean -->
+                <article class="project-card" data-category="mobile" data-image-type="mobile">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/mentalclean/unnamed (1).webp" alt="MentalClean" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-heartbeat"></i> HealthTech</span>
+                            <div class="project-links">
+                                <a href="https://play.google.com/store/apps/details?id=com.mentalclean.app"
+                                    target="_blank" class="link-icon" title="Play Store">
+                                    <i class="fab fa-google-play"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">MentalClean</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Plataforma de saúde e bem-estar focada no ambiente corporativo, oferecida às empresas
+                                como canal de suporte emocional para colaboradores. Disponibiliza atendimento
+                                psicossocial, central de atendimento 24/7, assessorias especializadas e programas
+                                educativos para promoção do equilíbrio emocional e da produtividade.
+                            </p>
+                            <div class="project-stack">
+                                <span>Python</span>
+                                <span>Flask</span>
+                                <span>Docker</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="projects-cta">
+                <button class="btn-view-more" id="view-more-btn">
+                    <span class="btn-text">Ver Mais</span>
+                    <span class="btn-icon"><i class="fas fa-chevron-down"></i></span>
+                </button>
+            </div>
+
+
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header centered">
+                <span class="section-number">05</span>
+                <h2 class="section-title">
+                    Entre em Contato
+                </h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="contact-wrapper">
+                <div class="contact-card">
+                    <div class="contact-header-text">
+                        <h3>Vamos construir algo incrível?</h3>
+                        <p>Estou disponível para novos projetos, consultorias e oportunidades. Se você tem uma ideia
+                            inovadora ou precisa de uma solução técnica, mande uma mensagem!</p>
+                    </div>
+
+                    <div class="contact-methods">
+                        <div class="method-item">
+                            <div class="method-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="method-info">
+                                <span>Email</span>
+                                <a href="mailto:keliane.dev@gmail.com">keliane.dev@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="method-item">
+                            <div class="method-icon"><i class="fab fa-linkedin-in"></i></div>
+                            <div class="method-info">
+                                <span>LinkedIn</span>
+                                <a href="https://linkedin.com/in/keliz" target="_blank">/in/keliz</a>
+                            </div>
+                        </div>
+                        <div class="method-item">
+                            <div class="method-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="method-info">
+                                <span>Localização</span>
+                                <span>Fortaleza, CE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form-new" id="contact-form">
+                    <div class="form-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span class="form-title">message.js</span>
+                    </div>
+                    <div class="form-body">
+                        <div class="input-group">
+                            <label for="name">const nome =</label>
+                            <input type="text" id="name" name="name" placeholder='"Seu Nome";' required>
+                        </div>
+                        <div class="input-group">
+                            <label for="email">const email =</label>
+                            <input type="email" id="email" name="email" placeholder='"seu@email.com";' required>
+                        </div>
+                        <div class="input-group">
+                            <label for="message">const mensagem =</label>
+                            <textarea id="message" name="message" rows="5" placeholder='`Escreva sua mensagem aqui...`;'
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-text">enviarMensagem()</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">[KS]</span>
+                    <p class="footer-tagline">Building the future, one commit at a time.</p>
+                </div>
+                <div class="footer-links">
+                    <!-- Links removidos conforme solicitado -->
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">
+                    <span class="code-tag">&lt;</span>
+                    Designed & Built by Keliane Soares
+                    <span class="code-tag">/&gt;</span>
+                </p>
+                <p class="footer-year">© 2026</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
