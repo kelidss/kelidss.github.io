@@ -13,7 +13,11 @@
 </head>
 
 <body>
-    <div class="grid-bg"></div>
+    <div class="ambient-bg">
+        <span class="ambient-blob blob-a"></span>
+        <span class="ambient-blob blob-b"></span>
+        <span class="ambient-blob blob-c"></span>
+    </div>
     <div class="noise-overlay"></div>
 
     <header class="header">
@@ -26,12 +30,19 @@
 
             <div class="nav-menu" id="nav-menu">
                 <ul class="nav-list">
-                    <li class="nav-item"><a href="#home" class="nav-link active"><span>01.</span>Home</a></li>
-                    <li class="nav-item"><a href="#about" class="nav-link"><span>02.</span>Sobre</a></li>
-                    <li class="nav-item"><a href="#experience" class="nav-link"><span>03.</span>Experiência</a></li>
-                    <li class="nav-item"><a href="#projects" class="nav-link"><span>04.</span>Projetos</a></li>
-                    <li class="nav-item"><a href="#contact" class="nav-link"><span>05.</span>Contato</a></li>
+                    <li class="nav-item"><a href="#home" class="nav-link active"><span>01.</span><span data-i18n="nav-home">Home</span></a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link"><span>02.</span><span data-i18n="nav-about">Sobre</span></a></li>
+                    <li class="nav-item"><a href="#services" class="nav-link"><span>03.</span><span data-i18n="nav-services">Serviços</span></a></li>
+                    <li class="nav-item"><a href="#experience" class="nav-link"><span>04.</span><span data-i18n="nav-experience">Experiência</span></a></li>
+                    <li class="nav-item"><a href="#projects" class="nav-link"><span>05.</span><span data-i18n="nav-projects">Projetos</span></a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link"><span>06.</span><span data-i18n="nav-contact">Contato</span></a></li>
                 </ul>
+            </div>
+
+            <div class="lang-toggle" id="lang-toggle">
+                <button class="lang-btn active" data-lang="pt">PT</button>
+                <span class="lang-divider">|</span>
+                <button class="lang-btn" data-lang="en">EN</button>
             </div>
 
             <button class="nav-toggle" id="nav-toggle">
@@ -46,7 +57,7 @@
 
 
                 <div class="hero-title-wrapper">
-                    <p class="hero-greeting">Olá, meu nome é</p>
+                    <p class="hero-greeting" data-i18n="hero-greeting">Olá, meu nome é</p>
                     <h1 class="hero-name" data-text="KELIANE SOARES">
                         <span class="name-line">KELIANE</span>
                         <span class="name-line accent">SOARES</span>
@@ -58,18 +69,17 @@
                     </div>
                 </div>
 
-                <p class="hero-description">
-                    Desenvolvedora <span class="text-accent">Full Stack</span> especializada em arquitetura de
-                    sistemas escaláveis, com ênfase em backend robusto: desenho de APIs (REST/GraphQL),
-                    microsserviços, bancos de dados relacionais e NoSQL, mensageria, cache e estratégias de
-                    performance. Trabalho com testes automatizados, observabilidade, CI/CD e infraestrutura
-                    em containerização (Docker/Kubernetes) para entregar produtos sistemas
-                    performáticos e escaláveis.
+                <p class="hero-description" data-i18n-html="hero-description">
+                    Engenheira de Software <span class="text-accent">Full Stack</span> especializada em arquitetura
+                    de sistemas escaláveis e na <span class="text-accent">integração prática de IA</span>. Construo
+                    back-ends robustos com Python (FastAPI, Django, Flask), C#/.NET e Node.js, além de interfaces
+                    web e mobile com React, TypeScript e Flutter. Da modelagem de dados à cultura DevOps, entrego
+                    código performático — de CRMs sob medida a sistemas críticos com triagem em tempo real.
                 </p>
 
                 <div class="hero-cta">
                     <a href="#projects" class="btn-primary">
-                        <span class="btn-text">Ver Projetos</span>
+                        <span class="btn-text" data-i18n="btn-projects">Ver Projetos</span>
                         <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
                     </a>
                     <a href="https://github.com/kelidss" target="_blank" class="btn-outline">
@@ -80,18 +90,18 @@
 
                 <div class="hero-metrics">
                     <div class="metric">
-                        <span class="metric-value" data-count="3">0</span>
-                        <span class="metric-label">Anos de exp.</span>
+                        <span class="metric-value" data-count="4">0</span>
+                        <span class="metric-label" data-i18n="metric-years">Anos de exp.</span>
                     </div>
                     <div class="metric-divider"></div>
                     <div class="metric">
                         <span class="metric-value" data-count="15">0</span>
-                        <span class="metric-label">Projetos</span>
+                        <span class="metric-label" data-i18n="metric-projects">Projetos</span>
                     </div>
                     <div class="metric-divider"></div>
                     <div class="metric">
                         <span class="metric-value" data-count="500">0</span>
-                        <span class="metric-label">Commits</span>
+                        <span class="metric-label" data-i18n="metric-commits">Commits</span>
                     </div>
                 </div>
             </div>
@@ -113,24 +123,29 @@
                 <div class="tech-orbit">
                     <div class="orbit-ring ring-1"></div>
                     <div class="orbit-ring ring-2"></div>
-                    <div class="orbit-ring ring-3"></div>
-                    <div class="orbit-item" style="--angle: 0deg; --delay: 0s;">
+                    <div class="orbit-item" style="--angle: 0deg; --delay: 0s;" title="React">
                         <i class="fab fa-react"></i>
                     </div>
-                    <div class="orbit-item" style="--angle: 60deg; --delay: 0.5s;">
+                    <div class="orbit-item" style="--angle: 45deg; --delay: -3.125s;" title="Python">
                         <i class="fab fa-python"></i>
                     </div>
-                    <div class="orbit-item" style="--angle: 120deg; --delay: 1s;">
+                    <div class="orbit-item" style="--angle: 90deg; --delay: -6.25s;" title="Node.js">
                         <i class="fab fa-node-js"></i>
                     </div>
-                    <div class="orbit-item" style="--angle: 180deg; --delay: 1.5s;">
-                        <i class="fab fa-aws"></i>
+                    <div class="orbit-item" style="--angle: 135deg; --delay: -9.375s;" title="TypeScript">
+                        <i class="fab fa-js"></i>
                     </div>
-                    <div class="orbit-item" style="--angle: 240deg; --delay: 2s;">
+                    <div class="orbit-item" style="--angle: 180deg; --delay: -12.5s;" title="IA / LLMs">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="orbit-item" style="--angle: 225deg; --delay: -15.625s;" title="Docker">
                         <i class="fab fa-docker"></i>
                     </div>
-                    <div class="orbit-item" style="--angle: 300deg; --delay: 2.5s;">
-                        <i class="fas fa-code"></i>
+                    <div class="orbit-item" style="--angle: 270deg; --delay: -18.75s;" title="Flutter">
+                        <i class="fas fa-mobile-screen-button"></i>
+                    </div>
+                    <div class="orbit-item" style="--angle: 315deg; --delay: -21.875s;" title="Database">
+                        <i class="fas fa-database"></i>
                     </div>
                 </div>
             </div>
@@ -149,7 +164,7 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-number">02</span>
-                <h2 class="section-title">
+                <h2 class="section-title" data-i18n="about-title">
                     Sobre Mim
                 </h2>
                 <div class="section-line"></div>
@@ -163,27 +178,26 @@
                     </div>
                     <div class="about-image-label">
                         <span class="label-icon"><i class="fas fa-terminal"></i></span>
-                        <span>Mentora & Dev</span>
+                        <span class="about-image-label">Mentora & Dev</span>
                     </div>
                 </div>
 
                 <div class="about-content">
                     <div class="about-intro">
-                        <p class="intro-text">
-                            <span class="code-comment">/** Desenvolvedora Full Stack */</span>
-                            Desenvolvedora especializada em criar soluções escaláveis com <strong>React, TypeScript,
-                                Python e Node.js</strong>.
-                            Experiência sólida em arquitetura de sistemas, integração de <strong>serviços e
-                                APIs</strong> e práticas DevOps (Docker, AWS).
+                        <p class="intro-text" data-i18n-html="about-intro">
+                            <span class="code-comment">/** Engenheira de Software Full Stack */</span>
+                            Priorizo a lógica estrutural e a resolução de problemas, criando soluções escaláveis com
+                            <strong>React, TypeScript, Python, C#/.NET e Node.js</strong>.
+                            Integro <strong>Inteligência Artificial (LLMs)</strong> em produtos reais — de análise de
+                            sentimentos a triagem em tempo real.
                         </p>
                     </div>
 
                     <div class="about-details">
-                        <p>
-                            Trabalho com desenvolvimento full-stack há mais de 3 anos, construindo desde interfaces
-                            modernas até
-                            APIs de alta performance. Domínio de bancos relacionais e NoSQL, CI/CD, containerização e
-                            cloud computing.
+                        <p data-i18n="about-details">
+                            Atuo com desenvolvimento full-stack há mais de 4 anos, entregando desde CRMs sob medida e
+                            algoritmos de matchmaking até sistemas críticos de saúde. Domínio de bancos relacionais e
+                            NoSQL, práticas DevOps (Docker, AWS, CI/CD) e código performático em múltiplas plataformas.
                         </p>
                     </div>
 
@@ -191,25 +205,36 @@
                         <div class="info-card info-card--compact">
                             <span class="info-icon"><i class="fas fa-graduation-cap"></i></span>
                             <div class="info-content">
-                                <span class="info-label">Formação</span>
-                                <span class="info-value">Ciência da Computação</span>
+                                <span class="info-label" data-i18n="about-formation-label">Formação</span>
+                                <span class="info-value" data-i18n="about-formation-value">Ciência da Computação</span>
                                 <!-- instituição e ano removidos -->
                             </div>
                         </div>
                     </div>
 
                     <div class="about-tech">
-                        <span class="tech-label">Tech Stack:</span>
+                        <span class="tech-label" data-i18n="about-tech-label">Tech Stack:</span>
                         <div class="tech-tags">
                             <span class="tech-tag"><i class="fab fa-react"></i> React</span>
                             <span class="tech-tag"><i class="fab fa-js"></i> TypeScript</span>
+                            <span class="tech-tag"><i class="fas fa-mobile-screen-button"></i> Flutter</span>
                             <span class="tech-tag"><i class="fab fa-python"></i> Python</span>
                             <span class="tech-tag"><i class="fas fa-bolt"></i> FastAPI</span>
+                            <span class="tech-tag"><i class="fab fa-python"></i> Django</span>
+                            <span class="tech-tag"><i class="fas fa-flask"></i> Flask</span>
+                            <span class="tech-tag"><i class="fas fa-hashtag"></i> C#/.NET</span>
                             <span class="tech-tag"><i class="fab fa-node-js"></i> Node.js</span>
+                            <span class="tech-tag"><i class="fab fa-php"></i> PHP</span>
+                            <span class="tech-tag"><i class="fas fa-robot"></i> LLMs / IA</span>
                             <span class="tech-tag"><i class="fas fa-database"></i> PostgreSQL</span>
+                            <span class="tech-tag"><i class="fas fa-leaf"></i> MongoDB</span>
+                            <span class="tech-tag"><i class="fas fa-bolt-lightning"></i> Redis</span>
+                            <span class="tech-tag"><i class="fas fa-database"></i> SQL Server</span>
                             <span class="tech-tag"><i class="fab fa-docker"></i> Docker</span>
                             <span class="tech-tag"><i class="fab fa-aws"></i> AWS</span>
-
+                            <span class="tech-tag"><i class="fas fa-infinity"></i> CI/CD</span>
+                            <span class="tech-tag"><i class="fab fa-git-alt"></i> Git</span>
+                            <span class="tech-tag"><i class="fab fa-linux"></i> Linux</span>
                         </div>
                     </div>
 
@@ -219,11 +244,147 @@
         </div>
     </section>
 
-    <section id="experience" class="experience">
+    <section id="services" class="services">
         <div class="container">
             <div class="section-header">
                 <span class="section-number">03</span>
-                <h2 class="section-title">
+                <h2 class="section-title" data-i18n="services-title">
+                    Serviços
+                </h2>
+                <div class="section-line"></div>
+            </div>
+
+            <p class="services-subtitle">
+            </p>
+
+            <div class="services-list">
+                <div class="service-item">
+                    <span class="service-item-icon"><i class="fas fa-globe"></i></span>
+                    <div class="service-item-body">
+                        <h3 class="service-item-name" data-i18n="svc-sites">Sites &amp; Landing Pages</h3>
+                        <p class="service-item-tags">
+                            <span data-i18n="svc-sites-1">Sites institucionais</span>
+                            <span data-i18n="svc-sites-2">Sites empresariais</span>
+                            <span data-i18n="svc-sites-3">Landing pages</span>
+                            <span data-i18n="svc-sites-4">Lojas virtuais</span>
+                            <span data-i18n="svc-sites-5">Portais corporativos</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <span class="service-item-icon"><i class="fas fa-layer-group"></i></span>
+                    <div class="service-item-body">
+                        <h3 class="service-item-name" data-i18n="svc-web">Sistemas Web</h3>
+                        <p class="service-item-tags">
+                            <span data-i18n="svc-web-1">Sistemas completos</span>
+                            <span data-i18n="svc-web-2">Plataformas SaaS</span>
+                            <span data-i18n="svc-web-3">CRM personalizado</span>
+                            <span data-i18n="svc-web-4">ERP sob medida</span>
+                            <span data-i18n="svc-web-5">Sistemas de gestão</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <span class="service-item-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                    <div class="service-item-body">
+                        <h3 class="service-item-name" data-i18n="svc-mobile">Apps Mobile</h3>
+                        <p class="service-item-tags">
+                            <span data-i18n="svc-mobile-1">Apps iOS</span>
+                            <span data-i18n="svc-mobile-2">Apps Android</span>
+                            <span data-i18n="svc-mobile-3">Apps multiplataforma</span>
+                            <span data-i18n="svc-mobile-4">Progressive Web Apps</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <span class="service-item-icon"><i class="fas fa-brain"></i></span>
+                    <div class="service-item-body">
+                        <h3 class="service-item-name" data-i18n="svc-ai">Soluções com IA</h3>
+                        <p class="service-item-tags">
+                            <span>Integração de LLMs</span>
+                            <span>Agentes Autônomos</span>
+                            <span>Análise Preditiva</span>
+                            <span>Automação Inteligente</span>
+                            <span>Processamento de Linguagem Natural</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <span class="service-item-icon"><i class="fas fa-gauge-high"></i></span>
+                    <div class="service-item-body">
+                        <h3 class="service-item-name" data-i18n="svc-dash">Dashboards &amp; Painéis</h3>
+                        <p class="service-item-tags">
+                            <span data-i18n="svc-dash-1">Dashboards administrativos</span>
+                            <span data-i18n="svc-dash-2">Painéis de gestão</span>
+                            <span data-i18n="svc-dash-3">Portais de clientes</span>
+                            <span data-i18n="svc-dash-4">Sistemas internos</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <span class="service-item-icon"><i class="fas fa-robot"></i></span>
+                    <div class="service-item-body">
+                        <h3 class="service-item-name" data-i18n="svc-auto">Plataformas &amp; Automação</h3>
+                        <p class="service-item-tags">
+                            <span data-i18n="svc-auto-1">Plataformas de agendamento</span>
+                            <span data-i18n="svc-auto-2">Sistemas de vendas</span>
+                            <span data-i18n="svc-auto-3">Automação de processos</span>
+                            <span data-i18n="svc-auto-4">Soluções sob demanda</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <span class="service-item-icon"><i class="fas fa-plug"></i></span>
+                    <div class="service-item-body">
+                        <h3 class="service-item-name" data-i18n="svc-int">Integrações</h3>
+                        <p class="service-item-tags">
+                            <span data-i18n="svc-int-1">APIs de terceiros</span>
+                            <span data-i18n="svc-int-2">Gateways de pagamento</span>
+                            <span data-i18n="svc-int-3">WhatsApp Business</span>
+                            <span data-i18n="svc-int-4">ERPs &amp; CRMs</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <span class="service-item-icon"><i class="fas fa-wand-magic-sparkles"></i></span>
+                    <div class="service-item-body">
+                        <h3 class="service-item-name" data-i18n="svc-mod">Modernização</h3>
+                        <p class="service-item-tags">
+                            <span data-i18n="svc-mod-1">Sistemas legados</span>
+                            <span data-i18n="svc-mod-2">Refatoração de front-end</span>
+                            <span data-i18n="svc-mod-3">Interfaces modernas</span>
+                            <span data-i18n="svc-mod-4">Arquitetura de software</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <span class="service-item-icon"><i class="fas fa-pen-ruler"></i></span>
+                    <div class="service-item-body">
+                        <h3 class="service-item-name" data-i18n="svc-design">Design &amp; UX</h3>
+                        <p class="service-item-tags">
+                            <span data-i18n="svc-design-2">Prototipagem de telas</span>
+                            <span data-i18n="svc-design-3">Interfaces responsivas</span>
+                            <span data-i18n="svc-design-4">Design systems</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title" data-i18n="exp-title">
                     Experiência
                 </h2>
                 <div class="section-line"></div>
@@ -231,9 +392,17 @@
 
             <div class="exp-layout">
                 <div class="exp-tabs">
-                    <button class="exp-tab active" data-tab="orfeu">
+                    <button class="exp-tab active" data-tab="bluecircuit">
+                        <span class="tab-indicator"></span>
+                        <span class="tab-company">BlueCircuit</span>
+                    </button>
+                    <button class="exp-tab" data-tab="orfeu">
                         <span class="tab-indicator"></span>
                         <span class="tab-company">Orfeu</span>
+                    </button>
+                    <button class="exp-tab" data-tab="acev">
+                        <span class="tab-indicator"></span>
+                        <span class="tab-company">ACEV</span>
                     </button>
                     <button class="exp-tab" data-tab="aquabit">
                         <span class="tab-indicator"></span>
@@ -254,46 +423,93 @@
                 </div>
 
                 <div class="exp-content">
-                    <div class="exp-panel active" id="orfeu">
+                    <div class="exp-panel active" id="bluecircuit">
                         <div class="exp-header">
-                            <h3 class="exp-title">Full Stack Developer</h3>
-                            <span class="exp-company">@ Orfeu</span>
+                            <h3 class="exp-title">Engenheira de Software Full-Stack</h3>
+                            <span class="exp-company">@ BlueCircuit</span>
                         </div>
                         <div class="exp-meta">
-                            <span class="exp-date"><i class="far fa-calendar"></i> Nov 2025 - Presente</span>
+                            <span class="exp-date"><i class="far fa-calendar"></i> Jul 2026 - Presente</span>
                             <span class="exp-badge current">Atual</span>
                         </div>
                         <ul class="exp-list">
-                            <li><span class="list-marker">▹</span>Desenvolvimento de interfaces ricas e responsivas com
-                                React e TypeScript</li>
-                            <li><span class="list-marker">▹</span>Implementação de serviços backend robustos com Node.js
-                            </li>
-                            <li><span class="list-marker">▹</span>Integração de soluções e automações para
-                                funcionalidades avançadas</li>
-                            <li><span class="list-marker">▹</span>Otimização de performance e gerenciamento de estados
-                                complexos</li>
+                            <li><span class="list-marker">▹</span>Desenvolvimento de sites, landing pages, lojas virtuais
+                                e sistemas web completos (SaaS, CRM e ERP sob medida)</li>
+                            <li><span class="list-marker">▹</span>Apps mobile (iOS, Android e multiplataforma), PWAs e
+                                dashboards administrativos</li>
+                            <li><span class="list-marker">▹</span>Integrações com APIs de terceiros, gateways de pagamento
+                                e WhatsApp Business</li>
+                            <li><span class="list-marker">▹</span>Modernização de sistemas legados, design UX/UI e
+                                consultoria em arquitetura de software</li>
                         </ul>
                         <div class="exp-stack">
-                            <span>React</span><span>TypeScript</span><span>Node.js</span>
+                            <span>React</span><span>TypeScript</span><span>Node.js</span><span>Flutter</span><span>UX/UI</span>
+                        </div>
+                    </div>
+
+                    <div class="exp-panel" id="orfeu">
+                        <div class="exp-header">
+                            <h3 class="exp-title">Desenvolvedora Full-Stack</h3>
+                            <span class="exp-company">@ Orfeu</span>
+                        </div>
+                        <div class="exp-meta">
+                            <span class="exp-date"><i class="far fa-calendar"></i> Nov 2025 - Mai 2026</span>
+                        </div>
+                        <ul class="exp-list">
+                            <li><span class="list-marker">▹</span>Interfaces ricas e responsivas com React e TypeScript,
+                                com foco em UX e tipagem segura</li>
+                            <li><span class="list-marker">▹</span>Serviços backend robustos com Node.js, aplicando boas
+                                práticas de arquitetura e design de APIs</li>
+                            <li><span class="list-marker">▹</span>Integração de IA Generativa e programação determinística
+                                de LLMs para automação de tarefas</li>
+                            <li><span class="list-marker">▹</span>Otimização de performance front-end e gerenciamento de
+                                estados complexos</li>
+                        </ul>
+                        <div class="exp-stack">
+                            <span>React</span><span>TypeScript</span><span>Node.js</span><span>LLMs</span>
+                        </div>
+                    </div>
+
+                    <div class="exp-panel" id="acev">
+                        <div class="exp-header">
+                            <h3 class="exp-title">Engenheira de Software (Tech Lead)</h3>
+                            <span class="exp-company">@ ACEV</span>
+                        </div>
+                        <div class="exp-meta">
+                            <span class="exp-date"><i class="far fa-calendar"></i> Dez 2025 - Abr 2026</span>
+                            <span class="exp-badge current">Tech Lead</span>
+                        </div>
+                        <ul class="exp-list">
+                            <li><span class="list-marker">▹</span>Liderança técnica no desenvolvimento de CRMs e sistemas
+                                sob medida, definindo a arquitetura de software</li>
+                            <li><span class="list-marker">▹</span>Back-end com Python (FastAPI, Django, Flask) e Node.js
+                                para APIs RESTful de alta performance</li>
+                            <li><span class="list-marker">▹</span>Interfaces web e mobile com React e Flutter em múltiplas
+                                plataformas</li>
+                            <li><span class="list-marker">▹</span>Integração de IA (LLMs) e implementação de cultura
+                                DevOps com pipelines de CI/CD</li>
+                        </ul>
+                        <div class="exp-stack">
+                            <span>Python</span><span>Node.js</span><span>React</span><span>Flutter</span><span>CI/CD</span>
                         </div>
                     </div>
 
                     <div class="exp-panel" id="aquabit">
                         <div class="exp-header">
-                            <h3 class="exp-title">Backend Software Engineer</h3>
+                            <h3 class="exp-title">Engenheira de Software Back-end</h3>
                             <span class="exp-company">@ Aquabit</span>
                         </div>
                         <div class="exp-meta">
-                            <span class="exp-date"><i class="far fa-calendar"></i> Nov 2024 - Mai 2025</span>
+                            <span class="exp-date"><i class="far fa-calendar"></i> Mar 2025 - Fev 2026</span>
                         </div>
                         <ul class="exp-list">
-                            <li><span class="list-marker">▹</span>APIs de alta performance e escaláveis com FastAPI e
-                                Django</li>
-                            <li><span class="list-marker">▹</span>Modelagem avançada de dados com PostgreSQL e
-                                SQLAlchemy</li>
-                            <li><span class="list-marker">▹</span>Containerização e gerenciamento de infraestrutura com
-                                Docker</li>
-                            <li><span class="list-marker">▹</span>Implementação de observabilidade e monitoramento</li>
+                            <li><span class="list-marker">▹</span>APIs escaláveis utilizando Python (FastAPI e Django)</li>
+                            <li><span class="list-marker">▹</span>Modelagem avançada de dados e otimização de consultas
+                                com PostgreSQL e SQLAlchemy</li>
+                            <li><span class="list-marker">▹</span>Infraestrutura, orquestração e containerização de
+                                aplicações com Docker</li>
+                            <li><span class="list-marker">▹</span>Scripts de automação em Python e rotinas de
+                                observabilidade (logs e monitoramento)</li>
                         </ul>
                         <div class="exp-stack">
                             <span>FastAPI</span><span>Django</span><span>PostgreSQL</span><span>Docker</span>
@@ -302,19 +518,21 @@
 
                     <div class="exp-panel" id="kompa">
                         <div class="exp-header">
-                            <h3 class="exp-title">Backend Developer</h3>
+                            <h3 class="exp-title">Desenvolvedora Back-end Pleno</h3>
                             <span class="exp-company">@ Kompa Saúde</span>
                         </div>
                         <div class="exp-meta">
-                            <span class="exp-date"><i class="far fa-calendar"></i> Ago 2024 - Nov 2024</span>
+                            <span class="exp-date"><i class="far fa-calendar"></i> Ago 2024 - Dez 2025</span>
                         </div>
                         <ul class="exp-list">
                             <li><span class="list-marker">▹</span>APIs RESTful em Python/Flask com integração de modelos
-                                de IA</li>
-                            <li><span class="list-marker">▹</span>Funcionalidades em tempo real com WebSockets/Socket.IO
-                            </li>
-                            <li><span class="list-marker">▹</span>DevOps com deploy em AWS (EC2, S3) e Docker Swarm</li>
-                            <li><span class="list-marker">▹</span>Sistemas de notificações push e análise de risco</li>
+                                de IA para análise de risco e triagem de pacientes</li>
+                            <li><span class="list-marker">▹</span>Funcionalidades em tempo real via WebSocketIO e
+                                notificações push</li>
+                            <li><span class="list-marker">▹</span>Gerenciamento de dados em PostgreSQL e otimização de
+                                performance com SQLAlchemy</li>
+                            <li><span class="list-marker">▹</span>DevOps com deploy em AWS (EC2, S3), secrets e
+                                orquestração via Docker Swarm</li>
                         </ul>
                         <div class="exp-stack">
                             <span>Python</span><span>Flask</span><span>AWS</span><span>WebSockets</span>
@@ -330,11 +548,14 @@
                             <span class="exp-date"><i class="far fa-calendar"></i> Nov 2023 - Mai 2024</span>
                         </div>
                         <ul class="exp-list">
-                            <li><span class="list-marker">▹</span>Dashboards gerenciais dinâmicos com Flask</li>
-                            <li><span class="list-marker">▹</span>Aplicativo mobile em Flutter para controle de estoque
-                            </li>
-                            <li><span class="list-marker">▹</span>Integração e manutenção de banco de dados SQL Server
-                            </li>
+                            <li><span class="list-marker">▹</span>Dashboards gerenciais dinâmicos e relatórios interativos
+                                com Flask</li>
+                            <li><span class="list-marker">▹</span>Desenvolvimento e manutenção de aplicativo mobile em
+                                Flutter</li>
+                            <li><span class="list-marker">▹</span>Integração e manutenção de banco de dados Microsoft SQL
+                                Server</li>
+                            <li><span class="list-marker">▹</span>Scripts de automação para reduzir retrabalho em tarefas
+                                repetitivas</li>
                         </ul>
                         <div class="exp-stack">
                             <span>Flask</span><span>Flutter</span><span>SQL Server</span>
@@ -366,22 +587,22 @@
     <section id="projects" class="projects">
         <div class="container">
             <div class="section-header">
-                <span class="section-number">04</span>
-                <h2 class="section-title">
+                <span class="section-number">05</span>
+                <h2 class="section-title" data-i18n="projects-title">
                     Projetos
                 </h2>
                 <div class="section-line"></div>
             </div>
 
             <p class="projects-subtitle">
-                <span class="code-comment">// Soluções que transformam ideias em realidade digital</span>
+                <span class="code-comment" data-i18n="projects-subtitle">// Soluções que transformam ideias em realidade digital</span>
             </p>
 
             <div class="projects-filter">
                 <button class="filter-btn active" data-filter="all">
                     <span class="filter-indicator"></span>
                     <span class="filter-icon">&lt;/&gt;</span>
-                    <span>Todos</span>
+                    <span data-i18n="filter-all">Todos</span>
                 </button>
                 <button class="filter-btn" data-filter="web">
                     <span class="filter-indicator"></span>
@@ -626,6 +847,126 @@
                     </div>
                 </article>
 
+                <!-- Método CEV -->
+                <article class="project-card" data-category="web">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/metodoCEV/image.png" alt="Método CEV" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-graduation-cap"></i> Educação</span>
+                            <div class="project-links">
+                                <a href="https://metodocev.cleanefontenele.com" target="_blank" class="link-icon" title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Método CEV</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Plataforma educacional baseada no Método CEV, voltada para capacitação e desenvolvimento profissional com conteúdos estruturados e acompanhamento de progresso.
+                            </p>
+                            <div class="project-stack">
+                                <span>React</span>
+                                <span>TypeScript</span>
+                                <span>Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Noticias ACEV -->
+                <article class="project-card" data-category="web">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/noticias-acev/image.png" alt="Noticias ACEV" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-newspaper"></i> Portal de Notícias</span>
+                            <div class="project-links">
+                                <a href="https://noticiasacev.com.br" target="_blank" class="link-icon" title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Noticias ACEV</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Portal de notícias e conteúdo da Associação de Conselheiros e Ex-Conselheiros Tutelares do Estado do Ceará, com foco em direitos da criança e do adolescente.
+                            </p>
+                            <div class="project-stack">
+                                <span>PHP</span>
+                                <span>HTML</span>
+                                <span>CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Movimento Metodo CEV -->
+                <article class="project-card" data-category="web">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/movimento-metodo-cev/image.png" alt="Movimento Metodo CEV" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-users"></i> Comunidade</span>
+                            <div class="project-links">
+                                <a href="https://metodocevemmovimento.cleanefontenele.com" target="_blank" class="link-icon" title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Movimento Metodo CEV</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Plataforma para a comunidade do Método CEV, promovendo engajamento e desenvolvimento contínuo através de conteúdos e interações exclusivas.
+                            </p>
+                            <div class="project-stack">
+                                <span>React</span>
+                                <span>TypeScript</span>
+                                <span>Next.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Imersao Metodo CEV -->
+                <article class="project-card" data-category="web">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/imersao-metodo-cev/image.png" alt="Imersao Metodo CEV" loading="lazy">
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-chalkboard-teacher"></i> Evento</span>
+                            <div class="project-links">
+                                <a href="https://imersaometodocev.cleanefontenele.com" target="_blank" class="link-icon" title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Imersao Metodo CEV</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Landing page para o evento de imersão do Método CEV, projetada para capturar inscrições e fornecer informações detalhadas sobre o programa.
+                            </p>
+                            <div class="project-stack">
+                                <span>React</span>
+                                <span>TypeScript</span>
+                                <span>Next.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
 
 
                 <!-- Projetos Mobile -->
@@ -650,7 +991,7 @@
                         <h3 class="project-title">Kompa Saúde</h3>
                         <div class="project-hover-content">
                             <p class="project-description">
-                                Ecossistema de saúde digital com APIs Python/Flask, integração para análise preditiva e
+                                Ecossistema de saúde digital com APIs Python/Flask, integration para análise preditiva e
                                 infraestrutura AWS.
                             </p>
                             <div class="project-stack">
@@ -697,22 +1038,15 @@
                 </article>
             </div>
 
-            <div class="projects-cta">
-                <button class="btn-view-more" id="view-more-btn">
-                    <span class="btn-text">Ver Mais</span>
-                    <span class="btn-icon"><i class="fas fa-chevron-down"></i></span>
-                </button>
-            </div>
-
-
+            <!-- Botão "Ver Mais" removido -->
         </div>
     </section>
 
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-header centered">
-                <span class="section-number">05</span>
-                <h2 class="section-title">
+                <span class="section-number">06</span>
+                <h2 class="section-title" data-i18n="contact-title">
                     Entre em Contato
                 </h2>
                 <div class="section-line"></div>
@@ -721,8 +1055,8 @@
             <div class="contact-wrapper">
                 <div class="contact-card">
                     <div class="contact-header-text">
-                        <h3>Vamos construir algo incrível?</h3>
-                        <p>Estou disponível para novos projetos, consultorias e oportunidades. Se você tem uma ideia
+                        <h3 data-i18n="contact-heading">Vamos construir algo incrível?</h3>
+                        <p data-i18n="contact-text">Estou disponível para novos projetos, consultorias e oportunidades. Se você tem uma ideia
                             inovadora ou precisa de uma solução técnica, mande uma mensagem!</p>
                     </div>
 
@@ -731,7 +1065,7 @@
                             <div class="method-icon"><i class="fas fa-envelope"></i></div>
                             <div class="method-info">
                                 <span>Email</span>
-                                <a href="mailto:keliane.dev@gmail.com">keliane.dev@gmail.com</a>
+                                <a href="mailto:kelianedss12@gmail.com">kelianedss12@gmail.com</a>
                             </div>
                         </div>
                         <div class="method-item">
@@ -744,7 +1078,7 @@
                         <div class="method-item">
                             <div class="method-icon"><i class="fas fa-map-marker-alt"></i></div>
                             <div class="method-info">
-                                <span>Localização</span>
+                                <span data-i18n="contact-location-label">Localização</span>
                                 <span>Fortaleza, CE</span>
                             </div>
                         </div>
@@ -760,20 +1094,20 @@
                     </div>
                     <div class="form-body">
                         <div class="input-group">
-                            <label for="name">const nome =</label>
-                            <input type="text" id="name" name="name" placeholder='"Seu Nome";' required>
+                            <label for="name" data-i18n="form-name-label">const nome =</label>
+                            <input type="text" id="name" name="name" placeholder='"Seu Nome";' data-i18n-placeholder="form-name-placeholder" required>
                         </div>
                         <div class="input-group">
-                            <label for="email">const email =</label>
-                            <input type="email" id="email" name="email" placeholder='"seu@email.com";' required>
+                            <label for="email" data-i18n="form-email-label">const email =</label>
+                            <input type="email" id="email" name="email" placeholder='"seu@email.com";' data-i18n-placeholder="form-email-placeholder" required>
                         </div>
                         <div class="input-group">
-                            <label for="message">const mensagem =</label>
+                            <label for="message" data-i18n="form-message-label">const mensagem =</label>
                             <textarea id="message" name="message" rows="5" placeholder='`Escreva sua mensagem aqui...`;'
-                                required></textarea>
+                                data-i18n-placeholder="form-message-placeholder" required></textarea>
                         </div>
                         <button type="submit" class="btn-submit">
-                            <span class="btn-text">enviarMensagem()</span>
+                            <span class="btn-text" data-i18n="form-submit">enviarMensagem()</span>
                             <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
@@ -782,25 +1116,34 @@
         </div>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" style="border-top: none; padding-top: 0;">
         <div class="container">
+            <div class="pacman-game" aria-hidden="true">
+                <div class="pac-dots" id="pac-dots"></div>
+                <div class="pac-cover"></div>
+                <div class="pacman">
+                    <span class="pac-jaw top"></span>
+                    <span class="pac-jaw bottom"></span>
+                    <span class="pac-eye"></span>
+                </div>
+            </div>
             <div class="footer-content">
                 <div class="footer-brand">
                     <span class="footer-logo">[KS]</span>
-                    <p class="footer-tagline">Building the future, one commit at a time.</p>
+                    <p class="footer-tagline" data-i18n="footer-tagline">Building the future, one commit at a time.</p>
                 </div>
                 <div class="footer-links">
                     <!-- Links removidos conforme solicitado -->
                 </div>
             </div>
-            <div class="footer-bottom">
+            <!-- <div class="footer-bottom">
                 <p class="copyright">
                     <span class="code-tag">&lt;</span>
                     Designed & Built by Keliane Soares
                     <span class="code-tag">/&gt;</span>
                 </p>
                 <p class="footer-year">© 2026</p>
-            </div>
+            </div> -->
         </div>
     </footer>
 

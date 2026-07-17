@@ -1,3 +1,5 @@
+let currentLanguage = 'pt';
+
 document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initTypingEffect();
@@ -8,7 +10,21 @@ document.addEventListener('DOMContentLoaded', () => {
     initAdvancedSmoothScroll();
     initParallax();
     initContactForm();
+    initLanguageToggle();
+    initPacman();
 });
+
+// ========== Pac-Man dots ==========
+function initPacman() {
+    const track = document.getElementById('pac-dots');
+    if (!track) return;
+    const total = 60;
+    for (let i = 0; i < total; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'pac-dot' + ((i + 1) % 8 === 0 ? ' power' : '');
+        track.appendChild(dot);
+    }
+}
 
 function initContactForm() {
     const contactForm = document.getElementById('contact-form');
@@ -20,10 +36,11 @@ function initContactForm() {
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
 
-            const subject = `Contato de ${name} pelo Portfólio`;
-            const body = `Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`;
+            const isEn = currentLanguage === 'en';
+            const subject = isEn ? `Contact from ${name} via Portfolio` : `Contato de ${name} pelo Portfólio`;
+            const body = isEn ? `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}` : `Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`;
             
-            const mailtoUrl = `mailto:keliane.dev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const mailtoUrl = `mailto:kelianedss12@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
             window.location.href = mailtoUrl;
         });
@@ -130,11 +147,12 @@ function initTypingEffect() {
     if (!element) return;
     
     const roles = [
-        'Full Stack Developer',
+        'Full Stack Engineer',
         'Software Engineer',
         'Backend Architect',
+        'AI Integration Dev',
         'Python Specialist',
-        'React Developer',
+        'Tech Lead',
         'DevOps Enthusiast'
     ];
     
@@ -213,7 +231,7 @@ function animateCounter(element, target) {
 function initScrollAnimations() {
     const animatedElements = document.querySelectorAll(
         '.section-header, .about-image-wrapper, .about-content, ' +
-        '.exp-layout, .project-card, .contact-card, .contact-cta'
+        '.service-item, .exp-layout, .project-card, .contact-card, .contact-cta'
     );
     
     const observerOptions = {
@@ -249,7 +267,8 @@ style.textContent = `
         transform: translateY(0);
     }
     
-    .project-card.reveal-element {
+    .project-card.reveal-element,
+    .service-item.reveal-element {
         transition-delay: calc(var(--delay, 0) * 0.1s);
     }
 `;
@@ -257,6 +276,10 @@ document.head.appendChild(style);
 
 document.querySelectorAll('.project-card').forEach((card, index) => {
     card.style.setProperty('--delay', index % 4);
+});
+
+document.querySelectorAll('.service-item').forEach((card, index) => {
+    card.style.setProperty('--delay', index % 2);
 });
 
 function initExperienceTabs() {
@@ -283,66 +306,28 @@ function initExperienceTabs() {
 function initProjectFilter() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
-    const viewMoreBtn = document.getElementById('view-more-btn');
-    const projectsToShow = 4;
-    let isToggled = false;
 
     const updateProjectVisibility = () => {
         const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-        let visibleProjects = 0;
 
         projectCards.forEach(card => {
             const categories = card.dataset.category || '';
             const matchesFilter = activeFilter === 'all' || categories.includes(activeFilter);
 
             if (matchesFilter) {
-                if (isToggled || visibleProjects < projectsToShow) {
-                    card.classList.remove('hidden');
-                    visibleProjects++;
-                } else {
-                    card.classList.add('hidden');
-                }
+                card.classList.remove('hidden');
             } else {
                 card.classList.add('hidden');
             }
         });
-
-        const totalVisible = Array.from(projectCards).filter(card => {
-            const categories = card.dataset.category || '';
-            return activeFilter === 'all' || categories.includes(activeFilter);
-        }).length;
-
-        if (totalVisible <= projectsToShow) {
-            viewMoreBtn.style.display = 'none';
-        } else {
-            viewMoreBtn.style.display = 'inline-flex';
-        }
     };
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            isToggled = false;
             updateProjectVisibility();
-            updateViewMoreButton();
         });
-    });
-
-    const updateViewMoreButton = () => {
-        if (isToggled) {
-            viewMoreBtn.querySelector('.btn-text').textContent = 'Ver Menos';
-            viewMoreBtn.querySelector('.btn-icon i').classList.replace('fa-chevron-down', 'fa-chevron-up');
-        } else {
-            viewMoreBtn.querySelector('.btn-text').textContent = 'Ver Mais';
-            viewMoreBtn.querySelector('.btn-icon i').classList.replace('fa-chevron-up', 'fa-chevron-down');
-        }
-    };
-    
-    viewMoreBtn.addEventListener('click', () => {
-        isToggled = !isToggled;
-        updateProjectVisibility();
-        updateViewMoreButton();
     });
 
     updateProjectVisibility();
@@ -526,3 +511,439 @@ function createMatrixRain() {
     }, 5000);
 }
 
+
+// ========== Internationalization (i18n) ==========
+
+const translations = {
+    pt: {
+        'nav-home': 'Home',
+        'nav-about': 'Sobre',
+        'nav-services': 'Serviços',
+        'nav-experience': 'Experiência',
+        'nav-projects': 'Projetos',
+        'nav-contact': 'Contato',
+        'services-title': 'Serviços',
+        'services-subtitle': '// O que construo hoje na <span class="text-accent">BlueCircuit</span> — do design ao deploy',
+        'svc-sites': 'Sites & Landing Pages',
+        'svc-sites-1': 'Sites institucionais',
+        'svc-sites-2': 'Sites empresariais',
+        'svc-sites-3': 'Landing pages',
+        'svc-sites-4': 'Lojas virtuais',
+        'svc-sites-5': 'Portais corporativos',
+        'svc-web': 'Sistemas Web',
+        'svc-web-1': 'Sistemas completos',
+        'svc-web-2': 'Plataformas SaaS',
+        'svc-web-3': 'CRM personalizado',
+        'svc-web-4': 'ERP sob medida',
+        'svc-web-5': 'Sistemas de gestão',
+        'svc-mobile': 'Apps Mobile',
+        'svc-mobile-1': 'Apps iOS',
+        'svc-mobile-2': 'Apps Android',
+        'svc-mobile-3': 'Apps multiplataforma',
+        'svc-mobile-4': 'Progressive Web Apps',
+        'svc-dash': 'Dashboards & Painéis',
+        'svc-dash-1': 'Dashboards administrativos',
+        'svc-dash-2': 'Painéis de gestão',
+        'svc-dash-3': 'Portais de clientes',
+        'svc-dash-4': 'Sistemas internos',
+        'svc-auto': 'Plataformas & Automação',
+        'svc-auto-1': 'Plataformas de agendamento',
+        'svc-auto-2': 'Sistemas de vendas',
+        'svc-auto-3': 'Automação de processos',
+        'svc-auto-4': 'Soluções sob demanda',
+        'svc-int': 'Integrações',
+        'svc-int-1': 'APIs de terceiros',
+        'svc-int-2': 'Gateways de pagamento',
+        'svc-int-3': 'WhatsApp Business',
+        'svc-int-4': 'ERPs & CRMs',
+        'svc-mod': 'Modernização',
+        'svc-mod-1': 'Sistemas legados',
+        'svc-mod-2': 'Refatoração de front-end',
+        'svc-mod-3': 'Interfaces modernas',
+        'svc-mod-4': 'Arquitetura de software',
+        'svc-design': 'Design & UX',
+        'svc-design-2': 'Prototipagem de telas',
+        'svc-design-3': 'Interfaces responsivas',
+        'svc-design-4': 'Design systems',
+        'hero-greeting': 'Olá, meu nome é',
+        'hero-description': 'Engenheira de Software <span class="text-accent">Full Stack</span> especializada em arquitetura de sistemas escaláveis e na <span class="text-accent">integração prática de IA</span>. Construo back-ends robustos com Python (FastAPI, Django, Flask), C#/.NET e Node.js, além de interfaces web e mobile com React, TypeScript e Flutter. Da modelagem de dados à cultura DevOps, entrego código performático — de CRMs sob medida a sistemas críticos com triagem em tempo real.',
+        'btn-projects': 'Ver Projetos',
+        'metric-years': 'Anos de exp.',
+        'metric-projects': 'Projetos',
+        'metric-commits': 'Commits',
+        'about-title': 'Sobre Mim',
+        'about-image-label': 'Mentora & Dev',
+        'about-intro': '<span class="code-comment">/** Engenheira de Software Full Stack */</span> Priorizo a lógica estrutural e a resolução de problemas, criando soluções escaláveis com <strong>React, TypeScript, Python, C#/.NET e Node.js</strong>. Integro <strong>Inteligência Artificial (LLMs)</strong> em produtos reais — de análise de sentimentos a triagem em tempo real.',
+        'about-details': 'Atuo com desenvolvimento full-stack há mais de 3 anos, entregando desde CRMs sob medida e algoritmos de matchmaking até sistemas críticos de saúde. Domínio de bancos relacionais e NoSQL, práticas DevOps (Docker, AWS, CI/CD) e código performático em múltiplas plataformas.',
+        'about-formation-label': 'Formação',
+        'about-formation-value': 'Ciência da Computação',
+        'about-tech-label': 'Tech Stack:',
+        'exp-title': 'Experiência',
+        'projects-title': 'Projetos',
+        'projects-subtitle': '// Soluções que transformam ideias em realidade digital',
+        'filter-all': 'Todos',
+        'btn-view-more': 'Ver Mais',
+        'btn-view-less': 'Ver Menos',
+        'contact-title': 'Entre em Contato',
+        'contact-heading': 'Vamos construir algo incrível?',
+        'contact-text': 'Estou disponível para novos projetos, consultorias e oportunidades. Se você tem uma ideia inovadora ou precisa de uma solução técnica, mande uma mensagem!',
+        'contact-location-label': 'Localização',
+        'form-name-label': 'const nome =',
+        'form-name-placeholder': '"Seu Nome";',
+        'form-email-label': 'const email =',
+        'form-email-placeholder': '"seu@email.com";',
+        'form-message-label': 'const mensagem =',
+        'form-message-placeholder': '`Escreva sua mensagem aqui...`;',
+        'form-submit': 'enviarMensagem()',
+        'footer-tagline': 'Building the future, one commit at a time.',
+    },
+    en: {
+        'nav-home': 'Home',
+        'nav-about': 'About',
+        'nav-services': 'Services',
+        'nav-experience': 'Experience',
+        'nav-projects': 'Projects',
+        'nav-contact': 'Contact',
+        'services-title': 'Services',
+        'services-subtitle': '// What I build today at <span class="text-accent">BlueCircuit</span> — from design to deploy',
+        'svc-sites': 'Websites & Landing Pages',
+        'svc-sites-1': 'Institutional websites',
+        'svc-sites-2': 'Business websites',
+        'svc-sites-3': 'Landing pages',
+        'svc-sites-4': 'Online stores',
+        'svc-sites-5': 'Corporate portals',
+        'svc-web': 'Web Systems',
+        'svc-web-1': 'Complete systems',
+        'svc-web-2': 'SaaS platforms',
+        'svc-web-3': 'Custom CRM',
+        'svc-web-4': 'Tailor-made ERP',
+        'svc-web-5': 'Management systems',
+        'svc-mobile': 'Mobile Apps',
+        'svc-mobile-1': 'iOS apps',
+        'svc-mobile-2': 'Android apps',
+        'svc-mobile-3': 'Cross-platform apps',
+        'svc-mobile-4': 'Progressive Web Apps',
+        'svc-dash': 'Dashboards & Panels',
+        'svc-dash-1': 'Admin dashboards',
+        'svc-dash-2': 'Management panels',
+        'svc-dash-3': 'Client portals',
+        'svc-dash-4': 'Internal systems',
+        'svc-auto': 'Platforms & Automation',
+        'svc-auto-1': 'Scheduling platforms',
+        'svc-auto-2': 'Sales systems',
+        'svc-auto-3': 'Process automation',
+        'svc-auto-4': 'On-demand solutions',
+        'svc-int': 'Integrations',
+        'svc-int-1': 'Third-party APIs',
+        'svc-int-2': 'Payment gateways',
+        'svc-int-3': 'WhatsApp Business',
+        'svc-int-4': 'ERPs & CRMs',
+        'svc-mod': 'Modernization',
+        'svc-mod-1': 'Legacy systems',
+        'svc-mod-2': 'Front-end refactoring',
+        'svc-mod-3': 'Modern interfaces',
+        'svc-mod-4': 'Software architecture',
+        'svc-design': 'Design & UX',
+        'svc-design-1': 'UX/UI design',
+        'svc-design-2': 'Screen prototyping',
+        'svc-design-3': 'Responsive interfaces',
+        'svc-design-4': 'Design systems',
+        'svc-support': 'Support & Consulting',
+        'svc-support-1': 'System maintenance',
+        'svc-support-2': 'Continuous tech support',
+        'svc-support-3': 'Technology consulting',
+        'svc-support-4': 'Strategic planning',
+        'hero-greeting': 'Hi, my name is',
+        'hero-description': '<span class="text-accent">Full Stack</span> Software Engineer specialized in scalable systems architecture and the <span class="text-accent">practical integration of AI</span>. I build robust back-ends with Python (FastAPI, Django, Flask), C#/.NET and Node.js, plus web and mobile interfaces with React, TypeScript and Flutter. From data modeling to DevOps culture, I deliver high-performing code — from tailor-made CRMs to critical systems with real-time triage.',
+        'btn-projects': 'View Projects',
+        'metric-years': 'Years of exp.',
+        'metric-projects': 'Projects',
+        'metric-commits': 'Commits',
+        'about-title': 'About Me',
+        'about-image-label': 'Mentor & Dev',
+        'about-intro': '<span class="code-comment">/** Full Stack Software Engineer */</span> I prioritize structural logic and problem-solving, creating scalable solutions with <strong>React, TypeScript, Python, C#/.NET and Node.js</strong>. I integrate <strong>Artificial Intelligence (LLMs)</strong> into real products — from sentiment analysis to real-time triage.',
+        'about-details': 'I\'ve been working with full-stack development for over 3 years, delivering everything from tailor-made CRMs and matchmaking algorithms to critical healthcare systems. Proficient in relational and NoSQL databases, DevOps practices (Docker, AWS, CI/CD), and high-performance code across multiple platforms.',
+        'about-formation-label': 'Education',
+        'about-formation-value': 'Computer Science',
+        'about-tech-label': 'Tech Stack:',
+        'exp-title': 'Experience',
+        'projects-title': 'Projects',
+        'projects-subtitle': '// Solutions that turn ideas into digital reality',
+        'filter-all': 'All',
+        'btn-view-more': 'View More',
+        'btn-view-less': 'View Less',
+        'contact-title': 'Get in Touch',
+        'contact-heading': 'Let\'s build something amazing?',
+        'contact-text': 'I\'m available for new projects, consulting, and opportunities. If you have an innovative idea or need a technical solution, send me a message!',
+        'contact-location-label': 'Location',
+        'form-name-label': 'const name =',
+        'form-name-placeholder': '"Your Name";',
+        'form-email-label': 'const email =',
+        'form-email-placeholder': '"your@email.com";',
+        'form-message-label': 'const message =',
+        'form-message-placeholder': '`Write your message here...`;',
+        'form-submit': 'sendMessage()',
+        'footer-tagline': 'Building the future, one commit at a time.',
+    }
+};
+
+const expTranslations = {
+    pt: {
+        bluecircuit: {
+            date: 'Jul 2026 - Presente',
+            badge: 'Atual',
+            items: [
+                'Desenvolvimento de sites, landing pages, lojas virtuais e sistemas web completos (SaaS, CRM e ERP sob medida)',
+                'Apps mobile (iOS, Android e multiplataforma), PWAs e dashboards administrativos',
+                'Integrações com APIs de terceiros, gateways de pagamento e WhatsApp Business',
+                'Modernização de sistemas legados, design UX/UI e consultoria em arquitetura de software'
+            ]
+        },
+        orfeu: {
+            date: 'Nov 2025 - Mai 2026',
+            items: [
+                'Interfaces ricas e responsivas com React e TypeScript, com foco em UX e tipagem segura',
+                'Serviços backend robustos com Node.js, aplicando boas práticas de arquitetura e design de APIs',
+                'Integração de IA Generativa e programação determinística de LLMs para automação de tarefas',
+                'Otimização de performance front-end e gerenciamento de estados complexos'
+            ]
+        },
+        acev: {
+            date: 'Dez 2025 - Abr 2026',
+            badge: 'Tech Lead',
+            items: [
+                'Liderança técnica no desenvolvimento de CRMs e sistemas sob medida, definindo a arquitetura de software',
+                'Back-end com Python (FastAPI, Django, Flask) e Node.js para APIs RESTful de alta performance',
+                'Interfaces web e mobile com React e Flutter em múltiplas plataformas',
+                'Integração de IA (LLMs) e implementação de cultura DevOps com pipelines de CI/CD'
+            ]
+        },
+        aquabit: {
+            date: 'Mar 2025 - Fev 2026',
+            items: [
+                'APIs escaláveis utilizando Python (FastAPI e Django)',
+                'Modelagem avançada de dados e otimização de consultas com PostgreSQL e SQLAlchemy',
+                'Infraestrutura, orquestração e containerização de aplicações com Docker',
+                'Scripts de automação em Python e rotinas de observabilidade (logs e monitoramento)'
+            ]
+        },
+        kompa: {
+            date: 'Ago 2024 - Dez 2025',
+            items: [
+                'APIs RESTful em Python/Flask com integração de modelos de IA para análise de risco e triagem de pacientes',
+                'Funcionalidades em tempo real via WebSocketIO e notificações push',
+                'Gerenciamento de dados em PostgreSQL e otimização de performance com SQLAlchemy',
+                'DevOps com deploy em AWS (EC2, S3), secrets e orquestração via Docker Swarm'
+            ]
+        },
+        passamanaria: {
+            date: 'Nov 2023 - Mai 2024',
+            items: [
+                'Dashboards gerenciais dinâmicos e relatórios interativos com Flask',
+                'Desenvolvimento e manutenção de aplicativo mobile em Flutter',
+                'Integração e manutenção de banco de dados Microsoft SQL Server',
+                'Scripts de automação para reduzir retrabalho em tarefas repetitivas'
+            ]
+        },
+        vida: {
+            date: 'Mai 2023 - Out 2023',
+            items: [
+                'Extração e tratamento de dados com SQL',
+                'Relatórios estratégicos e dashboards interativos',
+                'Automações web para otimização de rotinas'
+            ]
+        }
+    },
+    en: {
+        bluecircuit: {
+            date: 'Jul 2026 - Present',
+            badge: 'Current',
+            items: [
+                'Websites, landing pages, online stores and complete web systems (SaaS, CRM and tailor-made ERP)',
+                'Mobile apps (iOS, Android and cross-platform), PWAs and admin dashboards',
+                'Integrations with third-party APIs, payment gateways and WhatsApp Business',
+                'Legacy system modernization, UX/UI design and software architecture consulting'
+            ]
+        },
+        orfeu: {
+            date: 'Nov 2025 - May 2026',
+            items: [
+                'Rich and responsive interfaces with React and TypeScript, focused on UX and type safety',
+                'Robust backend services with Node.js, applying solid architecture and API design practices',
+                'Integration of Generative AI and deterministic LLM programming for task automation',
+                'Front-end performance optimization and complex state management'
+            ]
+        },
+        acev: {
+            date: 'Dec 2025 - Apr 2026',
+            badge: 'Tech Lead',
+            items: [
+                'Technical leadership building tailor-made CRMs and systems, defining the software architecture',
+                'Back-end with Python (FastAPI, Django, Flask) and Node.js for high-performance RESTful APIs',
+                'Web and mobile interfaces with React and Flutter across multiple platforms',
+                'AI (LLMs) integration and DevOps culture with CI/CD pipelines'
+            ]
+        },
+        aquabit: {
+            date: 'Mar 2025 - Feb 2026',
+            items: [
+                'Scalable APIs using Python (FastAPI and Django)',
+                'Advanced data modeling and query optimization with PostgreSQL and SQLAlchemy',
+                'Infrastructure, orchestration and application containerization with Docker',
+                'Python automation scripts and observability routines (logs and monitoring)'
+            ]
+        },
+        kompa: {
+            date: 'Aug 2024 - Dec 2025',
+            items: [
+                'RESTful APIs in Python/Flask with AI model integration for risk analysis and patient triage',
+                'Real-time features via WebSocketIO and push notifications',
+                'Data management in PostgreSQL and performance optimization with SQLAlchemy',
+                'DevOps with deployment on AWS (EC2, S3), secrets and orchestration via Docker Swarm'
+            ]
+        },
+        passamanaria: {
+            date: 'Nov 2023 - May 2024',
+            items: [
+                'Dynamic management dashboards and interactive reports with Flask',
+                'Development and maintenance of a mobile app in Flutter',
+                'Microsoft SQL Server database integration and maintenance',
+                'Automation scripts to reduce rework on repetitive tasks'
+            ]
+        },
+        vida: {
+            date: 'May 2023 - Oct 2023',
+            items: [
+                'Data extraction and processing with SQL',
+                'Strategic reports and interactive dashboards',
+                'Web automations for routine optimization'
+            ]
+        }
+    }
+};
+
+const projectTranslations = {
+    pt: {
+        'Orfeu': { type: '<i class="fas fa-project-diagram"></i> Orquestrador', desc: 'Funciona como um orquestrador de jornadas de inovação corporativa global. A ferramenta ajuda empresas a gerenciar e transformar iniciativas de inovação dispersas em vantagens estratégicas reais.' },
+        'Aquabit': { type: '<i class="fas fa-fish"></i> Agritech', desc: 'Plataforma de inteligência e gestão para aquicultura (produção de peixes e camarões). O site e o aplicativo oferecem controle de biometrias e mortalidade, gestão de estoque por tanques e lotes, além de acompanhar custos e rentabilidade da produção.' },
+        'Comunidade Aqua': { type: '<i class="fas fa-users"></i> Social', desc: 'Plataforma de interação para a comunidade de aquicultura, conectando produtores e técnicos. Desenvolvida em Django, traz autenticação, feed em tempo real e recursos colaborativos para troca de conhecimento e suporte técnico.' },
+        'NordDev': { type: '<i class="fas fa-building"></i> Institucional', desc: 'Portal institucional para empresa de tecnologia que cria sites, plataformas e sistemas para outras empresas. Projetado para apresentar serviços, portfólio e facilitar a captura de leads.' },
+        'Amevis': { type: '<i class="fas fa-briefcase"></i> Corporativo', desc: 'Site de e-commerce/loja de perfumes, especializado em fragrâncias similares e orientais. Estruturado para exibir produtos, facilitar compras e promover a marca.' },
+        'Marília Dantas': { type: '<i class="fas fa-palette"></i> Portfolio', desc: 'Site institucional de um estúdio de beleza e estética, apresentando serviços, tratamentos e informações de contato para clientes.' },
+        'Blog da Leticia': { type: '<i class="fas fa-blog"></i> Blog', desc: 'Blog pessoal da Letícia, psicóloga, dedicado a artigos, reflexões e recursos sobre o luto e processos de perda.' },
+        'Método CEV': { type: '<i class="fas fa-graduation-cap"></i> Educação', desc: 'Plataforma educacional baseada no Método CEV, voltada para capacitação e desenvolvimento profissional com conteúdos estruturados e acompanhamento de progresso.' },
+        'Kompa Saúde': { type: '<i class="fas fa-heartbeat"></i> HealthTech', desc: 'Ecossistema de saúde digital com APIs Python/Flask, integração para análise preditiva e infraestrutura AWS.' },
+        'MentalClean': { type: '<i class="fas fa-heartbeat"></i> HealthTech', desc: 'Plataforma de saúde e bem-estar focada no ambiente corporativo, oferecida às empresas como canal de suporte emocional para colaboradores. Disponibiliza atendimento psicossocial, central de atendimento 24/7, assessorias especializadas e programas educativos para promoção do equilíbrio emocional e da produtividade.' },
+        'Noticias ACEV': { type: '<i class="fas fa-newspaper"></i> Portal de Notícias', desc: 'Portal de notícias e conteúdo da Associação de Conselheiros e Ex-Conselheiros Tutelares do Estado do Ceará, com foco em direitos da criança e do adolescente.' },
+        'Movimento Metodo CEV': { type: '<i class="fas fa-users"></i> Comunidade', desc: 'Plataforma para a comunidade do Método CEV, promovendo engajamento e desenvolvimento contínuo através de conteúdos e interações exclusivas.' },
+        'Imersao Metodo CEV': { type: '<i class="fas fa-chalkboard-teacher"></i> Evento', desc: 'Landing page para o evento de imersão do Método CEV, projetada para capturar inscrições e fornecer informações detalhadas sobre o programa.' },
+    },
+    en: {
+        'Orfeu': { type: '<i class="fas fa-project-diagram"></i> Orchestrator', desc: 'Works as an orchestrator for global corporate innovation journeys. The tool helps companies manage and transform scattered innovation initiatives into real strategic advantages.' },
+        'Aquabit': { type: '<i class="fas fa-fish"></i> Agritech', desc: 'Intelligence and management platform for aquaculture (fish and shrimp production). The website and app offer biometrics and mortality control, inventory management by tanks and batches, plus tracking production costs and profitability.' },
+        'Comunidade Aqua': { type: '<i class="fas fa-users"></i> Social', desc: 'Interaction platform for the aquaculture community, connecting producers and technicians. Built with Django, it features authentication, real-time feed, and collaborative resources for knowledge sharing and technical support.' },
+        'NordDev': { type: '<i class="fas fa-building"></i> Institutional', desc: 'Institutional portal for a technology company that creates websites, platforms, and systems for other businesses. Designed to showcase services, portfolio, and facilitate lead capture.' },
+        'Amevis': { type: '<i class="fas fa-briefcase"></i> Corporate', desc: 'E-commerce/perfume store website, specialized in similar and oriental fragrances. Structured to display products, facilitate purchases, and promote the brand.' },
+        'Marília Dantas': { type: '<i class="fas fa-palette"></i> Portfolio', desc: 'Institutional website for a beauty and aesthetics studio, showcasing services, treatments, and contact information for clients.' },
+        'Blog da Leticia': { type: '<i class="fas fa-blog"></i> Blog', desc: 'Personal blog of Letícia, a psychologist, dedicated to articles, reflections, and resources about grief and loss processes.' },
+        'Método CEV': { type: '<i class="fas fa-graduation-cap"></i> Education', desc: 'Educational platform based on the CEV Method, focused on professional training and development with structured content and progress tracking.' },
+        'Kompa Saúde': { type: '<i class="fas fa-heartbeat"></i> HealthTech', desc: 'Digital health ecosystem with Python/Flask APIs, predictive analysis integration, and AWS infrastructure.' },
+        'MentalClean': { type: '<i class="fas fa-heartbeat"></i> HealthTech', desc: 'Corporate wellness platform offered to companies as an emotional support channel for employees. Provides psychosocial care, 24/7 support center, specialized advisory services, and educational programs for promoting emotional balance and productivity.' },
+        'Noticias ACEV': { type: '<i class="fas fa-newspaper"></i> News Portal', desc: 'News and content portal for the Association of Counselors and Former Guardianship Counselors of the State of Ceará, focusing on the rights of children and adolescents.' },
+        'Movimento Metodo CEV': { type: '<i class="fas fa-users"></i> Community', desc: 'Platform for the Método CEV community, promoting engagement and continuous development through exclusive content and interactions.' },
+        'Imersao Metodo CEV': { type: '<i class="fas fa-chalkboard-teacher"></i> Event', desc: 'Landing page for the Método CEV immersion event, designed to capture registrations and provide detailed information about the program.' },
+    }
+};
+
+function initLanguageToggle() {
+    const langBtns = document.querySelectorAll('.lang-btn');
+
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.dataset.lang;
+            if (lang === currentLanguage) return;
+            currentLanguage = lang;
+            langBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            applyTranslations(lang);
+        });
+    });
+}
+
+function applyTranslations(lang) {
+    const t = translations[lang];
+    if (!t) return;
+
+    // Simple text content
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.textContent = t[key];
+    });
+
+    // HTML content
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+
+    // Placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (t[key] !== undefined) el.placeholder = t[key];
+    });
+
+    // Experience panels
+    translateExperience(lang);
+
+    // Project cards
+    translateProjects(lang);
+}
+
+function translateExperience(lang) {
+    const data = expTranslations[lang];
+    if (!data) return;
+
+    Object.keys(data).forEach(panelId => {
+        const panel = document.getElementById(panelId);
+        if (!panel) return;
+        const t = data[panelId];
+
+        const dateEl = panel.querySelector('.exp-date');
+        if (dateEl && t.date) {
+            dateEl.innerHTML = '<i class="far fa-calendar"></i> ' + t.date;
+        }
+
+        if (t.badge) {
+            const badge = panel.querySelector('.exp-badge');
+            if (badge) badge.textContent = t.badge;
+        }
+
+        const items = panel.querySelectorAll('.exp-list li');
+        if (t.items) {
+            items.forEach((li, i) => {
+                if (t.items[i] !== undefined) {
+                    li.innerHTML = '<span class="list-marker">▹</span>' + t.items[i];
+                }
+            });
+        }
+    });
+}
+
+function translateProjects(lang) {
+    const data = projectTranslations[lang];
+    if (!data) return;
+
+    document.querySelectorAll('.project-card').forEach(card => {
+        const titleEl = card.querySelector('.project-title');
+        if (!titleEl) return;
+        const title = titleEl.textContent.trim();
+
+        if (data[title]) {
+            const typeEl = card.querySelector('.project-type');
+            if (typeEl && data[title].type) typeEl.innerHTML = data[title].type;
+
+            const descEl = card.querySelector('.project-description');
+            if (descEl && data[title].desc) descEl.textContent = data[title].desc;
+        }
+    });
+}
