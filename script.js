@@ -40,7 +40,7 @@ function initContactForm() {
             const subject = isEn ? `Contact from ${name} via Portfolio` : `Contato de ${name} pelo Portfólio`;
             const body = isEn ? `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}` : `Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`;
             
-            const mailtoUrl = `mailto:kelianedss12@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const mailtoUrl = `mailto:keliane.dev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
             window.location.href = mailtoUrl;
         });
@@ -94,24 +94,24 @@ function initNavigation() {
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     
-    // Scroll effect
-    let lastScroll = 0;
-    
-    window.addEventListener('scroll', () => {
+    // Scroll effect (throttled with requestAnimationFrame to avoid layout thrash)
+    const sections = document.querySelectorAll('section');
+    let scrollTicking = false;
+
+    function onScroll() {
         const currentScroll = window.scrollY;
-        
+
         if (currentScroll > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-        
+
         // Active section
-        const sections = document.querySelectorAll('section');
         sections.forEach(section => {
             const sectionTop = section.offsetTop - 150;
             const sectionHeight = section.offsetHeight;
-            
+
             if (currentScroll >= sectionTop && currentScroll < sectionTop + sectionHeight) {
                 const id = section.getAttribute('id');
                 navLinks.forEach(link => {
@@ -122,9 +122,16 @@ function initNavigation() {
                 });
             }
         });
-        
-        lastScroll = currentScroll;
-    });
+
+        scrollTicking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            scrollTicking = true;
+            requestAnimationFrame(onScroll);
+        }
+    }, { passive: true });
     
     // Mobile menu
     if (navToggle && navMenu) {
@@ -351,33 +358,54 @@ function initParallax() {
     const profileFrame = document.querySelector('.profile-frame');
     const gridBg = document.querySelector('.grid-bg');
     
-    window.addEventListener('scroll', () => {
+    let parallaxTicking = false;
+
+    function onParallaxScroll() {
         const scrolled = window.scrollY;
-        
+
         if (heroVisual && scrolled < window.innerHeight) {
             heroVisual.style.transform = `translateY(${scrolled * 0.2}px)`;
         }
-        
+
         if (gridBg) {
             gridBg.style.transform = `translateY(${scrolled * 0.1}px)`;
         }
-    });
+
+        parallaxTicking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!parallaxTicking) {
+            parallaxTicking = true;
+            requestAnimationFrame(onParallaxScroll);
+        }
+    }, { passive: true });
     
-    // Mouse parallax on hero
+    // Mouse parallax on hero (throttled with requestAnimationFrame)
     if (profileFrame) {
+        let mouseTicking = false;
+        let lastX = 0;
+        let lastY = 0;
+
         document.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const { innerWidth, innerHeight } = window;
-            
-            const xPercent = (clientX / innerWidth - 0.5) * 2;
-            const yPercent = (clientY / innerHeight - 0.5) * 2;
-            
-            profileFrame.style.transform = `
-                perspective(1000px)
-                rotateY(${xPercent * 5}deg)
-                rotateX(${-yPercent * 5}deg)
-            `;
-        });
+            lastX = e.clientX;
+            lastY = e.clientY;
+            if (!mouseTicking) {
+                mouseTicking = true;
+                requestAnimationFrame(() => {
+                    const { innerWidth, innerHeight } = window;
+                    const xPercent = (lastX / innerWidth - 0.5) * 2;
+                    const yPercent = (lastY / innerHeight - 0.5) * 2;
+
+                    profileFrame.style.transform = `
+                        perspective(1000px)
+                        rotateY(${xPercent * 5}deg)
+                        rotateX(${-yPercent * 5}deg)
+                    `;
+                    mouseTicking = false;
+                });
+            }
+        }, { passive: true });
     }
 }
 
