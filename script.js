@@ -730,6 +730,29 @@ const translations = {
         'hero-greeting': 'Olá, meu nome é',
         'hero-description': 'Engenheira de Software <span class="text-accent">Full Stack</span> com Python, C#/.NET, Node.js, React e Flutter. Integro <span class="text-accent">IA em produtos reais</span> — de CRMs sob medida a sistemas críticos de saúde com triagem em tempo real.',
         'about-location-value': 'Fortaleza, CE · remoto',
+        'now-title': 'agora',
+        'now-building-key': 'construindo',
+        'now-building': 'sites, sistemas e apps na BlueCircuit',
+        'now-learning-key': 'explorando',
+        'now-learning': 'agentes de IA e LLMs em produção',
+        'now-open-key': 'aberta a',
+        'now-open': 'projetos, consultorias e oportunidades remotas',
+        'gh-title': 'atividade no GitHub',
+        'gh-total-label': 'contribuições nos últimos 12 meses',
+        'commit-label': 'último commit',
+        'process-title': '// como eu trabalho',
+        'process-1-title': 'Descoberta',
+        'process-1-text': 'Entendo o problema, quem usa e o que precisa sair do papel primeiro.',
+        'process-2-title': 'Proposta',
+        'process-2-text': 'Escopo claro, arquitetura, prazo e custo — sem surpresa no meio do caminho.',
+        'process-3-title': 'Construção',
+        'process-3-text': 'Entregas semanais em ambiente de teste, com você acompanhando cada etapa.',
+        'process-4-title': 'Lançamento e suporte',
+        'process-4-text': 'Deploy, monitoramento e ajustes depois que o produto está no ar.',
+        'metric-aqua': '<b>+1.000</b> empreendedores na comunidade',
+        'metric-mental': '<b>10 mil+</b> downloads na Play Store',
+        'modal-visit': 'Abrir projeto',
+        'toast-copied': 'e-mail copiado ✓',
         'stack-backend': 'backend',
         'stack-frontend': 'frontend & mobile',
         'stack-data': 'dados',
@@ -828,6 +851,29 @@ const translations = {
         'hero-greeting': 'Hi, my name is',
         'hero-description': '<span class="text-accent">Full Stack</span> Software Engineer working with Python, C#/.NET, Node.js, React and Flutter. I integrate <span class="text-accent">AI into real products</span> — from tailor-made CRMs to critical healthcare systems with real-time triage.',
         'about-location-value': 'Fortaleza, Brazil · remote',
+        'now-title': 'now',
+        'now-building-key': 'building',
+        'now-building': 'websites, systems and apps at BlueCircuit',
+        'now-learning-key': 'exploring',
+        'now-learning': 'AI agents and LLMs in production',
+        'now-open-key': 'open to',
+        'now-open': 'projects, consulting and remote opportunities',
+        'gh-title': 'GitHub activity',
+        'gh-total-label': 'contributions in the last 12 months',
+        'commit-label': 'last commit',
+        'process-title': '// how I work',
+        'process-1-title': 'Discovery',
+        'process-1-text': 'I understand the problem, who uses it and what needs to ship first.',
+        'process-2-title': 'Proposal',
+        'process-2-text': 'Clear scope, architecture, timeline and cost — no surprises halfway.',
+        'process-3-title': 'Build',
+        'process-3-text': 'Weekly deliveries in a staging environment, with you following every step.',
+        'process-4-title': 'Launch & support',
+        'process-4-text': 'Deploy, monitoring and adjustments after the product goes live.',
+        'metric-aqua': '<b>1,000+</b> entrepreneurs in the community',
+        'metric-mental': '<b>10k+</b> downloads on Google Play',
+        'modal-visit': 'Open project',
+        'toast-copied': 'email copied ✓',
         'stack-backend': 'backend',
         'stack-frontend': 'frontend & mobile',
         'stack-data': 'data',
@@ -1067,6 +1113,12 @@ function applyTranslations(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (t[key] !== undefined) el.textContent = t[key];
+    });
+
+    // métricas dos projetos (têm <b>)
+    document.querySelectorAll('.project-metric[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.innerHTML = t[key];
     });
 
     // HTML content

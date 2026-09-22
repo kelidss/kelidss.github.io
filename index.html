@@ -64,6 +64,8 @@
 </head>
 
 <body>
+    <div class="read-progress" aria-hidden="true"></div>
+    <div class="toast" role="status" aria-live="polite"></div>
     <div class="ambient-bg">
         <span class="ambient-blob blob-a"></span>
         <span class="ambient-blob blob-b"></span>
@@ -90,6 +92,7 @@
                 </ul>
             </div>
 
+            <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Tema claro"><i class="fas fa-sun"></i></button>
             <div class="lang-toggle" id="lang-toggle">
                 <button class="lang-btn active" data-lang="pt" lang="pt-BR" aria-label="Português" aria-pressed="true">PT</button>
                 <span class="lang-divider">|</span>
@@ -158,6 +161,8 @@
                         <span class="metric-label" data-i18n="metric-commits">Commits</span>
                     </div>
                 </div>
+                <!-- preenchido pelo features.js com o último push público no GitHub -->
+                <p class="hero-commit" id="hero-commit" hidden></p>
             </div>
 
             <div class="hero-visual">
@@ -171,6 +176,7 @@
                     <div class="frame-line left"></div>
                     <div class="frame-line right"></div>
                     <img src="assets/eu.webp" width="731" height="1280" alt="Keliane Soares" class="profile-image">
+                    <img src="assets/perfil.webp" width="900" height="1200" alt="" aria-hidden="true" class="profile-image profile-image--alt">
                     <div class="profile-glitch"></div>
                 </div>
 
@@ -213,6 +219,14 @@
             <span class="deco-text">FULL_STACK.DEV</span>
         </div>
     </section>
+
+    <!-- faixa de tecnologias em movimento (pausa no hover) -->
+    <div class="tech-marquee" aria-hidden="true">
+        <div class="marquee-track">
+            <span class="marquee-item"><i class="fab fa-python"></i>Python</span><span class="marquee-item"><i class="fas fa-bolt"></i>FastAPI</span><span class="marquee-item"><i class="fab fa-python"></i>Django</span><span class="marquee-item"><i class="fas fa-flask"></i>Flask</span><span class="marquee-item"><i class="fas fa-hashtag"></i>C#/.NET</span><span class="marquee-item"><i class="fab fa-node-js"></i>Node.js</span><span class="marquee-item"><i class="fab fa-react"></i>React</span><span class="marquee-item"><i class="fab fa-js"></i>TypeScript</span><span class="marquee-item"><i class="fas fa-mobile-screen-button"></i>Flutter</span><span class="marquee-item"><i class="fas fa-robot"></i>LLMs / IA</span><span class="marquee-item"><i class="fas fa-database"></i>PostgreSQL</span><span class="marquee-item"><i class="fab fa-docker"></i>Docker</span><span class="marquee-item"><i class="fab fa-aws"></i>AWS</span><span class="marquee-item"><i class="fas fa-infinity"></i>CI/CD</span>
+            <span class="marquee-item"><i class="fab fa-python"></i>Python</span><span class="marquee-item"><i class="fas fa-bolt"></i>FastAPI</span><span class="marquee-item"><i class="fab fa-python"></i>Django</span><span class="marquee-item"><i class="fas fa-flask"></i>Flask</span><span class="marquee-item"><i class="fas fa-hashtag"></i>C#/.NET</span><span class="marquee-item"><i class="fab fa-node-js"></i>Node.js</span><span class="marquee-item"><i class="fab fa-react"></i>React</span><span class="marquee-item"><i class="fab fa-js"></i>TypeScript</span><span class="marquee-item"><i class="fas fa-mobile-screen-button"></i>Flutter</span><span class="marquee-item"><i class="fas fa-robot"></i>LLMs / IA</span><span class="marquee-item"><i class="fas fa-database"></i>PostgreSQL</span><span class="marquee-item"><i class="fab fa-docker"></i>Docker</span><span class="marquee-item"><i class="fab fa-aws"></i>AWS</span><span class="marquee-item"><i class="fas fa-infinity"></i>CI/CD</span>
+        </div>
+    </div>
 
     <section id="about" class="about">
         <div class="container">
@@ -263,7 +277,7 @@
                             <span class="info-icon"><i class="fas fa-location-dot"></i></span>
                             <div class="info-content">
                                 <span class="info-label" data-i18n="contact-location-label">Localização</span>
-                                <span class="info-value" data-i18n="about-location-value">Fortaleza, CE · remoto</span>
+                                <span class="info-value"><span data-i18n="about-location-value">Fortaleza, CE · remoto</span> <span class="local-time-wrap">· <span id="local-time"></span></span></span>
                             </div>
                         </div>
                     </div>
@@ -314,7 +328,24 @@
                         </div>
                     </div>
 
+                    <!-- "Agora": o que está rolando. Edite os textos aqui e nas traduções (script.js). -->
+                    <div class="about-now">
+                        <span class="now-label"><span class="dot-live"></span> <span data-i18n="now-title">agora</span></span>
+                        <ul class="now-list">
+                            <li><span class="now-key" data-i18n="now-building-key">construindo</span><span data-i18n="now-building">sites, sistemas e apps na BlueCircuit</span></li>
+                            <li><span class="now-key" data-i18n="now-learning-key">explorando</span><span data-i18n="now-learning">agentes de IA e LLMs em produção</span></li>
+                            <li><span class="now-key" data-i18n="now-open-key">aberta a</span><span data-i18n="now-open">projetos, consultorias e oportunidades remotas</span></li>
+                        </ul>
+                    </div>
 
+                    <!-- mapa de contribuições do GitHub (features.js) -->
+                    <div class="gh-heatmap" id="gh-heatmap" hidden>
+                        <div class="gh-head">
+                            <span class="gh-title"><i class="fab fa-github"></i> <span data-i18n="gh-title">atividade no GitHub</span></span>
+                            <span class="gh-meta"><b class="gh-total">–</b> <span data-i18n="gh-total-label">contribuições nos últimos 12 meses</span></span>
+                        </div>
+                        <div class="gh-grid"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -453,6 +484,36 @@
                     </div>
                 </div>
             </div>
+
+            <div class="process">
+                <p class="process-title code-comment" data-i18n="process-title">// como eu trabalho</p>
+                <ol class="process-steps">
+                    <li class="process-step">
+                        <span class="process-num">01</span>
+                        <span class="process-icon"><i class="fas fa-magnifying-glass"></i></span>
+                        <h4 data-i18n="process-1-title">Descoberta</h4>
+                        <p data-i18n="process-1-text">Entendo o problema, quem usa e o que precisa sair do papel primeiro.</p>
+                    </li>
+                    <li class="process-step">
+                        <span class="process-num">02</span>
+                        <span class="process-icon"><i class="fas fa-pen-ruler"></i></span>
+                        <h4 data-i18n="process-2-title">Proposta</h4>
+                        <p data-i18n="process-2-text">Escopo claro, arquitetura, prazo e custo — sem surpresa no meio do caminho.</p>
+                    </li>
+                    <li class="process-step">
+                        <span class="process-num">03</span>
+                        <span class="process-icon"><i class="fas fa-code"></i></span>
+                        <h4 data-i18n="process-3-title">Construção</h4>
+                        <p data-i18n="process-3-text">Entregas semanais em ambiente de teste, com você acompanhando cada etapa.</p>
+                    </li>
+                    <li class="process-step">
+                        <span class="process-num">04</span>
+                        <span class="process-icon"><i class="fas fa-rocket"></i></span>
+                        <h4 data-i18n="process-4-title">Lançamento e suporte</h4>
+                        <p data-i18n="process-4-text">Deploy, monitoramento e ajustes depois que o produto está no ar.</p>
+                    </li>
+                </ol>
+            </div>
         </div>
     </section>
 
@@ -465,6 +526,9 @@
                 </h2>
                 <div class="section-line"></div>
             </div>
+
+            <!-- linha do tempo horizontal (features.js) -->
+            <div class="career-timeline" id="career-timeline" aria-hidden="true"></div>
 
             <div class="exp-layout">
                 <div class="exp-tabs">
@@ -825,6 +889,7 @@
                                 </a>
                             </div>
                         </div>
+                        <p class="project-metric" data-i18n="metric-mental"><b>10 mil+</b> downloads na Play Store</p>
                         <h3 class="project-title">MentalClean</h3>
                         <div class="project-hover-content">
                             <p class="project-description">
@@ -862,6 +927,7 @@
                                 </a>
                             </div>
                         </div>
+                        <p class="project-metric" data-i18n="metric-aqua"><b>+1.000</b> empreendedores na comunidade</p>
                         <h3 class="project-title">Comunidade Aqua</h3>
                         <div class="project-hover-content">
                             <p class="project-description">
@@ -1116,6 +1182,11 @@
 
                 <!-- Projetos Mobile -->            </div>
 
+            <dialog class="project-modal" id="project-modal" aria-labelledby="modal-title">
+                <button type="button" class="modal-close" aria-label="Fechar"><i class="fas fa-xmark"></i></button>
+                <div class="modal-body"></div>
+            </dialog>
+
             <div class="projects-more">
                 <button type="button" class="btn-outline btn-view-more" id="projects-toggle" aria-expanded="false">
                     <span class="btn-text" data-i18n="btn-view-more">Ver Mais</span>
@@ -1150,6 +1221,7 @@
                                 <span>Email</span>
                                 <a href="mailto:keliane.dev@gmail.com">keliane.dev@gmail.com</a>
                             </div>
+                            <button type="button" class="copy-btn" data-copy="keliane.dev@gmail.com" aria-label="Copiar e-mail" title="Copiar"><i class="far fa-copy"></i><i class="fas fa-check"></i></button>
                         </div>
                         <a class="method-item method-item--link" href="https://wa.me/5585921633870?text=Ol%C3%A1%2C%20Keliane!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar." target="_blank" rel="noopener">
                             <div class="method-icon method-icon--wa"><i class="fab fa-whatsapp"></i></div>
@@ -1250,6 +1322,7 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="features.js"></script>
 </body>
 
 </html>

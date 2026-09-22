@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Keliane Soares</title>
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#1f1c2c">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1f1c2c;
+            --bg-2: #2a253a;
+            --accent: #f78f92;
+            --text: #f2f2f2;
+            --muted: #9a95ae;
+            --border: #4a435c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', system-ui, sans-serif;
+            text-align: center;
+            padding: 24px;
+            overflow: hidden;
+        }
+
+        .code {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-size: clamp(4rem, 16vw, 9rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.04em;
+        }
+
+        h1 span { color: var(--accent); }
+
+        p {
+            color: var(--muted);
+            font-size: 1.1rem;
+            margin: 18px auto 34px;
+            max-width: 420px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 24px;
+            border-radius: 8px;
+            background: var(--accent);
+            color: var(--bg);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.25s ease;
+        }
+
+        .btn:hover { transform: translateY(-2px); }
+
+        /* Pac-Man comendo a trilha */
+        .track {
+            position: relative;
+            width: min(560px, 90vw);
+            height: 48px;
+            margin: 0 auto 40px;
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pac {
+            position: absolute;
+            left: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 26px;
+            height: 26px;
+            z-index: 3;
+            filter: drop-shadow(0 0 8px rgba(247, 143, 146, 0.35));
+        }
+
+        .jaw {
+            position: absolute;
+            left: 0;
+            width: 26px;
+            height: 13px;
+            background: var(--accent);
+        }
+
+        .jaw.top { top: 0; border-radius: 26px 26px 0 0; transform-origin: bottom center; animation: chompTop 0.35s linear infinite; }
+        .jaw.bottom { bottom: 0; border-radius: 0 0 26px 26px; transform-origin: top center; animation: chompBottom 0.35s linear infinite; }
+
+        @keyframes chompTop { 0%, 100% { transform: rotate(-32deg); } 50% { transform: rotate(0); } }
+        @keyframes chompBottom { 0%, 100% { transform: rotate(32deg); } 50% { transform: rotate(0); } }
+
+        .eye { position: absolute; top: 5px; left: 13px; width: 3px; height: 3px; border-radius: 50%; background: var(--bg); z-index: 4; }
+
+        .cover { position: absolute; left: 0; top: 0; width: 54px; height: 100%; background: var(--bg); z-index: 2; }
+
+        .dots {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            padding-left: 60px;
+            transform: translateY(-50%);
+            animation: dots 4.5s linear infinite;
+        }
+
+        .dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+        .dots i:nth-child(8n) { width: 13px; height: 13px; background: var(--accent); }
+
+        @keyframes dots { from { transform: translate(0, -50%); } to { transform: translate(-136px, -50%); } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .jaw, .dots { animation: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="code">ERR_PAGE_EATEN</div>
+        <h1>4<span>0</span>4</h1>
+        <p>Essa página foi comida pelo Pac-Man. <br>O resto do portfólio continua inteiro.</p>
+        <div class="track" aria-hidden="true">
+            <div class="dots" id="dots"></div>
+            <div class="cover"></div>
+            <div class="pac"><span class="jaw top"></span><span class="jaw bottom"></span><span class="eye"></span></div>
+        </div>
+        <a class="btn" href="/">&larr; voltar pro início</a>
+    </main>
+    <script>
+        document.getElementById('dots').innerHTML = '<i></i>'.repeat(40);
+    </script>
+</body>
+
+</html>
