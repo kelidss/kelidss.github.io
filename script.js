@@ -363,9 +363,11 @@ document.querySelectorAll('.service-item').forEach((card, index) => {
     card.style.setProperty('--delay', index % 2);
 });
 
+// A Experiência não usa mais abas (os painéis ficam empilhados).
 function initExperienceTabs() {
     const tabs = document.querySelectorAll('.exp-tab');
     const panels = document.querySelectorAll('.exp-panel');
+    if (!tabs.length) return;
     
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {

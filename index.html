@@ -38,7 +38,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="styles.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Anton&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -115,6 +115,14 @@
             <div class="hero-content">
 
 
+                <p class="brand-line" aria-hidden="true">
+                    <span class="brand-handle">@keliane.dev</span>
+                    <span class="brand-sep">|</span>
+                    <span>Keliane Soares</span>
+                    <span class="brand-rule"></span>
+                    <span class="brand-role">Desenvolvedora</span>
+                </p>
+
                 <div class="hero-title-wrapper">
                     <p class="hero-greeting" data-i18n="hero-greeting">Olá, meu nome é</p>
                     <h1 class="hero-name" data-text="KELIANE SOARES">
@@ -142,6 +150,10 @@
                     <a href="https://github.com/kelidss" target="_blank" class="btn-outline">
                         <span class="btn-icon"><i class="fab fa-github"></i></span>
                         <span class="btn-text">GitHub</span>
+                    </a>
+                    <a href="https://www.instagram.com/keliane.dev/" target="_blank" rel="noopener" class="btn-outline">
+                        <span class="btn-icon"><i class="fab fa-instagram"></i></span>
+                        <span class="btn-text">Instagram</span>
                     </a>
                     <!-- Currículo: coloque o PDF em assets/cv-keliane-soares.pdf e o botão aparece sozinho -->
                     <a href="assets/cv-keliane-soares.pdf" class="btn-outline btn-cv" download hidden>
@@ -495,39 +507,9 @@
             <div class="career-timeline" id="career-timeline" aria-hidden="true"></div>
 
             <div class="exp-layout">
-                <div class="exp-tabs">
-                    <button class="exp-tab active" data-tab="bluecircuit">
-                        <span class="tab-indicator"></span>
-                        <span class="tab-company">BlueCircuit <span class="tab-live" title="Atual"></span></span>
-                    </button>
-                    <button class="exp-tab" data-tab="orfeu">
-                        <span class="tab-indicator"></span>
-                        <span class="tab-company">Orfeu</span>
-                    </button>
-                    <button class="exp-tab" data-tab="acev">
-                        <span class="tab-indicator"></span>
-                        <span class="tab-company">ACEV</span>
-                    </button>
-                    <button class="exp-tab" data-tab="aquabit">
-                        <span class="tab-indicator"></span>
-                        <span class="tab-company">Aquabit</span>
-                    </button>
-                    <button class="exp-tab" data-tab="kompa">
-                        <span class="tab-indicator"></span>
-                        <span class="tab-company">Kompa Saúde</span>
-                    </button>
-                    <button class="exp-tab" data-tab="passamanaria">
-                        <span class="tab-indicator"></span>
-                        <span class="tab-company">Passamanaria</span>
-                    </button>
-                    <button class="exp-tab" data-tab="vida">
-                        <span class="tab-indicator"></span>
-                        <span class="tab-company">Vida Premium</span>
-                    </button>
-                </div>
 
                 <div class="exp-content">
-                    <div class="exp-panel active" id="bluecircuit">
+                    <div class="exp-panel" id="bluecircuit">
                         <div class="exp-header">
                             <h3 class="exp-title">Engenheira de Software Full-Stack</h3>
                             <span class="exp-company">@ BlueCircuit</span>
@@ -1158,11 +1140,6 @@
 
                 <!-- Projetos Mobile -->            </div>
 
-            <dialog class="project-modal" id="project-modal" aria-labelledby="modal-title">
-                <button type="button" class="modal-close" aria-label="Fechar"><i class="fas fa-xmark"></i></button>
-                <div class="modal-body"></div>
-            </dialog>
-
             <div class="projects-more">
                 <button type="button" class="btn-outline btn-view-more" id="projects-toggle" aria-expanded="false">
                     <span class="btn-text" data-i18n="btn-view-more">Ver Mais</span>
@@ -1213,6 +1190,13 @@
                                 <a href="https://linkedin.com/in/keliz" target="_blank">/in/keliz</a>
                             </div>
                         </div>
+                        <a class="method-item method-item--link" href="https://www.instagram.com/keliane.dev/" target="_blank" rel="noopener">
+                            <div class="method-icon method-icon--ig"><i class="fab fa-instagram"></i></div>
+                            <div class="method-info">
+                                <span>Instagram</span>
+                                <span>@keliane.dev</span>
+                            </div>
+                        </a>
                         <div class="method-item">
                             <div class="method-icon"><i class="fas fa-map-marker-alt"></i></div>
                             <div class="method-info">

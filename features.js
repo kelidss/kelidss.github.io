@@ -204,65 +204,6 @@
         }
     }
 
-    /* ---------- 7) modal de projeto ---------- */
-    function initProjectModal() {
-        const dialog = document.getElementById('project-modal');
-        if (!dialog || typeof dialog.showModal !== 'function') return;
-        const body = dialog.querySelector('.modal-body');
-        let activeVideo = null;
-
-        const open = (card) => {
-            const title = card.querySelector('.project-title')?.textContent.trim() || '';
-            const type = card.querySelector('.project-type')?.innerHTML || '';
-            const desc = card.querySelector('.project-description')?.textContent.trim() || '';
-            const stack = [...card.querySelectorAll('.project-stack span')].map(s => `<span>${s.textContent}</span>`).join('');
-            const link = card.querySelector('.project-links a');
-            const metric = card.querySelector('.project-metric');
-            const video = card.querySelector('.project-video source');
-            const poster = card.querySelector('.project-image-container img');
-            const isMobile = card.dataset.imageType === 'mobile';
-
-            const media = video
-                ? `<video class="modal-video" autoplay muted loop playsinline poster="${poster ? poster.currentSrc || poster.src : ''}"><source src="${video.getAttribute('src')}" type="video/webm"></video>`
-                : (poster ? `<img class="modal-img" src="${poster.currentSrc || poster.src}" alt="">` : '');
-
-            body.innerHTML = `
-                <div class="modal-media${isMobile ? ' modal-media--mobile' : ''}">${media}</div>
-                <div class="modal-info">
-                    <span class="project-type">${type}</span>
-                    <h3 class="modal-title">${title}</h3>
-                    ${metric ? `<p class="modal-metric">${metric.innerHTML}</p>` : ''}
-                    <p class="modal-desc">${desc}</p>
-                    <div class="modal-stack">${stack}</div>
-                    ${link ? `<a href="${link.href}" target="_blank" rel="noopener" class="btn-primary modal-link"><span class="btn-text">${t('modal-visit') || 'Abrir projeto'}</span><span class="btn-icon"><i class="fas fa-arrow-up-right-from-square"></i></span></a>` : ''}
-                </div>`;
-            activeVideo = body.querySelector('video');
-            dialog.showModal();
-            document.body.classList.add('modal-open');
-        };
-
-        const close = () => {
-            if (activeVideo) { activeVideo.pause(); activeVideo = null; }
-            dialog.close();
-        };
-
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.setAttribute('tabindex', '0');
-            card.setAttribute('role', 'button');
-            card.addEventListener('click', (e) => {
-                if (e.target.closest('a, button')) return; // links do card continuam normais
-                open(card);
-            });
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card); }
-            });
-        });
-
-        dialog.querySelector('.modal-close').addEventListener('click', close);
-        dialog.addEventListener('click', (e) => { if (e.target === dialog) close(); });
-        dialog.addEventListener('close', () => { document.body.classList.remove('modal-open'); });
-    }
-
     /* ---------- 11) linha do tempo da carreira ---------- */
     const CAREER = [
         { id: 'vida', label: 'Vida Premium', start: '2023-05' },
@@ -303,19 +244,26 @@
                     <span class="tl-label"><span class="tl-name">${c.label}</span><span class="tl-date">${fmtDate(c.start)}${c.current ? ' →' : ''}</span></span>
                 </button>`).join('')}`;
 
-        const sync = () => {
-            const active = document.querySelector('.exp-tab.active')?.dataset.tab;
-            wrap.querySelectorAll('.tl-dot').forEach(d => d.classList.toggle('is-active', d.dataset.tab === active));
-        };
-        wrap.querySelectorAll('.tl-dot').forEach(dot => {
+        const dots = [...wrap.querySelectorAll('.tl-dot')];
+        const setActive = (id) => dots.forEach(d => d.classList.toggle('is-active', d.dataset.tab === id));
+
+        dots.forEach(dot => {
             dot.addEventListener('click', () => {
-                const tab = document.querySelector(`.exp-tab[data-tab="${dot.dataset.tab}"]`);
-                if (tab) tab.click();
-                sync();
+                const panel = document.getElementById(dot.dataset.tab);
+                if (!panel) return;
+                setActive(dot.dataset.tab);
+                window.scrollTo({ top: panel.getBoundingClientRect().top + window.scrollY - 110, behavior: 'smooth' });
             });
         });
-        document.querySelectorAll('.exp-tab').forEach(tab => tab.addEventListener('click', () => setTimeout(sync, 0)));
-        sync();
+
+        // destaca o ponto da experiência que está no meio da tela
+        const panels = dots.map(d => document.getElementById(d.dataset.tab)).filter(Boolean);
+        if (panels.length && 'IntersectionObserver' in window) {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+            }, { rootMargin: '-45% 0px -45% 0px' });
+            panels.forEach(p => io.observe(p));
+        }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -328,7 +276,6 @@
         initLocalTime();
         initLastCommit();
         initHeatmap();
-        initProjectModal();
         initCareerTimeline();
         document.addEventListener('languagechange-portfolio', () => { renderCommit(); initCareerTimeline(); });
     });
