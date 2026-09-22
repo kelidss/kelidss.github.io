@@ -116,39 +116,8 @@
         setInterval(tick, 30000);
     }
 
-    /* ---------- 1 e 2) GitHub ao vivo ---------- */
-    const GH_USER = 'kelidss';
 
 
-
-    async function initHeatmap() {
-        const wrap = document.getElementById('gh-heatmap');
-        if (!wrap) return;
-        try {
-            const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${GH_USER}?y=last`);
-            if (!res.ok) throw new Error(res.status);
-            const data = await res.json();
-            const days = data.contributions;
-            if (!days || !days.length) throw new Error('vazio');
-
-            // alinha a primeira coluna no domingo
-            const first = new Date(days[0].date + 'T00:00:00');
-            const pad = first.getDay();
-            const cells = [];
-            for (let i = 0; i < pad; i++) cells.push(null);
-            days.forEach(d => cells.push(d));
-
-            const grid = wrap.querySelector('.gh-grid');
-            grid.innerHTML = cells.map(d => d
-                ? `<i data-level="${d.level}" title="${d.count} ${d.count === 1 ? 'contribuição' : 'contribuições'} · ${d.date}"></i>`
-                : '<i data-level="-1"></i>').join('');
-            const total = wrap.querySelector('.gh-total');
-            if (total) total.textContent = data.total.lastYear.toLocaleString('pt-BR');
-            wrap.hidden = false;
-        } catch (e) {
-            wrap.hidden = true;
-        }
-    }
 
     /* ---------- experiência atual em destaque ---------- */
     function markCurrentExperience() {
@@ -266,7 +235,6 @@
         initTheme();
         initCopyEmail();
         initLocalTime();
-        initHeatmap();
         initCareerTimeline();
         markCurrentExperience();
         initExperienceSwitcher();
