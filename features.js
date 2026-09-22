@@ -208,14 +208,45 @@
     function markCurrentExperience() {
         const current = document.querySelector('.exp-panel .exp-badge');
         if (current) current.closest('.exp-panel').classList.add('is-current');
-        // índice 01…07, como a numeração dos slides
-        document.querySelectorAll('.exp-panel[data-index]').forEach(panel => {
-            const meta = panel.querySelector('.exp-meta');
-            if (!meta || meta.querySelector('.exp-index')) return;
-            const idx = document.createElement('span');
-            idx.className = 'exp-index';
-            idx.textContent = panel.dataset.index;
-            meta.prepend(idx);
+    }
+
+    /* ---------- experiência: lista com detalhes expansíveis ---------- */
+    // Cada cargo é uma linha; os itens e a stack ficam num bloco que abre ao
+    // clicar no cargo ou na seta. A experiência atual começa aberta.
+    function initExperienceAccordion() {
+        const panels = [...document.querySelectorAll('.exp-panel')];
+        panels.forEach((panel, i) => {
+            const list = panel.querySelector('.exp-list');
+            const stack = panel.querySelector('.exp-stack');
+            const header = panel.querySelector('.exp-header');
+            if (!list || !header || panel.querySelector('.exp-body')) return;
+
+            const body = document.createElement('div');
+            body.className = 'exp-body';
+            const inner = document.createElement('div');
+            inner.className = 'exp-body-inner';
+            body.appendChild(inner);
+            inner.appendChild(list);
+            if (stack) inner.appendChild(stack);
+            panel.appendChild(body);
+
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'exp-toggle';
+            btn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+            btn.setAttribute('aria-controls', panel.id + '-body');
+            inner.id = panel.id + '-body';
+            panel.insertBefore(btn, body);
+
+            const setOpen = (open) => {
+                panel.classList.toggle('is-open', open);
+                btn.setAttribute('aria-expanded', String(open));
+                btn.setAttribute('aria-label', open ? 'Recolher' : 'Ver detalhes');
+            };
+            btn.addEventListener('click', () => setOpen(!panel.classList.contains('is-open')));
+            header.addEventListener('click', () => setOpen(!panel.classList.contains('is-open')));
+            panel.__setOpen = setOpen;
+            setOpen(i === 0);
         });
     }
 
@@ -267,6 +298,7 @@
                 const panel = document.getElementById(dot.dataset.tab);
                 if (!panel) return;
                 setActive(dot.dataset.tab);
+                if (panel.__setOpen) panel.__setOpen(true);
                 window.scrollTo({ top: panel.getBoundingClientRect().top + window.scrollY - 110, behavior: 'smooth' });
             });
         });
@@ -293,6 +325,7 @@
         initHeatmap();
         initCareerTimeline();
         markCurrentExperience();
+        initExperienceAccordion();
         document.addEventListener('languagechange-portfolio', () => { renderCommit(); initCareerTimeline(); });
     });
 })();

@@ -3951,3 +3951,244 @@ button:focus-visible,
         grid-column: 1;
     }
 }
+
+
+/* ============================================================
+   EXPERIÊNCIA v3 — lista editorial
+   Sem cards e sem caixa: período à esquerda, cargo e empresa na
+   linha, detalhes abrem ao clicar. Sobrescreve as versões anteriores.
+   ============================================================ */
+.exp-content {
+    gap: 0;
+    border-top: 1px solid var(--border);
+}
+
+.exp-panel,
+.exp-panel:hover {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr) 40px;
+    column-gap: 28px;
+    align-items: start;
+    padding: 22px 4px 22px 12px;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    overflow: visible;
+    transition: background 0.3s ease;
+}
+
+.exp-panel:hover {
+    background: linear-gradient(90deg, rgba(139, 127, 240, 0.05), transparent 70%);
+}
+
+.exp-panel::before,
+.exp-panel::after {
+    content: none;
+    display: none;
+}
+
+.exp-index {
+    display: none;
+}
+
+/* período */
+.exp-meta {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding-top: 5px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+}
+
+.exp-date {
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    line-height: 1.55;
+}
+
+.exp-panel.is-current .exp-date {
+    color: var(--text-secondary);
+}
+
+.exp-badge {
+    margin: 0;
+    font-size: 0.6rem;
+    padding: 3px 9px;
+}
+
+/* cargo + empresa na mesma linha */
+.exp-header {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.exp-title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    color: var(--text-primary);
+    transition: color 0.25s ease;
+}
+
+.exp-panel:hover .exp-title,
+.exp-panel.is-open .exp-title {
+    color: var(--accent-soft);
+}
+
+.exp-company {
+    padding: 4px 11px;
+    font-size: 0.7rem;
+}
+
+/* seta */
+.exp-toggle {
+    grid-column: 3;
+    grid-row: 1;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: transform 0.35s var(--ease-out), border-color 0.25s ease, color 0.25s ease;
+}
+
+.exp-panel:hover .exp-toggle,
+.exp-panel.is-open .exp-toggle {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.exp-panel.is-open .exp-toggle {
+    transform: rotate(180deg);
+}
+
+/* bloco expansível */
+.exp-body {
+    grid-column: 2;
+    grid-row: 2;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s var(--ease-out);
+}
+
+.exp-body-inner {
+    overflow: hidden;
+}
+
+.exp-panel.is-open .exp-body {
+    grid-template-rows: 1fr;
+}
+
+.exp-list {
+    margin: 0;
+    padding: 16px 0 14px;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    gap: 8px;
+    max-width: 66ch;
+}
+
+.exp-list li {
+    font-size: 0.94rem;
+}
+
+.exp-stack {
+    margin-bottom: 6px;
+}
+
+@media (max-width: 860px) {
+    .exp-panel,
+    .exp-panel:hover {
+        grid-template-columns: minmax(0, 1fr) 34px;
+        padding: 18px 0;
+        column-gap: 14px;
+        row-gap: 8px;
+    }
+
+    .exp-meta {
+        grid-column: 1;
+        grid-row: 1;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding-top: 0;
+        margin: 0;
+    }
+
+    .exp-header {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .exp-toggle {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        align-self: center;
+    }
+
+    .exp-body {
+        grid-column: 1 / -1;
+        grid-row: 3;
+    }
+}
+
+
+/* ============================================================
+   AJUSTES GLOBAIS (passada final)
+   ============================================================ */
+/* Sobre: cards de Formação/Localização empilhados sob a foto */
+.about-image-wrapper .about-info-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 16px 0 0;
+}
+
+.about-image-wrapper .info-card {
+    padding: 12px 14px;
+}
+
+/* stack: rótulo dos grupos numa linha só */
+.tech-group {
+    grid-template-columns: 156px 1fr;
+}
+
+.tech-group-label {
+    white-space: nowrap;
+    font-size: 0.68rem;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 1100px) {
+    .tech-group {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .tech-group-label {
+        padding-top: 0;
+    }
+}
