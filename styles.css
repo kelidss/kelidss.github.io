@@ -1498,6 +1498,39 @@ section {
     transform: scale(1.05);
 }
 
+/* Vídeo de apresentação: fica por cima da imagem (que segue como poster
+   e fallback) e só aparece quando já tem dados para tocar. */
+.project-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    background: transparent;
+}
+
+.project-video.is-ready {
+    opacity: 1;
+}
+
+.project-card:hover .project-video {
+    transform: scale(1.05);
+}
+
+.project-card[data-image-type="mobile"] .project-video {
+    object-position: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project-video {
+        display: none;
+    }
+}
+
 
 .project-card[data-image-type="mobile"] {
     flex-direction: row;

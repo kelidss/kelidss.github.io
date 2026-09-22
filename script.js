@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initExperienceTabs();
     initProjectFilter();
+    initProjectVideos();
     initAdvancedSmoothScroll();
     initParallax();
     initContactForm();
@@ -339,6 +340,45 @@ function initProjectFilter() {
 
     updateProjectVisibility();
     initProjectCardGlow();
+}
+
+// ========== Vídeos de apresentação dos projetos ==========
+// Cada card tem um <video> (webm) por cima da imagem. O vídeo só é
+// carregado e tocado quando o card entra na tela; sai da tela, pausa.
+// Se o navegador não tocar webm ou a rede pedir economia de dados,
+// o vídeo some e a imagem continua.
+function initProjectVideos() {
+    const videos = document.querySelectorAll('.project-video');
+    if (!videos.length) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const saveData = navigator.connection && navigator.connection.saveData;
+    if (reduceMotion || saveData) {
+        videos.forEach(v => v.remove());
+        return;
+    }
+
+    videos.forEach(video => {
+        video.addEventListener('canplay', () => video.classList.add('is-ready'), { once: true });
+        // erro de <source> não borbulha: escuta no último source
+        const lastSource = video.querySelector('source:last-child');
+        (lastSource || video).addEventListener('error', () => video.remove(), { once: true });
+        video.addEventListener('error', () => video.remove(), { once: true });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+                const p = video.play();
+                if (p && p.catch) p.catch(() => {});
+            } else {
+                video.pause();
+            }
+        });
+    }, { threshold: 0.35 });
+
+    videos.forEach(video => observer.observe(video));
 }
 
 function initProjectCardGlow() {
