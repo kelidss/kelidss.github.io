@@ -3987,3 +3987,67 @@ button:focus-visible,
 .about-image {
     object-fit: contain;
 }
+
+/* ============================================================
+   RITMO ENTRE SEÇÕES
+   Mesmo respiro em todas as seções e fundos alternados sem
+   degradês, para as fronteiras ficarem limpas e previsíveis.
+   ============================================================ */
+:root {
+    --section-gap: 96px;
+}
+
+.about,
+.services,
+.projects,
+.experience,
+.contact {
+    padding: var(--section-gap) 0;
+}
+
+.about { background: var(--bg-primary); }
+.services { background: var(--bg-dark); }
+.projects { background: var(--bg-primary); }
+.experience { background: var(--bg-dark); }
+.contact { background: var(--bg-primary); }
+
+.section-header {
+    margin-bottom: 48px;
+}
+
+.contact .section-header {
+    margin-bottom: 40px;
+}
+
+.footer {
+    padding: 48px 0 28px;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-gap: 72px;
+    }
+
+    .section-header {
+        margin-bottom: 36px;
+    }
+}
+
+/* Sobre: mapa do GitHub abaixo das duas colunas, na largura toda */
+.gh-heatmap {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+}
+
+/* Projetos em três colunas nas telas largas: seção mais curta */
+@media (min-width: 1100px) {
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+}
+
+.gh-grid {
+    gap: 5px;
+}
