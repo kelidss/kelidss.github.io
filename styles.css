@@ -662,44 +662,6 @@ img {
     filter: grayscale(0%);
 }
 
-.profile-glitch {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
-    background: var(--accent);
-    mix-blend-mode: overlay;
-    opacity: 0;
-    animation: glitch 5s infinite;
-}
-
-@keyframes glitch {
-
-    0%,
-    95%,
-    100% {
-        opacity: 0;
-    }
-
-    96% {
-        opacity: 0.1;
-        transform: translateX(-5px);
-    }
-
-    97% {
-        opacity: 0;
-    }
-
-    98% {
-        opacity: 0.1;
-        transform: translateX(5px);
-    }
-
-    99% {
-        opacity: 0;
-    }
-}
 
 .tech-orbit {
     position: absolute;
@@ -2859,16 +2821,6 @@ button:focus-visible,
     transform: rotate(20deg);
 }
 
-/* 5) foto alternativa no hover do frame */
-.profile-image--alt {
-    opacity: 0;
-    object-position: center;
-    transition: opacity 0.6s ease;
-}
-
-.profile-frame:hover .profile-image--alt {
-    opacity: 1;
-}
 
 /* 4) relógio */
 .local-time-wrap {
@@ -4010,4 +3962,20 @@ button:focus-visible,
 
 .image-overlay {
     display: none;
+}
+
+/* Sobre: o mockup é recortado (fundo transparente), sem moldura nem véu */
+.about-image-frame,
+.about-image-frame::before {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.about-image-frame::before {
+    display: none;
+}
+
+.about-image {
+    object-fit: contain;
 }
