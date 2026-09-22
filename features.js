@@ -208,6 +208,15 @@
     function markCurrentExperience() {
         const current = document.querySelector('.exp-panel .exp-badge');
         if (current) current.closest('.exp-panel').classList.add('is-current');
+        // índice 01…07, como a numeração dos slides
+        document.querySelectorAll('.exp-panel[data-index]').forEach(panel => {
+            const meta = panel.querySelector('.exp-meta');
+            if (!meta || meta.querySelector('.exp-index')) return;
+            const idx = document.createElement('span');
+            idx.className = 'exp-index';
+            idx.textContent = panel.dataset.index;
+            meta.prepend(idx);
+        });
     }
 
     /* ---------- 11) linha do tempo da carreira ---------- */

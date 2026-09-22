@@ -3607,3 +3607,347 @@ button:focus-visible,
 .noise-overlay {
     opacity: 0.05;
 }
+
+
+/* ============================================================
+   FEED @keliane.dev — v2
+   Cards de experiência como slides do carrossel; nome em serifa
+   itálica; ✦ nas linhas; rodapé com os pilares do perfil.
+   ============================================================ */
+
+/* --- hero: "KELIANE" pesado + "Soares" em serifa itálica lilás --- */
+.name-line.accent {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    font-size: 1.14em;
+    line-height: 0.9;
+    color: var(--accent-soft);
+}
+
+.brand-star {
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-left: 4px;
+}
+
+/* halftone atrás da foto do hero, como a textura das artes */
+.hero-visual::before {
+    content: '';
+    position: absolute;
+    inset: -60px;
+    background-image: radial-gradient(circle, rgba(139, 127, 240, 0.28) 1.2px, transparent 1.6px);
+    background-size: 14px 14px;
+    -webkit-mask-image: radial-gradient(circle at 60% 50%, #000 20%, transparent 70%);
+    mask-image: radial-gradient(circle at 60% 50%, #000 20%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- linha dos títulos termina em ✦ --- */
+.section-line {
+    position: relative;
+}
+
+.section-line::after {
+    content: '✦';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: 8px;
+    background: inherit;
+    color: var(--accent);
+    font-size: 0.8rem;
+    line-height: 1;
+}
+
+.section-header.centered .section-line::after {
+    display: none;
+}
+
+/* --- contato: frase em serifa itálica, como as frases do feed --- */
+.contact-header-text h3 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    line-height: 1.1;
+}
+
+/* --- rodapé: pilares do perfil --- */
+.footer-tags {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-tags i {
+    font-style: normal;
+    color: var(--accent);
+}
+
+.footer-tags:hover {
+    color: var(--text-primary);
+}
+
+/* ============================================================
+   EXPERIÊNCIA — cards como slides
+   ============================================================ */
+.exp-content {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.exp-panel {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+    column-gap: 28px;
+    padding: 28px 30px 26px;
+    border: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(139, 127, 240, 0.10), transparent 40%),
+        var(--bg-card);
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.35s var(--ease-out), box-shadow 0.35s ease;
+}
+
+.exp-panel:hover {
+    border-color: rgba(139, 127, 240, 0.55);
+    transform: translateY(-3px);
+    box-shadow: 0 24px 50px -30px rgba(0, 0, 0, 0.8);
+    background:
+        radial-gradient(circle at 100% 0%, rgba(139, 127, 240, 0.14), transparent 40%),
+        var(--bg-card);
+}
+
+/* textura halftone bem discreta, como nas artes */
+.exp-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    left: auto;
+    top: auto;
+    width: 46%;
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1.4px);
+    background-size: 12px 12px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 60%);
+    mask-image: linear-gradient(90deg, transparent, #000 60%);
+    pointer-events: none;
+}
+
+/* sem a linha/ponto da versão anterior */
+.exp-panel::after {
+    content: none;
+}
+
+.exp-panel:first-child::before,
+.exp-panel:last-child::before {
+    top: auto;
+    bottom: 0;
+}
+
+/* coluna da esquerda: índice grande + período */
+.exp-meta {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding-top: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+}
+
+.exp-meta::before {
+    content: attr(data-index);
+}
+
+.exp-panel[data-index] .exp-meta::before {
+    content: '';
+}
+
+.exp-index {
+    font-family: 'Anton', var(--font-mono);
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.55;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+}
+
+.exp-date {
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    line-height: 1.6;
+}
+
+.exp-badge {
+    margin-top: 2px;
+}
+
+/* coluna da direita */
+.exp-header,
+.exp-list,
+.exp-stack {
+    grid-column: 2;
+}
+
+.exp-header {
+    display: flex;
+    flex-direction: column-reverse; /* empresa (pílula) acima do cargo */
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+/* empresa em pílula de borda fina, como "@keliane.dev" nos posts */
+.exp-company {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 12px;
+    border: 1px solid rgba(139, 127, 240, 0.55);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.5px;
+    color: var(--accent-soft);
+    background: transparent;
+}
+
+.exp-panel.is-current .exp-company {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #14121b;
+    font-weight: 600;
+}
+
+/* cargo na display das artes */
+.exp-title {
+    font-family: 'Anton', var(--font-sans);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 1.55rem;
+    line-height: 1.05;
+    margin: 0;
+}
+
+/* itens dentro de uma caixa, como a caixa de texto dos posts */
+.exp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin: 0 0 16px;
+    padding: 16px 18px;
+    max-width: 72ch;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.exp-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.list-marker {
+    width: auto;
+    height: auto;
+    margin-top: 0;
+    background: none;
+    opacity: 1;
+}
+
+.list-marker::before {
+    content: '✦';
+    color: var(--accent);
+    font-size: 0.7rem;
+    line-height: 1.6;
+}
+
+/* stack como a linha de tags do rodapé dos posts */
+.exp-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 6px;
+    align-items: center;
+}
+
+.exp-stack span {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.exp-stack span:not(:last-child)::after {
+    content: '·';
+    color: var(--accent);
+    margin-left: 6px;
+}
+
+@media (max-width: 860px) {
+    .exp-panel {
+        grid-template-columns: 1fr;
+        padding: 22px 20px;
+    }
+
+    .exp-panel::before {
+        display: none;
+    }
+
+    .exp-meta {
+        grid-row: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px 14px;
+        padding-top: 0;
+        margin-bottom: 14px;
+    }
+
+    .exp-index {
+        font-size: 1.6rem;
+        margin: 0;
+    }
+
+    .exp-header,
+    .exp-list,
+    .exp-stack {
+        grid-column: 1;
+    }
+}
