@@ -3996,3 +3996,8 @@ button:focus-visible,
         grid-template-columns: 1fr;
     }
 }
+
+/* a órbita é só decoração: não pode roubar o hover da foto */
+.tech-orbit {
+    pointer-events: none;
+}
