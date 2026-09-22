@@ -121,11 +121,9 @@
                 </div>
 
                 <p class="hero-description" data-i18n-html="hero-description">
-                    Engenheira de Software <span class="text-accent">Full Stack</span> especializada em arquitetura
-                    de sistemas escaláveis e na <span class="text-accent">integração prática de IA</span>. Construo
-                    back-ends robustos com Python (FastAPI, Django, Flask), C#/.NET e Node.js, além de interfaces
-                    web e mobile com React, TypeScript e Flutter. Da modelagem de dados à cultura DevOps, entrego
-                    código performático — de CRMs sob medida a sistemas críticos com triagem em tempo real.
+                    Engenheira de Software <span class="text-accent">Full Stack</span> com Python, C#/.NET, Node.js,
+                    React e Flutter. Integro <span class="text-accent">IA em produtos reais</span> — de CRMs sob
+                    medida a sistemas críticos de saúde com triagem em tempo real.
                 </p>
 
                 <div class="hero-cta">
@@ -151,7 +149,7 @@
                     </div>
                     <div class="metric-divider"></div>
                     <div class="metric">
-                        <span class="metric-value" data-count="15">0</span>
+                        <span class="metric-value" data-count="12">0</span>
                         <span class="metric-label" data-i18n="metric-projects">Projetos</span>
                     </div>
                     <div class="metric-divider"></div>
@@ -259,34 +257,60 @@
                             <div class="info-content">
                                 <span class="info-label" data-i18n="about-formation-label">Formação</span>
                                 <span class="info-value" data-i18n="about-formation-value">Ciência da Computação</span>
-                                <!-- instituição e ano removidos -->
+                            </div>
+                        </div>
+                        <div class="info-card info-card--compact">
+                            <span class="info-icon"><i class="fas fa-location-dot"></i></span>
+                            <div class="info-content">
+                                <span class="info-label" data-i18n="contact-location-label">Localização</span>
+                                <span class="info-value" data-i18n="about-location-value">Fortaleza, CE · remoto</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="about-tech">
                         <span class="tech-label" data-i18n="about-tech-label">Tech Stack:</span>
-                        <div class="tech-tags">
-                            <span class="tech-tag"><i class="fab fa-react"></i> React</span>
-                            <span class="tech-tag"><i class="fab fa-js"></i> TypeScript</span>
-                            <span class="tech-tag"><i class="fas fa-mobile-screen-button"></i> Flutter</span>
-                            <span class="tech-tag"><i class="fab fa-python"></i> Python</span>
-                            <span class="tech-tag"><i class="fas fa-bolt"></i> FastAPI</span>
-                            <span class="tech-tag"><i class="fab fa-python"></i> Django</span>
-                            <span class="tech-tag"><i class="fas fa-flask"></i> Flask</span>
-                            <span class="tech-tag"><i class="fas fa-hashtag"></i> C#/.NET</span>
-                            <span class="tech-tag"><i class="fab fa-node-js"></i> Node.js</span>
-                            <span class="tech-tag"><i class="fab fa-php"></i> PHP</span>
-                            <span class="tech-tag"><i class="fas fa-robot"></i> LLMs / IA</span>
-                            <span class="tech-tag"><i class="fas fa-database"></i> PostgreSQL</span>
-                            <span class="tech-tag"><i class="fas fa-leaf"></i> MongoDB</span>
-                            <span class="tech-tag"><i class="fas fa-bolt-lightning"></i> Redis</span>
-                            <span class="tech-tag"><i class="fas fa-database"></i> SQL Server</span>
-                            <span class="tech-tag"><i class="fab fa-docker"></i> Docker</span>
-                            <span class="tech-tag"><i class="fab fa-aws"></i> AWS</span>
-                            <span class="tech-tag"><i class="fas fa-infinity"></i> CI/CD</span>
-                            <span class="tech-tag"><i class="fab fa-git-alt"></i> Git</span>
-                            <span class="tech-tag"><i class="fab fa-linux"></i> Linux</span>
+                        <div class="tech-groups">
+                            <div class="tech-group">
+                                <span class="tech-group-label" data-i18n="stack-backend">backend</span>
+                                <div class="tech-tags">
+                                    <span class="tech-tag"><i class="fab fa-python"></i> Python</span>
+                                    <span class="tech-tag"><i class="fas fa-bolt"></i> FastAPI</span>
+                                    <span class="tech-tag"><i class="fab fa-python"></i> Django</span>
+                                    <span class="tech-tag"><i class="fas fa-flask"></i> Flask</span>
+                                    <span class="tech-tag"><i class="fas fa-hashtag"></i> C#/.NET</span>
+                                    <span class="tech-tag"><i class="fab fa-node-js"></i> Node.js</span>
+                                    <span class="tech-tag"><i class="fab fa-php"></i> PHP</span>
+                                    <span class="tech-tag"><i class="fas fa-robot"></i> LLMs / IA</span>
+                                </div>
+                            </div>
+                            <div class="tech-group">
+                                <span class="tech-group-label" data-i18n="stack-frontend">frontend &amp; mobile</span>
+                                <div class="tech-tags">
+                                    <span class="tech-tag"><i class="fab fa-react"></i> React</span>
+                                    <span class="tech-tag"><i class="fab fa-js"></i> TypeScript</span>
+                                    <span class="tech-tag"><i class="fas fa-mobile-screen-button"></i> Flutter</span>
+                                </div>
+                            </div>
+                            <div class="tech-group">
+                                <span class="tech-group-label" data-i18n="stack-data">dados</span>
+                                <div class="tech-tags">
+                                    <span class="tech-tag"><i class="fas fa-database"></i> PostgreSQL</span>
+                                    <span class="tech-tag"><i class="fas fa-leaf"></i> MongoDB</span>
+                                    <span class="tech-tag"><i class="fas fa-bolt-lightning"></i> Redis</span>
+                                    <span class="tech-tag"><i class="fas fa-database"></i> SQL Server</span>
+                                </div>
+                            </div>
+                            <div class="tech-group">
+                                <span class="tech-group-label" data-i18n="stack-devops">devops &amp; infra</span>
+                                <div class="tech-tags">
+                                    <span class="tech-tag"><i class="fab fa-docker"></i> Docker</span>
+                                    <span class="tech-tag"><i class="fab fa-aws"></i> AWS</span>
+                                    <span class="tech-tag"><i class="fas fa-infinity"></i> CI/CD</span>
+                                    <span class="tech-tag"><i class="fab fa-git-alt"></i> Git</span>
+                                    <span class="tech-tag"><i class="fab fa-linux"></i> Linux</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -446,7 +470,7 @@
                 <div class="exp-tabs">
                     <button class="exp-tab active" data-tab="bluecircuit">
                         <span class="tab-indicator"></span>
-                        <span class="tab-company">BlueCircuit</span>
+                        <span class="tab-company">BlueCircuit <span class="tab-live" title="Atual"></span></span>
                     </button>
                     <button class="exp-tab" data-tab="orfeu">
                         <span class="tab-indicator"></span>
@@ -745,6 +769,79 @@
                     </div>
                 </article>
 
+
+                <!-- Kompa Saúde -->
+                <article class="project-card" data-category="mobile" data-image-type="mobile">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/kompa/unnamed.webp" width="545" height="967" alt="Kompa Saúde" loading="lazy" decoding="async">
+                        <video class="project-video" muted loop playsinline preload="none" poster="assets/kompa/unnamed.webp" aria-label="Prévia: Kompa Saúde" tabindex="-1">
+                            <source src="assets/kompa/preview.webm" type="video/webm">
+                        </video>
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-heartbeat"></i> HealthTech</span>
+                            <div class="project-links">
+                                <a href="https://manager.kompa.com.br" target="_blank" class="link-icon"
+                                    title="Live Demo">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Kompa Saúde</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Ecossistema de saúde digital com APIs Python/Flask, integration para análise preditiva e
+                                infraestrutura AWS.
+                            </p>
+                            <div class="project-stack">
+                                <span>Python</span>
+                                <span>Flask</span>
+                                <span>AWS</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- MentalClean -->
+                <article class="project-card" data-category="mobile" data-image-type="mobile">
+                    <div class="project-card-border"></div>
+                    <div class="project-image-container">
+                        <img src="assets/mentalclean/unnamed (1).webp" width="817" height="1600" alt="MentalClean" loading="lazy" decoding="async">
+                        <video class="project-video" muted loop playsinline preload="none" poster="assets/mentalclean/unnamed (1).webp" aria-label="Prévia: MentalClean" tabindex="-1">
+                            <source src="assets/mentalclean/preview.webm" type="video/webm">
+                        </video>
+                        <div class="project-image-glow"></div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <span class="project-type"><i class="fas fa-heartbeat"></i> HealthTech</span>
+                            <div class="project-links">
+                                <a href="https://play.google.com/store/apps/details?id=com.mentalclean.app"
+                                    target="_blank" class="link-icon" title="Play Store">
+                                    <i class="fab fa-google-play"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">MentalClean</h3>
+                        <div class="project-hover-content">
+                            <p class="project-description">
+                                Plataforma de saúde e bem-estar focada no ambiente corporativo, oferecida às empresas
+                                como canal de suporte emocional para colaboradores. Disponibiliza atendimento
+                                psicossocial, central de atendimento 24/7, assessorias especializadas e programas
+                                educativos para promoção do equilíbrio emocional e da produtividade.
+                            </p>
+                            <div class="project-stack">
+                                <span>Python</span>
+                                <span>Flask</span>
+                                <span>Docker</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
                 <!-- Comunidade Aqua -->
                 <article class="project-card" data-category="web">
                     <div class="project-card-border"></div>
@@ -1017,82 +1114,14 @@
 
 
 
-                <!-- Projetos Mobile -->
+                <!-- Projetos Mobile -->            </div>
 
-                <!-- Kompa Saúde -->
-                <article class="project-card" data-category="mobile" data-image-type="mobile">
-                    <div class="project-card-border"></div>
-                    <div class="project-image-container">
-                        <img src="assets/kompa/unnamed.webp" width="545" height="967" alt="Kompa Saúde" loading="lazy" decoding="async">
-                        <video class="project-video" muted loop playsinline preload="none" poster="assets/kompa/unnamed.webp" aria-label="Prévia: Kompa Saúde" tabindex="-1">
-                            <source src="assets/kompa/preview.webm" type="video/webm">
-                        </video>
-                        <div class="project-image-glow"></div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <span class="project-type"><i class="fas fa-heartbeat"></i> HealthTech</span>
-                            <div class="project-links">
-                                <a href="https://manager.kompa.com.br" target="_blank" class="link-icon"
-                                    title="Live Demo">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <h3 class="project-title">Kompa Saúde</h3>
-                        <div class="project-hover-content">
-                            <p class="project-description">
-                                Ecossistema de saúde digital com APIs Python/Flask, integration para análise preditiva e
-                                infraestrutura AWS.
-                            </p>
-                            <div class="project-stack">
-                                <span>Python</span>
-                                <span>Flask</span>
-                                <span>AWS</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- MentalClean -->
-                <article class="project-card" data-category="mobile" data-image-type="mobile">
-                    <div class="project-card-border"></div>
-                    <div class="project-image-container">
-                        <img src="assets/mentalclean/unnamed (1).webp" width="817" height="1600" alt="MentalClean" loading="lazy" decoding="async">
-                        <video class="project-video" muted loop playsinline preload="none" poster="assets/mentalclean/unnamed (1).webp" aria-label="Prévia: MentalClean" tabindex="-1">
-                            <source src="assets/mentalclean/preview.webm" type="video/webm">
-                        </video>
-                        <div class="project-image-glow"></div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <span class="project-type"><i class="fas fa-heartbeat"></i> HealthTech</span>
-                            <div class="project-links">
-                                <a href="https://play.google.com/store/apps/details?id=com.mentalclean.app"
-                                    target="_blank" class="link-icon" title="Play Store">
-                                    <i class="fab fa-google-play"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <h3 class="project-title">MentalClean</h3>
-                        <div class="project-hover-content">
-                            <p class="project-description">
-                                Plataforma de saúde e bem-estar focada no ambiente corporativo, oferecida às empresas
-                                como canal de suporte emocional para colaboradores. Disponibiliza atendimento
-                                psicossocial, central de atendimento 24/7, assessorias especializadas e programas
-                                educativos para promoção do equilíbrio emocional e da produtividade.
-                            </p>
-                            <div class="project-stack">
-                                <span>Python</span>
-                                <span>Flask</span>
-                                <span>Docker</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+            <div class="projects-more">
+                <button type="button" class="btn-outline btn-view-more" id="projects-toggle" aria-expanded="false">
+                    <span class="btn-text" data-i18n="btn-view-more">Ver Mais</span>
+                    <span class="btn-icon"><i class="fas fa-chevron-down"></i></span>
+                </button>
             </div>
-
-            <!-- Botão "Ver Mais" removido -->
         </div>
     </section>
 
@@ -1196,9 +1225,11 @@
                     <span class="footer-logo">[KS]</span>
                     <p class="footer-tagline" data-i18n="footer-tagline">Building the future, one commit at a time.</p>
                 </div>
-                <div class="footer-links">
-                    <!-- Links removidos conforme solicitado -->
-                </div>
+                <p class="footer-meta">
+                    <span class="code-tag">&lt;</span>Keliane Soares<span class="code-tag"> /&gt;</span>
+                    <span class="footer-sep">·</span> © 2026
+                    <span class="footer-sep">·</span> Fortaleza, CE
+                </p>
             </div>
             <!-- <div class="footer-bottom">
                 <p class="copyright">

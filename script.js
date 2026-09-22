@@ -385,29 +385,57 @@ function initExperienceTabs() {
 function initProjectFilter() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
+    const toggleBtn = document.getElementById('projects-toggle');
+    const INITIAL = 6; // cards visíveis antes do "Ver mais"
+    let expanded = false;
 
     const updateProjectVisibility = () => {
         const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+        let shown = 0;
+        let collapsedAny = false;
 
         projectCards.forEach(card => {
             const categories = card.dataset.category || '';
             const matchesFilter = activeFilter === 'all' || categories.includes(activeFilter);
-
-            if (matchesFilter) {
-                card.classList.remove('hidden');
-            } else {
-                card.classList.add('hidden');
-            }
+            // "Ver mais" só vale na lista completa; filtros mostram tudo que casar
+            const collapsed = matchesFilter && activeFilter === 'all' && !expanded && shown >= INITIAL;
+            if (matchesFilter) shown++;
+            if (collapsed) collapsedAny = true;
+            card.classList.toggle('hidden', !matchesFilter || collapsed);
         });
+
+        if (toggleBtn) {
+            const t = translations[currentLanguage] || translations.pt;
+            toggleBtn.hidden = activeFilter !== 'all' || projectCards.length <= INITIAL;
+            toggleBtn.setAttribute('aria-expanded', String(expanded));
+            toggleBtn.classList.toggle('is-open', expanded);
+            toggleBtn.querySelector('.btn-text').textContent = expanded ? t['btn-view-less'] : t['btn-view-more'];
+        }
     };
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            expanded = false;
             updateProjectVisibility();
         });
     });
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            expanded = !expanded;
+            updateProjectVisibility();
+            if (!expanded) {
+                // recolheu: volta para o topo da seção para não ficar no vazio
+                const top = document.getElementById('projects').getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo({ top, behavior: 'smooth' });
+            }
+        });
+    }
+
+    // troca de idioma: reaplica o texto do botão
+    document.addEventListener('languagechange-portfolio', () => updateProjectVisibility());
 
     updateProjectVisibility();
     initProjectCardGlow();
@@ -700,7 +728,12 @@ const translations = {
         'svc-design-3': 'Interfaces responsivas',
         'svc-design-4': 'Design systems',
         'hero-greeting': 'Olá, meu nome é',
-        'hero-description': 'Engenheira de Software <span class="text-accent">Full Stack</span> especializada em arquitetura de sistemas escaláveis e na <span class="text-accent">integração prática de IA</span>. Construo back-ends robustos com Python (FastAPI, Django, Flask), C#/.NET e Node.js, além de interfaces web e mobile com React, TypeScript e Flutter. Da modelagem de dados à cultura DevOps, entrego código performático — de CRMs sob medida a sistemas críticos com triagem em tempo real.',
+        'hero-description': 'Engenheira de Software <span class="text-accent">Full Stack</span> com Python, C#/.NET, Node.js, React e Flutter. Integro <span class="text-accent">IA em produtos reais</span> — de CRMs sob medida a sistemas críticos de saúde com triagem em tempo real.',
+        'about-location-value': 'Fortaleza, CE · remoto',
+        'stack-backend': 'backend',
+        'stack-frontend': 'frontend & mobile',
+        'stack-data': 'dados',
+        'stack-devops': 'devops & infra',
         'btn-projects': 'Ver Projetos',
         'btn-cv': 'Currículo (PDF)',
         'form-sending': '// enviando...',
@@ -793,7 +826,12 @@ const translations = {
         'svc-support-3': 'Technology consulting',
         'svc-support-4': 'Strategic planning',
         'hero-greeting': 'Hi, my name is',
-        'hero-description': '<span class="text-accent">Full Stack</span> Software Engineer specialized in scalable systems architecture and the <span class="text-accent">practical integration of AI</span>. I build robust back-ends with Python (FastAPI, Django, Flask), C#/.NET and Node.js, plus web and mobile interfaces with React, TypeScript and Flutter. From data modeling to DevOps culture, I deliver high-performing code — from tailor-made CRMs to critical systems with real-time triage.',
+        'hero-description': '<span class="text-accent">Full Stack</span> Software Engineer working with Python, C#/.NET, Node.js, React and Flutter. I integrate <span class="text-accent">AI into real products</span> — from tailor-made CRMs to critical healthcare systems with real-time triage.',
+        'about-location-value': 'Fortaleza, Brazil · remote',
+        'stack-backend': 'backend',
+        'stack-frontend': 'frontend & mobile',
+        'stack-data': 'data',
+        'stack-devops': 'devops & infra',
         'btn-projects': 'View Projects',
         'btn-cv': 'Resume (PDF)',
         'form-sending': '// sending...',
@@ -1048,6 +1086,8 @@ function applyTranslations(lang) {
 
     // Project cards
     translateProjects(lang);
+
+    document.dispatchEvent(new CustomEvent('languagechange-portfolio'));
 }
 
 function translateExperience(lang) {
