@@ -176,10 +176,10 @@ function initNavigation() {
             if (currentScroll >= sectionTop && currentScroll < sectionTop + sectionHeight) {
                 const id = section.getAttribute('id');
                 navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === '#' + id) {
-                        link.classList.add('active');
-                    }
+                    const isActive = link.getAttribute('href') === '#' + id;
+                    link.classList.toggle('active', isActive);
+                    if (isActive) link.setAttribute('aria-current', 'page');
+                    else link.removeAttribute('aria-current');
                 });
             }
         });
@@ -197,14 +197,19 @@ function initNavigation() {
     // Mobile menu
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
+            const open = navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active', open);
+            navToggle.setAttribute('aria-expanded', String(open));
+            navToggle.setAttribute('aria-label', open
+                ? (currentLanguage === 'en' ? 'Close menu' : 'Fechar menu')
+                : (currentLanguage === 'en' ? 'Open menu' : 'Abrir menu'));
         });
         
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
                 navToggle.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
             });
         });
     }
@@ -213,6 +218,12 @@ function initNavigation() {
 function initTypingEffect() {
     const element = document.getElementById('typed-role');
     if (!element) return;
+
+    // prefers-reduced-motion: mostra o cargo principal, sem digitar/apagar
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        element.textContent = 'Full Stack Engineer';
+        return;
+    }
     
     const roles = [
         'Full Stack Engineer',
@@ -526,6 +537,7 @@ document.querySelectorAll('.btn-primary, .btn-large, .nav-cta').forEach(btn => {
 const heroName = document.querySelector('.hero-name');
 if (heroName) {
     heroName.addEventListener('mouseenter', () => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         heroName.style.animation = 'textGlitch 0.3s ease';
         setTimeout(() => {
             heroName.style.animation = '';
@@ -1001,8 +1013,11 @@ function initLanguageToggle() {
             const lang = btn.dataset.lang;
             if (lang === currentLanguage) return;
             currentLanguage = lang;
-            langBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            langBtns.forEach(b => {
+                const on = b === btn;
+                b.classList.toggle('active', on);
+                b.setAttribute('aria-pressed', String(on));
+            });
             applyTranslations(lang);
         });
     });
@@ -1011,6 +1026,12 @@ function initLanguageToggle() {
 function applyTranslations(lang) {
     const t = translations[lang];
     if (!t) return;
+
+    // idioma do documento e título da aba acompanham a troca
+    document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
+    document.title = lang === 'en'
+        ? 'Keliane Soares | Full Stack Developer'
+        : 'Keliane Soares | Desenvolvedora Full Stack';
 
     // Simple text content
     document.querySelectorAll('[data-i18n]').forEach(el => {

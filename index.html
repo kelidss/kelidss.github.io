@@ -80,8 +80,8 @@
             </a>
 
             <div class="nav-menu" id="nav-menu">
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="#home" class="nav-link active"><span>01.</span><span data-i18n="nav-home">Home</span></a></li>
+                <ul class="nav-list" role="list">
+                    <li class="nav-item"><a href="#home" class="nav-link active" aria-current="page"><span>01.</span><span data-i18n="nav-home">Home</span></a></li>
                     <li class="nav-item"><a href="#about" class="nav-link"><span>02.</span><span data-i18n="nav-about">Sobre</span></a></li>
                     <li class="nav-item"><a href="#services" class="nav-link"><span>03.</span><span data-i18n="nav-services">Serviços</span></a></li>
                     <li class="nav-item"><a href="#experience" class="nav-link"><span>04.</span><span data-i18n="nav-experience">Experiência</span></a></li>
@@ -91,12 +91,12 @@
             </div>
 
             <div class="lang-toggle" id="lang-toggle">
-                <button class="lang-btn active" data-lang="pt">PT</button>
+                <button class="lang-btn active" data-lang="pt" lang="pt-BR" aria-label="Português" aria-pressed="true">PT</button>
                 <span class="lang-divider">|</span>
-                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
             </div>
 
-            <button class="nav-toggle" id="nav-toggle">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
                 <span></span>
             </button>
         </nav>
