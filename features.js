@@ -270,12 +270,20 @@
         const years = [];
         for (let y = Number(CAREER[0].start.slice(0, 4)); y <= now.getFullYear(); y++) years.push(y);
 
+        const monthNames = { pt: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
+                             en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] };
+        const fmtDate = (ym) => {
+            const [y, m] = ym.split('-').map(Number);
+            return `${(monthNames[currentLanguage] || monthNames.pt)[m - 1]}/${String(y).slice(2)}`;
+        };
+        const yearPct = (y) => Math.max(0, Math.min(100, ((y * 12 - startM) / span) * 100));
+
         wrap.innerHTML = `
             <div class="tl-line"></div>
-            ${years.map(y => `<span class="tl-year" style="left:${((y * 12 - startM) / span) * 100}%">${y}</span>`).join('')}
+            ${years.map(y => `<span class="tl-year" style="left:${yearPct(y)}%">${y}</span>`).join('')}
             ${CAREER.map((c, i) => `
                 <button type="button" class="tl-dot${c.current ? ' is-current' : ''}${i % 2 ? ' is-below' : ''}" style="left:${pct(c.start)}%" data-tab="${c.id}" title="${c.label}">
-                    <span class="tl-label">${c.label}</span>
+                    <span class="tl-label"><span class="tl-name">${c.label}</span><span class="tl-date">${fmtDate(c.start)}${c.current ? ' →' : ''}</span></span>
                 </button>`).join('')}`;
 
         const sync = () => {
@@ -304,6 +312,6 @@
         initHeatmap();
         initProjectModal();
         initCareerTimeline();
-        document.addEventListener('languagechange-portfolio', renderCommit);
+        document.addEventListener('languagechange-portfolio', () => { renderCommit(); initCareerTimeline(); });
     });
 })();

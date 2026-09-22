@@ -3022,26 +3022,6 @@ button:focus-visible,
     color: var(--text-muted);
 }
 
-/* 3) agora */
-.about-now {
-    margin-top: 34px;
-    padding: 18px 20px;
-    border: 1px dashed var(--border-light);
-    border-radius: 12px;
-}
-
-.now-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-}
-
 .dot-live {
     display: inline-block;
     width: 7px;
@@ -3052,27 +3032,6 @@ button:focus-visible,
     animation: pulse 2s ease-in-out infinite;
 }
 
-.now-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.now-list li {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 12px;
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-}
-
-.now-key {
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    color: var(--accent);
-    padding-top: 3px;
-}
 
 /* 1) heatmap do GitHub */
 .gh-heatmap {
@@ -3227,8 +3186,8 @@ button:focus-visible,
 /* 11) linha do tempo da carreira */
 .career-timeline {
     position: relative;
-    height: 96px;
-    margin: 0 20px 44px;
+    height: 190px;
+    margin: 0 30px 36px;
 }
 
 .tl-line {
@@ -3236,78 +3195,122 @@ button:focus-visible,
     left: 0;
     right: 0;
     top: 50%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--border), var(--accent));
-    opacity: 0.7;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--border-light), var(--accent));
 }
 
 .tl-year {
     position: absolute;
-    top: calc(50% + 30px);
+    bottom: 0;
     transform: translateX(-50%);
     font-family: var(--font-mono);
-    font-size: 0.66rem;
+    font-size: 0.7rem;
+    font-weight: 600;
     color: var(--text-muted);
+    letter-spacing: 1px;
 }
 
 .tl-year::before {
     content: '';
     position: absolute;
     left: 50%;
-    top: -30px;
+    bottom: 100%;
+    margin-bottom: 4px;
     width: 1px;
-    height: 8px;
+    height: 12px;
     background: var(--border-light);
 }
 
 .tl-dot {
     position: absolute;
     top: 50%;
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     transform: translate(-50%, -50%);
     border-radius: 50%;
     background: var(--bg-primary);
-    border: 2px solid var(--accent);
+    border: 3px solid var(--accent);
     cursor: pointer;
     padding: 0;
-    transition: transform 0.25s ease, background 0.25s ease;
+    z-index: 1;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .tl-dot:hover,
 .tl-dot.is-active {
     background: var(--accent);
-    transform: translate(-50%, -50%) scale(1.25);
+    box-shadow: 0 0 0 5px var(--accent-dim), 0 0 18px var(--accent-glow);
 }
 
 .tl-dot.is-current::after {
     content: '';
     position: absolute;
-    inset: -6px;
+    inset: -8px;
     border-radius: 50%;
     border: 1px solid var(--accent);
     animation: pulse 2s ease-in-out infinite;
 }
 
+/* conector do ponto até a etiqueta */
+.tl-dot::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    width: 1px;
+    height: 22px;
+    background: var(--border-light);
+}
+
+.tl-dot.is-below::before {
+    bottom: auto;
+    top: 100%;
+}
+
 .tl-label {
     position: absolute;
     left: 50%;
-    bottom: 18px;
+    bottom: calc(100% + 22px);
     transform: translateX(-50%);
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    padding: 6px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
     white-space: nowrap;
-    transition: color 0.25s ease;
+    transition: border-color 0.25s ease, color 0.25s ease;
 }
 
 .tl-dot.is-below .tl-label {
     bottom: auto;
-    top: 18px;
+    top: calc(100% + 22px);
+}
+
+.tl-name {
+    font-family: var(--font-sans);
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.tl-date {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
 }
 
 .tl-dot.is-active .tl-label,
 .tl-dot:hover .tl-label {
+    border-color: var(--accent);
+}
+
+.tl-dot.is-active .tl-name,
+.tl-dot:hover .tl-name {
     color: var(--accent);
 }
 
