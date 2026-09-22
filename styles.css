@@ -1740,6 +1740,16 @@ section {
     gap: 20px;
 }
 
+.method-item--link {
+    cursor: pointer;
+}
+
+.method-item--link:hover .method-icon--wa {
+    background: rgba(37, 211, 102, 0.18);
+    color: #25d366;
+    border-color: rgba(37, 211, 102, 0.5);
+}
+
 .method-icon {
     width: 50px;
     height: 50px;
