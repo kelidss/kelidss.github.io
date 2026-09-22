@@ -4001,3 +4001,13 @@ button:focus-visible,
 .tech-orbit {
     pointer-events: none;
 }
+
+/* o mockup do Sobre já tem a cor da marca: sem filtro nem véu lilás */
+.about-image,
+.about-image-frame:hover .about-image {
+    filter: none;
+}
+
+.image-overlay {
+    display: none;
+}
