@@ -156,44 +156,55 @@
         if (current) current.closest('.exp-panel').classList.add('is-current');
     }
 
-    /* ---------- experiência: lista com detalhes expansíveis ---------- */
-    // Cada cargo é uma linha; os itens e a stack ficam num bloco que abre ao
-    // clicar no cargo ou na seta. A experiência atual começa aberta.
-    function initExperienceAccordion() {
+    /* ---------- experiência: um cargo por vez ---------- */
+    // A linha do tempo é o navegador: clicar num ponto mostra aquele cargo.
+    // Abaixo dela fica um único card compacto, com setas para trocar.
+    let selectExperience = null;   // preenchido pelo switcher, usado pela linha do tempo
+    let setTimelineActive = null;  // preenchido pela linha do tempo, usado pelo switcher
+    let activeExperience = null;
+
+    function initExperienceSwitcher() {
+        const content = document.querySelector('.exp-content');
         const panels = [...document.querySelectorAll('.exp-panel')];
-        panels.forEach((panel, i) => {
-            const list = panel.querySelector('.exp-list');
-            const stack = panel.querySelector('.exp-stack');
-            const header = panel.querySelector('.exp-header');
-            if (!list || !header || panel.querySelector('.exp-body')) return;
+        if (!content || !panels.length || content.querySelector('.exp-nav')) return;
 
-            const body = document.createElement('div');
-            body.className = 'exp-body';
-            const inner = document.createElement('div');
-            inner.className = 'exp-body-inner';
-            body.appendChild(inner);
-            inner.appendChild(list);
-            if (stack) inner.appendChild(stack);
-            panel.appendChild(body);
+        const nav = document.createElement('div');
+        nav.className = 'exp-nav';
+        nav.innerHTML =
+            '<button type="button" class="exp-nav-btn" data-dir="-1" aria-label="Anterior"><i class="fas fa-arrow-left"></i></button>' +
+            '<span class="exp-count" aria-live="polite"></span>' +
+            '<button type="button" class="exp-nav-btn" data-dir="1" aria-label="Próxima"><i class="fas fa-arrow-right"></i></button>';
+        content.prepend(nav);
+        const count = nav.querySelector('.exp-count');
+        const pad = (n) => String(n).padStart(2, '0');
 
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'exp-toggle';
-            btn.innerHTML = '<i class="fas fa-chevron-down"></i>';
-            btn.setAttribute('aria-controls', panel.id + '-body');
-            inner.id = panel.id + '-body';
-            panel.insertBefore(btn, body);
+        const select = (id) => {
+            const idx = panels.findIndex(p => p.id === id);
+            if (idx < 0) return;
+            activeExperience = id;
+            panels.forEach(p => {
+                const on = p.id === id;
+                p.classList.toggle('is-active', on);
+                p.hidden = !on;
+            });
+            const active = panels[idx];
+            active.classList.remove('is-entering');
+            void active.offsetWidth; // reinicia a animação de entrada
+            active.classList.add('is-entering');
+            count.textContent = `${pad(idx + 1)} / ${pad(panels.length)}`;
+            if (setTimelineActive) setTimelineActive(id);
+        };
 
-            const setOpen = (open) => {
-                panel.classList.toggle('is-open', open);
-                btn.setAttribute('aria-expanded', String(open));
-                btn.setAttribute('aria-label', open ? 'Recolher' : 'Ver detalhes');
-            };
-            btn.addEventListener('click', () => setOpen(!panel.classList.contains('is-open')));
-            header.addEventListener('click', () => setOpen(!panel.classList.contains('is-open')));
-            panel.__setOpen = setOpen;
-            setOpen(i === 0);
+        nav.querySelectorAll('.exp-nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const idx = panels.findIndex(p => p.id === activeExperience);
+                const next = (idx + Number(btn.dataset.dir) + panels.length) % panels.length;
+                select(panels[next].id);
+            });
         });
+
+        selectExperience = select;
+        select(panels[0].id);
     }
 
     /* ---------- 11) linha do tempo da carreira ---------- */
@@ -241,22 +252,12 @@
 
         dots.forEach(dot => {
             dot.addEventListener('click', () => {
-                const panel = document.getElementById(dot.dataset.tab);
-                if (!panel) return;
-                setActive(dot.dataset.tab);
-                if (panel.__setOpen) panel.__setOpen(true);
-                window.scrollTo({ top: panel.getBoundingClientRect().top + window.scrollY - 110, behavior: 'smooth' });
+                if (selectExperience) selectExperience(dot.dataset.tab);
             });
         });
 
-        // destaca o ponto da experiência que está no meio da tela
-        const panels = dots.map(d => document.getElementById(d.dataset.tab)).filter(Boolean);
-        if (panels.length && 'IntersectionObserver' in window) {
-            const io = new IntersectionObserver((entries) => {
-                entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
-            }, { rootMargin: '-45% 0px -45% 0px' });
-            panels.forEach(p => io.observe(p));
-        }
+        setTimelineActive = setActive;
+        if (activeExperience) setActive(activeExperience);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -268,7 +269,7 @@
         initHeatmap();
         initCareerTimeline();
         markCurrentExperience();
-        initExperienceAccordion();
+        initExperienceSwitcher();
         document.addEventListener('languagechange-portfolio', () => { initCareerTimeline(); });
     });
 })();
