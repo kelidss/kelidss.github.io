@@ -19,7 +19,6 @@ const PROJECTS = [
   { slug: 'orfeu', folder: 'orfeu', url: 'https://orfeu.app' },
   { slug: 'aquabit', folder: 'aquabit', url: 'https://web.aquabit.com.br' },
   { slug: 'comunidade-aqua', folder: 'comunidade aqua', url: 'https://comunidadeaqua.com.br' },
-  { slug: 'norddev', folder: 'norddev', url: 'https://www.norddev.com.br' },
   { slug: 'amevis', folder: 'amevi', url: 'https://amevis.com.br' },
   { slug: 'mariliadantas', folder: 'mariliadantas', url: 'https://www.mariliadantas.com' },
   { slug: 'leticia', folder: 'blogleticia', url: 'https://psicologaleticiamorais.com' },
