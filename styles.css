@@ -1507,38 +1507,6 @@ section {
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 6) sinal de que o card abre em tela cheia */
-.project-expand {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 34px;
-    height: 34px;
-    display: grid;
-    place-items: center;
-    border-radius: var(--radius-input);
-    background: rgba(31, 28, 44, 0.78);
-    backdrop-filter: blur(6px);
-    border: 1px solid var(--border-light);
-    color: var(--text-primary);
-    font-size: 0.78rem;
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    pointer-events: none;
-    z-index: 4;
-}
-
-.project-card:hover .project-expand,
-.project-card:focus-visible .project-expand {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.project-card:hover .project-expand {
-    color: var(--accent);
-    border-color: var(--accent);
-}
 
 .project-card:hover .project-image-container img {
     filter: saturate(1.05);
@@ -2902,78 +2870,6 @@ button:focus-visible,
     opacity: 1;
 }
 
-/* 2) último commit */
-.hero-commit {
-    margin-top: 22px;
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-}
-
-.hero-commit i {
-    color: var(--accent);
-}
-
-.hero-commit .commit-repo {
-    color: var(--text-secondary);
-    border-bottom: 1px dashed var(--border-light);
-}
-
-.hero-commit .commit-repo:hover {
-    color: var(--accent);
-}
-
-.hero-commit .commit-msg {
-    flex-basis: 100%;
-    color: var(--text-muted);
-    opacity: 0.8;
-}
-
-/* 8) faixa de tecnologias */
-.tech-marquee {
-    overflow: hidden;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background: var(--bg-dark);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-}
-
-.marquee-track {
-    display: flex;
-    width: max-content;
-    gap: 44px;
-    padding: 16px 22px;
-    animation: marquee 40s linear infinite;
-}
-
-.tech-marquee:hover .marquee-track {
-    animation-play-state: paused;
-}
-
-.marquee-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    white-space: nowrap;
-}
-
-.marquee-item i {
-    color: var(--accent);
-}
-
-@keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-}
-
 /* 4) relógio */
 .local-time-wrap {
     font-family: var(--font-mono);
@@ -3222,22 +3118,12 @@ button:focus-visible,
         gap: 2px;
     }
 
-    .hero-commit {
-        justify-content: center;
-    }
-
     .theme-toggle {
         margin-right: 8px;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .marquee-track {
-        animation: none;
-        flex-wrap: wrap;
-        width: auto;
-    }
-
     .has-spotlight::after {
         display: none;
     }
@@ -3345,10 +3231,6 @@ button:focus-visible,
     flex: 1;
 }
 
-.project-expand {
-    top: 40px;
-}
-
 /* apps: captura inteira, centralizada, com moldura de celular */
 .project-card[data-image-type="mobile"] .project-image-container {
     background:
@@ -3364,95 +3246,6 @@ button:focus-visible,
     background: transparent;
 }
 
-.project-card[data-image-type="mobile"] .project-expand {
-    top: 12px;
-}
-
-
-/* ============================================================
-   IDENTIDADE @keliane.dev
-   Guiada pelo feed: lilás como cor de marca, títulos em display
-   condensado e a assinatura que abre os posts.
-   ============================================================ */
-.hero-name,
-.section-title,
-.contact-header-text h3 {
-    font-family: 'Anton', 'Outfit', sans-serif;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-}
-
-.hero-name {
-    line-height: 0.92;
-}
-
-.section-title {
-    letter-spacing: 0.02em;
-}
-
-/* assinatura: @keliane.dev | Keliane Soares ——— Desenvolvedora */
-.brand-line {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 18px;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    white-space: nowrap;
-}
-
-.brand-handle {
-    color: var(--accent);
-    font-weight: 600;
-}
-
-.brand-sep {
-    opacity: 0.5;
-}
-
-.brand-rule {
-    flex: 1;
-    height: 1px;
-    max-width: 120px;
-    background: var(--border-light);
-}
-
-.brand-role {
-    color: var(--text-secondary);
-}
-
-.hero-description .text-accent {
-    color: var(--accent-soft);
-}
-
-/* Instagram no contato */
-.method-icon--ig {
-    background: linear-gradient(135deg, rgba(139, 127, 240, 0.18), rgba(224, 124, 180, 0.18));
-}
-
-.method-item--link:hover .method-icon--ig {
-    background: linear-gradient(135deg, #8b7ff0, #e07cb4);
-    color: #fff;
-    border-color: transparent;
-}
-
-@media (max-width: 600px) {
-    .brand-line {
-        justify-content: center;
-        font-size: 0.6rem;
-        letter-spacing: 1.5px;
-        flex-wrap: wrap;
-        white-space: normal;
-    }
-
-    .brand-rule {
-        display: none;
-    }
-}
 
 
 /* ============================================================
@@ -3562,396 +3355,6 @@ button:focus-visible,
         grid-column: 1;
     }
 }
-
-/* ============================================================
-   DETALHES DA MARCA (feed @keliane.dev)
-   ============================================================ */
-
-/* saudação em pílula lilás, como "OI, EU SOU A KELI" nos posts */
-.greeting-pill {
-    display: inline-block;
-    padding: 5px 14px;
-    border-radius: var(--radius-pill);
-    background: var(--accent-dim);
-    border: 1px solid rgba(139, 127, 240, 0.35);
-    color: var(--accent-soft);
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.5px;
-}
-
-/* números grandes com a fonte das artes */
-.metric-value {
-    font-family: 'Anton', var(--font-mono);
-    font-weight: 400;
-    letter-spacing: 0.02em;
-}
-
-/* barra lilás no lugar do ponto, como marcação de título */
-.section-title::before {
-    width: 5px;
-    height: 0.8em;
-    border-radius: 2px;
-    align-self: center;
-}
-
-/* títulos dos projetos na mesma linguagem do feed */
-.project-title {
-    font-family: 'Anton', var(--font-sans);
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-}
-
-/* grão um pouco mais presente, como nas artes */
-.noise-overlay {
-    opacity: 0.05;
-}
-
-
-/* ============================================================
-   FEED @keliane.dev — v2
-   Cards de experiência como slides do carrossel; nome em serifa
-   itálica; ✦ nas linhas; rodapé com os pilares do perfil.
-   ============================================================ */
-
-/* --- hero: "KELIANE" pesado + "Soares" em serifa itálica lilás --- */
-.name-line.accent {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
-    font-weight: 400;
-    text-transform: none;
-    letter-spacing: -0.01em;
-    font-size: 1.14em;
-    line-height: 0.9;
-    color: var(--accent-soft);
-}
-
-.brand-star {
-    color: var(--accent);
-    font-size: 0.9rem;
-    margin-left: 4px;
-}
-
-/* halftone atrás da foto do hero, como a textura das artes */
-.hero-visual::before {
-    content: '';
-    position: absolute;
-    inset: -60px;
-    background-image: radial-gradient(circle, rgba(139, 127, 240, 0.28) 1.2px, transparent 1.6px);
-    background-size: 14px 14px;
-    -webkit-mask-image: radial-gradient(circle at 60% 50%, #000 20%, transparent 70%);
-    mask-image: radial-gradient(circle at 60% 50%, #000 20%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* --- linha dos títulos termina em ✦ --- */
-.section-line {
-    position: relative;
-}
-
-.section-line::after {
-    content: '✦';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    padding-left: 8px;
-    background: inherit;
-    color: var(--accent);
-    font-size: 0.8rem;
-    line-height: 1;
-}
-
-.section-header.centered .section-line::after {
-    display: none;
-}
-
-/* --- contato: frase em serifa itálica, como as frases do feed --- */
-.contact-header-text h3 {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
-    font-weight: 400;
-    text-transform: none;
-    letter-spacing: -0.01em;
-    font-size: clamp(2.2rem, 4vw, 3rem);
-    line-height: 1.1;
-}
-
-/* --- rodapé: pilares do perfil --- */
-.footer-tags {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 10px;
-    transition: color 0.3s ease;
-}
-
-.footer-tags i {
-    font-style: normal;
-    color: var(--accent);
-}
-
-.footer-tags:hover {
-    color: var(--text-primary);
-}
-
-/* ============================================================
-   EXPERIÊNCIA — cards como slides
-   ============================================================ */
-.exp-content {
-    border: 0;
-    background: transparent;
-    padding: 0;
-    overflow: visible;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.exp-panel {
-    display: grid;
-    grid-template-columns: 96px minmax(0, 1fr);
-    column-gap: 28px;
-    padding: 28px 30px 26px;
-    border: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    border-radius: 16px;
-    background:
-        radial-gradient(circle at 100% 0%, rgba(139, 127, 240, 0.10), transparent 40%),
-        var(--bg-card);
-    overflow: hidden;
-    transition: border-color 0.3s ease, transform 0.35s var(--ease-out), box-shadow 0.35s ease;
-}
-
-.exp-panel:hover {
-    border-color: rgba(139, 127, 240, 0.55);
-    transform: translateY(-3px);
-    box-shadow: 0 24px 50px -30px rgba(0, 0, 0, 0.8);
-    background:
-        radial-gradient(circle at 100% 0%, rgba(139, 127, 240, 0.14), transparent 40%),
-        var(--bg-card);
-}
-
-/* textura halftone bem discreta, como nas artes */
-.exp-panel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    left: auto;
-    top: auto;
-    width: 46%;
-    height: 100%;
-    right: 0;
-    bottom: 0;
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1.4px);
-    background-size: 12px 12px;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 60%);
-    mask-image: linear-gradient(90deg, transparent, #000 60%);
-    pointer-events: none;
-}
-
-/* sem a linha/ponto da versão anterior */
-.exp-panel::after {
-    content: none;
-}
-
-.exp-panel:first-child::before,
-.exp-panel:last-child::before {
-    top: auto;
-    bottom: 0;
-}
-
-/* coluna da esquerda: índice grande + período */
-.exp-meta {
-    grid-column: 1;
-    grid-row: 1 / span 3;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    padding-top: 2px;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-}
-
-.exp-meta::before {
-    content: attr(data-index);
-}
-
-.exp-panel[data-index] .exp-meta::before {
-    content: '';
-}
-
-.exp-index {
-    font-family: 'Anton', var(--font-mono);
-    font-size: 2.6rem;
-    line-height: 1;
-    color: var(--accent);
-    opacity: 0.55;
-    letter-spacing: 0.02em;
-    margin-bottom: 4px;
-}
-
-.exp-date {
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    line-height: 1.6;
-}
-
-.exp-badge {
-    margin-top: 2px;
-}
-
-/* coluna da direita */
-.exp-header,
-.exp-list,
-.exp-stack {
-    grid-column: 2;
-}
-
-.exp-header {
-    display: flex;
-    flex-direction: column-reverse; /* empresa (pílula) acima do cargo */
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 16px;
-}
-
-/* empresa em pílula de borda fina, como "@keliane.dev" nos posts */
-.exp-company {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px 12px;
-    border: 1px solid rgba(139, 127, 240, 0.55);
-    border-radius: var(--radius-pill);
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    letter-spacing: 0.5px;
-    color: var(--accent-soft);
-    background: transparent;
-}
-
-.exp-panel.is-current .exp-company {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #14121b;
-    font-weight: 600;
-}
-
-/* cargo na display das artes */
-.exp-title {
-    font-family: 'Anton', var(--font-sans);
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    font-size: 1.55rem;
-    line-height: 1.05;
-    margin: 0;
-}
-
-/* itens dentro de uma caixa, como a caixa de texto dos posts */
-.exp-list {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    margin: 0 0 16px;
-    padding: 16px 18px;
-    max-width: 72ch;
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-}
-
-.exp-list li {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    font-size: 0.93rem;
-    line-height: 1.6;
-    color: var(--text-secondary);
-}
-
-.list-marker {
-    width: auto;
-    height: auto;
-    margin-top: 0;
-    background: none;
-    opacity: 1;
-}
-
-.list-marker::before {
-    content: '✦';
-    color: var(--accent);
-    font-size: 0.7rem;
-    line-height: 1.6;
-}
-
-/* stack como a linha de tags do rodapé dos posts */
-.exp-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 6px;
-    align-items: center;
-}
-
-.exp-stack span {
-    padding: 0;
-    border: 0;
-    background: transparent;
-    border-radius: 0;
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-}
-
-.exp-stack span:not(:last-child)::after {
-    content: '·';
-    color: var(--accent);
-    margin-left: 6px;
-}
-
-@media (max-width: 860px) {
-    .exp-panel {
-        grid-template-columns: 1fr;
-        padding: 22px 20px;
-    }
-
-    .exp-panel::before {
-        display: none;
-    }
-
-    .exp-meta {
-        grid-row: auto;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 10px 14px;
-        padding-top: 0;
-        margin-bottom: 14px;
-    }
-
-    .exp-index {
-        font-size: 1.6rem;
-        margin: 0;
-    }
-
-    .exp-header,
-    .exp-list,
-    .exp-stack {
-        grid-column: 1;
-    }
-}
-
 
 /* ============================================================
    EXPERIÊNCIA v3 — lista editorial
@@ -4190,5 +3593,209 @@ button:focus-visible,
 
     .tech-group-label {
         padding-top: 0;
+    }
+}
+
+
+/* ============================================================
+   BASE SÓBRIA — tipografia e detalhes de volta ao essencial
+   ============================================================ */
+.hero-name,
+.section-title,
+.contact-header-text h3,
+.project-title,
+.metric-value,
+.exp-title,
+.name-line.accent {
+    font-family: var(--font-sans);
+    font-style: normal;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.hero-name {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    line-height: 1;
+}
+
+.name-line.accent {
+    font-size: inherit;
+    line-height: inherit;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+}
+
+.section-title {
+    font-weight: 700;
+    font-size: 2.25rem;
+    letter-spacing: -0.02em;
+}
+
+/* volta ao ponto discreto antes do título */
+.section-title::before {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.contact-header-text h3 {
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+.project-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.metric-value {
+    font-family: var(--font-mono);
+    font-weight: 700;
+}
+
+.hero-greeting {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    letter-spacing: 0;
+    margin-bottom: 10px;
+}
+
+.hero-visual::before {
+    display: none;
+}
+
+.section-line::after {
+    display: none;
+}
+
+.noise-overlay {
+    opacity: 0.03;
+}
+
+/* marcador de lista simples */
+.list-marker::before {
+    content: '';
+}
+
+.list-marker {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 0.6em;
+    opacity: 0.9;
+}
+
+/* empresa: texto, sem pílula */
+.exp-company,
+.exp-panel.is-current .exp-company {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+/* stack: chips discretos, não linha em caixa alta */
+.exp-stack {
+    gap: 6px;
+}
+
+.exp-stack span {
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--bg-secondary);
+    font-size: 0.68rem;
+    letter-spacing: 0.3px;
+    text-transform: none;
+    color: var(--text-muted);
+}
+
+.exp-stack span:not(:last-child)::after {
+    content: none;
+}
+
+/* linha do tempo mais discreta */
+.tl-label {
+    padding: 4px 10px;
+    border-color: var(--border);
+    background: var(--bg-primary);
+}
+
+.tl-name {
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+.tl-dot.is-current::after {
+    animation: none;
+}
+
+.hero-description .text-accent {
+    color: var(--accent-soft);
+}
+
+.method-icon--ig {
+    background: linear-gradient(135deg, rgba(139, 127, 240, 0.18), rgba(224, 124, 180, 0.18));
+}
+
+.method-item--link:hover .method-icon--ig {
+    background: linear-gradient(135deg, #8b7ff0, #e07cb4);
+    color: #fff;
+    border-color: transparent;
+}
+
+/* botão do Instagram no hero como os demais */
+.hero-cta .btn-outline {
+    font-family: var(--font-mono);
+}
+
+/* experiência: lista limpa, sem caixa em volta */
+.exp-content {
+    border: 0;
+    border-top: 1px solid var(--border);
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    overflow: visible;
+}
+
+.exp-panel,
+.exp-panel:hover {
+    grid-template-columns: 170px minmax(0, 1fr) 40px;
+    padding: 22px 0;
+}
+
+/* a coluna do período ocupa as duas linhas: o texto abre logo abaixo do cargo */
+.exp-meta {
+    grid-row: 1 / span 2;
+}
+
+.exp-date {
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.exp-list {
+    padding-top: 12px;
+}
+
+@media (max-width: 860px) {
+    .exp-panel,
+    .exp-panel:hover {
+        grid-template-columns: minmax(0, 1fr) 34px;
+    }
+
+    .exp-meta {
+        grid-row: 1;
     }
 }

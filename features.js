@@ -15,19 +15,6 @@
     const finePointer = window.matchMedia('(pointer: fine)').matches;
     const t = (key) => ((typeof translations !== 'undefined' && translations[currentLanguage]) || {})[key] || '';
 
-    /* ---------- 15) tela de carregamento ---------- */
-    function initPreloader() {
-        const el = document.getElementById('preloader');
-        if (!el) return;
-        const done = () => {
-            el.classList.add('is-done');
-            setTimeout(() => el.remove(), 600);
-        };
-        if (document.readyState === 'complete') setTimeout(done, 300);
-        else window.addEventListener('load', () => setTimeout(done, 200), { once: true });
-        setTimeout(done, 1200); // teto: nunca segura a página
-    }
-
     /* ---------- 16) barra de navegador nos cards web ---------- */
     function initBrowserBars() {
         document.querySelectorAll('.project-card:not([data-image-type="mobile"])').forEach(card => {
@@ -132,48 +119,7 @@
     /* ---------- 1 e 2) GitHub ao vivo ---------- */
     const GH_USER = 'kelidss';
 
-    function relativeTime(date) {
-        const diff = Math.max(0, Date.now() - date.getTime());
-        const min = Math.round(diff / 60000);
-        const h = Math.round(min / 60);
-        const d = Math.round(h / 24);
-        const en = currentLanguage === 'en';
-        if (min < 60) return en ? `${min} min ago` : `há ${min} min`;
-        if (h < 24) return en ? `${h}h ago` : `há ${h}h`;
-        if (d === 1) return en ? 'yesterday' : 'ontem';
-        if (d < 30) return en ? `${d} days ago` : `há ${d} dias`;
-        const m = Math.round(d / 30);
-        return en ? `${m} months ago` : `há ${m} meses`;
-    }
 
-    let lastPush = null;
-
-    function renderCommit() {
-        const el = document.getElementById('hero-commit');
-        if (!el || !lastPush) return;
-        const repo = lastPush.repo.split('/').pop();
-        const msg = (lastPush.message || '').split('\n')[0].slice(0, 56);
-        el.innerHTML = `<i class="fas fa-code-commit"></i> <span class="commit-label">${t('commit-label') || 'último commit'}</span> ` +
-            `<a href="https://github.com/${lastPush.repo}" target="_blank" rel="noopener" class="commit-repo">${repo}</a> ` +
-            `<span class="commit-time">· ${relativeTime(new Date(lastPush.date))}</span>` +
-            (msg ? `<span class="commit-msg">"${msg.replace(/</g, '&lt;')}"</span>` : '');
-        el.hidden = false;
-    }
-
-    async function initLastCommit() {
-        const el = document.getElementById('hero-commit');
-        if (!el) return;
-        try {
-            const res = await fetch(`https://api.github.com/users/${GH_USER}/events/public?per_page=30`);
-            if (!res.ok) return;
-            const events = await res.json();
-            const push = events.find(e => e.type === 'PushEvent');
-            if (!push) return;
-            const commits = (push.payload && push.payload.commits) || [];
-            lastPush = { repo: push.repo.name, date: push.created_at, message: commits.length ? commits[commits.length - 1].message : '' };
-            renderCommit();
-        } catch (e) { /* offline ou limite da API: some em silêncio */ }
-    }
 
     async function initHeatmap() {
         const wrap = document.getElementById('gh-heatmap');
@@ -314,18 +260,15 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        initPreloader();
         initBrowserBars();
         initReadProgress();
         initTheme();
-        initSpotlight();
         initCopyEmail();
         initLocalTime();
-        initLastCommit();
         initHeatmap();
         initCareerTimeline();
         markCurrentExperience();
         initExperienceAccordion();
-        document.addEventListener('languagechange-portfolio', () => { renderCommit(); initCareerTimeline(); });
+        document.addEventListener('languagechange-portfolio', () => { initCareerTimeline(); });
     });
 })();
