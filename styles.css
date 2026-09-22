@@ -2883,10 +2883,16 @@ button:focus-visible,
 }
 
 .gh-grid i[data-level="-1"] { background: transparent; }
-.gh-grid i[data-level="1"] { background: rgba(139, 127, 240, 0.35); }
-.gh-grid i[data-level="2"] { background: rgba(139, 127, 240, 0.6); }
-.gh-grid i[data-level="3"] { background: rgba(139, 127, 240, 0.85); }
-.gh-grid i[data-level="4"] { background: var(--accent); box-shadow: 0 0 6px var(--accent-glow); }
+/* escala de verdes do próprio GitHub (tema escuro) */
+.gh-grid i[data-level="1"] { background: #0e4429; }
+.gh-grid i[data-level="2"] { background: #006d32; }
+.gh-grid i[data-level="3"] { background: #26a641; }
+.gh-grid i[data-level="4"] { background: #39d353; }
+
+[data-theme="light"] .gh-grid i[data-level="1"] { background: #9be9a8; }
+[data-theme="light"] .gh-grid i[data-level="2"] { background: #40c463; }
+[data-theme="light"] .gh-grid i[data-level="3"] { background: #30a14e; }
+[data-theme="light"] .gh-grid i[data-level="4"] { background: #216e39; }
 
 /* 6) luz que segue o mouse */
 .has-spotlight {
