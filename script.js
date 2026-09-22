@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initAdvancedSmoothScroll();
     initParallax();
     initContactForm();
+    initResumeButton();
     initLanguageToggle();
     initPacman();
 });
@@ -27,25 +28,84 @@ function initPacman() {
     }
 }
 
+// Formulário de contato.
+// Com a chave do Web3Forms em data-web3forms-key, envia direto (sem backend)
+// e mostra o resultado. Sem chave, abre o app de e-mail (mailto) como antes.
 function initContactForm() {
     const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+    if (!contactForm) return;
 
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+    const status = contactForm.querySelector('.form-status');
+    const submitBtn = contactForm.querySelector('.btn-submit');
+    const accessKey = (contactForm.dataset.web3formsKey || '').trim();
 
-            const isEn = currentLanguage === 'en';
-            const subject = isEn ? `Contact from ${name} via Portfolio` : `Contato de ${name} pelo Portfólio`;
-            const body = isEn ? `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}` : `Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`;
-            
-            const mailtoUrl = `mailto:keliane.dev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const t = (key) => (translations[currentLanguage] || translations.pt)[key] || '';
+    const setStatus = (key, cls) => {
+        if (!status) return;
+        status.textContent = t(key);
+        status.className = 'form-status' + (cls ? ' ' + cls : '');
+    };
 
-            window.location.href = mailtoUrl;
-        });
-    }
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        if (!name || !emailOk || !message) {
+            setStatus('form-invalid', 'is-error');
+            return;
+        }
+
+        const isEn = currentLanguage === 'en';
+        const subject = isEn ? `Contact from ${name} via Portfolio` : `Contato de ${name} pelo Portfólio`;
+
+        // sem chave: comportamento antigo (mailto)
+        if (!accessKey) {
+            const body = isEn
+                ? `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+                : `Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`;
+            window.location.href = `mailto:keliane.dev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            return;
+        }
+
+        // honeypot preenchido = bot
+        const honeypot = contactForm.querySelector('[name="botcheck"]');
+        if (honeypot && honeypot.checked) return;
+
+        submitBtn.disabled = true;
+        setStatus('form-sending');
+
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify({ access_key: accessKey, subject, name, email, message })
+            });
+            const data = await response.json();
+            if (response.ok && data.success) {
+                setStatus('form-sent', 'is-ok');
+                contactForm.reset();
+            } else {
+                throw new Error(data.message || 'erro');
+            }
+        } catch (err) {
+            setStatus('form-error', 'is-error');
+        } finally {
+            submitBtn.disabled = false;
+        }
+    });
+}
+
+// Botão de currículo: só aparece se o PDF existir em assets/
+function initResumeButton() {
+    const btn = document.querySelector('.btn-cv');
+    if (!btn) return;
+    fetch(btn.getAttribute('href'), { method: 'HEAD' })
+        .then(r => { if (r.ok) btn.hidden = false; })
+        .catch(() => {});
 }
 
 function initAdvancedSmoothScroll() {
@@ -636,6 +696,11 @@ const translations = {
         'hero-greeting': 'Olá, meu nome é',
         'hero-description': 'Engenheira de Software <span class="text-accent">Full Stack</span> especializada em arquitetura de sistemas escaláveis e na <span class="text-accent">integração prática de IA</span>. Construo back-ends robustos com Python (FastAPI, Django, Flask), C#/.NET e Node.js, além de interfaces web e mobile com React, TypeScript e Flutter. Da modelagem de dados à cultura DevOps, entrego código performático — de CRMs sob medida a sistemas críticos com triagem em tempo real.',
         'btn-projects': 'Ver Projetos',
+        'btn-cv': 'Currículo (PDF)',
+        'form-sending': '// enviando...',
+        'form-sent': '// mensagem enviada! respondo em breve.',
+        'form-error': '// não foi possível enviar. tente de novo ou use o e-mail.',
+        'form-invalid': '// preencha nome, e-mail válido e mensagem.',
         'metric-years': 'Anos de exp.',
         'metric-projects': 'Projetos',
         'metric-commits': 'Commits',
@@ -724,6 +789,11 @@ const translations = {
         'hero-greeting': 'Hi, my name is',
         'hero-description': '<span class="text-accent">Full Stack</span> Software Engineer specialized in scalable systems architecture and the <span class="text-accent">practical integration of AI</span>. I build robust back-ends with Python (FastAPI, Django, Flask), C#/.NET and Node.js, plus web and mobile interfaces with React, TypeScript and Flutter. From data modeling to DevOps culture, I deliver high-performing code — from tailor-made CRMs to critical systems with real-time triage.',
         'btn-projects': 'View Projects',
+        'btn-cv': 'Resume (PDF)',
+        'form-sending': '// sending...',
+        'form-sent': '// message sent! I will reply soon.',
+        'form-error': '// could not send. try again or use the email.',
+        'form-invalid': '// please fill in name, a valid email and message.',
         'metric-years': 'Years of exp.',
         'metric-projects': 'Projects',
         'metric-commits': 'Commits',

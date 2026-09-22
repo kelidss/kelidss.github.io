@@ -137,6 +137,11 @@
                         <span class="btn-icon"><i class="fab fa-github"></i></span>
                         <span class="btn-text">GitHub</span>
                     </a>
+                    <!-- Currículo: coloque o PDF em assets/cv-keliane-soares.pdf e o botão aparece sozinho -->
+                    <a href="assets/cv-keliane-soares.pdf" class="btn-outline btn-cv" download hidden>
+                        <span class="btn-icon"><i class="fas fa-file-arrow-down"></i></span>
+                        <span class="btn-text" data-i18n="btn-cv">Currículo (PDF)</span>
+                    </a>
                 </div>
 
                 <div class="hero-metrics">
@@ -1164,7 +1169,16 @@
                     </div>
                 </div>
 
-                <form class="contact-form-new" id="contact-form">
+                <!--
+                    Envio real via Web3Forms (grátis, sem backend): crie a chave em
+                    https://web3forms.com com o e-mail keliane.dev@gmail.com e cole em
+                    data-web3forms-key. Enquanto a chave estiver vazia, o formulário abre
+                    o app de e-mail (mailto) como antes.
+                -->
+                <form class="contact-form-new" id="contact-form" data-web3forms-key="" novalidate>
+                    <input type="hidden" name="subject" value="Contato pelo Portfólio">
+                    <input type="hidden" name="from_name" value="Portfólio Keliane Soares">
+                    <input type="checkbox" name="botcheck" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
                     <div class="form-header">
                         <span class="dot red"></span>
                         <span class="dot yellow"></span>
@@ -1189,6 +1203,7 @@
                             <span class="btn-text" data-i18n="form-submit">enviarMensagem()</span>
                             <i class="fas fa-arrow-right"></i>
                         </button>
+                        <p class="form-status" role="status" aria-live="polite"></p>
                     </div>
                 </form>
             </div>

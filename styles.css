@@ -1909,6 +1909,36 @@ section {
     transition: all 0.3s;
 }
 
+.btn-submit[disabled] {
+    opacity: 0.6;
+    cursor: wait;
+    transform: none;
+}
+
+.form-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.form-status {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin-top: 14px;
+    min-height: 1.2em;
+    color: var(--text-secondary);
+}
+
+.form-status.is-ok {
+    color: #7ee0c3;
+}
+
+.form-status.is-error {
+    color: var(--accent);
+}
+
 .btn-submit:hover {
     background: #f9a7a9;
     transform: translateY(-2px);
