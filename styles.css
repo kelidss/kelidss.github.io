@@ -23,6 +23,11 @@
     /* Spacing */
     --section-gap: 120px;
 
+    /* Raios (3 valores para todo o site) */
+    --radius-card: 12px;
+    --radius-input: 8px;
+    --radius-pill: 999px;
+
     /* Transitions */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --duration: 0.4s;
@@ -66,7 +71,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background: var(--accent);
-    border-radius: 10px;
+    border-radius: var(--radius-input);
     border: 2px solid var(--bg-primary);
 }
 
@@ -328,13 +333,14 @@ img {
     margin: 0 auto;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    /* texto ganha espaço; a coluna da foto acompanha o frame */
+    grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.75fr);
+    gap: 64px;
     align-items: center;
 }
 
 .hero-content {
-    max-width: 600px;
+    max-width: 720px;
 }
 
 @keyframes pulse {
@@ -495,6 +501,9 @@ img {
     display: flex;
     align-items: center;
     gap: 30px;
+    margin-top: 42px;
+    padding-top: 26px;
+    border-top: 1px solid var(--border);
     animation: fadeInUp 0.8s var(--ease-out) 0.7s backwards;
 }
 
@@ -531,8 +540,9 @@ img {
 .hero-visual {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    padding-right: 20px;
     animation: fadeIn 1s var(--ease-out) 0.5s backwards;
 }
 
@@ -561,7 +571,7 @@ img {
 .profile-frame {
     position: relative;
     width: 320px;
-    height: 320px;
+    height: 400px; /* 4:5, igual à foto da seção Sobre */
 }
 
 .frame-corner {
@@ -767,6 +777,13 @@ img {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+/* some assim que a pessoa começa a rolar (classe no body via script) */
+body.scrolled .scroll-hint {
+    opacity: 0;
 }
 
 .scroll-line::after {
@@ -861,6 +878,9 @@ section {
 .about-image-wrapper {
     position: sticky;
     top: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .about-image-frame {
@@ -1064,6 +1084,7 @@ section {
 }
 
 .tech-tag {
+    border-radius: var(--radius-pill);
     padding: 8px 16px;
     background: transparent;
     border: 1px solid var(--border);
@@ -1138,7 +1159,7 @@ section {
     color: var(--accent);
     font-size: 1rem;
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: var(--radius-input);
     transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
 
@@ -1426,6 +1447,22 @@ section {
     display: none;
 }
 
+/* 14) degradê no fim da grade quando há mais projetos escondidos */
+.projects-grid.is-collapsed {
+    position: relative;
+}
+
+.projects-grid.is-collapsed::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 160px;
+    background: linear-gradient(to bottom, transparent, var(--bg-primary));
+    pointer-events: none;
+}
+
 .projects-more {
     display: flex;
     justify-content: center;
@@ -1443,7 +1480,7 @@ section {
 .project-card {
     position: relative;
     background: var(--bg-card);
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     min-height: 420px;
@@ -1460,18 +1497,53 @@ section {
 .project-image-container {
     position: relative;
     width: 100%;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--bg-secondary);
 }
 
 .project-image-container img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: top center;
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 6) sinal de que o card abre em tela cheia */
+.project-expand {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-input);
+    background: rgba(31, 28, 44, 0.78);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--border-light);
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.project-card:hover .project-expand,
+.project-card:focus-visible .project-expand {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.project-card:hover .project-expand {
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
 .project-card:hover .project-image-container img {
@@ -1509,46 +1581,7 @@ section {
     }
 }
 
-.project-card[data-image-type="mobile"] {
-    flex-direction: row;
-    min-height: 320px;
-}
 
-.project-card[data-image-type="mobile"] .project-image-container {
-    width: 45%;
-    height: 100%;
-    flex-shrink: 0;
-    background: var(--bg-secondary);
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 12px 0 0 12px;
-}
-
-.project-card[data-image-type="mobile"] .project-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    border-radius: 0;
-    background: transparent;
-}
-
-.project-card[data-image-type="mobile"] .project-content {
-    width: 55%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 20px;
-}
-
-.project-card[data-image-type="mobile"] .project-image-glow {
-    background: linear-gradient(to left,
-            var(--bg-card) 0%,
-            transparent 40%);
-}
 
 .project-content {
     padding: 24px;
@@ -1556,6 +1589,7 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    gap: 2px;
 }
 
 .project-header {
@@ -1629,7 +1663,12 @@ section {
     color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 16px;
-    flex: 1;
+    /* mesma altura de texto em todos os cards: o rodapé fica alinhado */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 /* Tech Stack */
@@ -1637,6 +1676,7 @@ section {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
+    margin-top: auto; /* empurra a stack para a base do card */
 }
 
 .project-stack span {
@@ -1645,7 +1685,7 @@ section {
     color: var(--text-muted);
     background: var(--bg-secondary);
     padding: 5px 10px;
-    border-radius: 4px;
+    border-radius: var(--radius-pill);
     border: 1px solid var(--border);
     transition: all 0.3s ease;
 }
@@ -1710,9 +1750,9 @@ section {
 
 .contact-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 60px;
-    align-items: center;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 56px;
+    align-items: start;
 }
 
 .contact-header-text h3 {
@@ -1790,14 +1830,14 @@ section {
 
 .contact-form-new {
     background: var(--bg-card);
-    border-radius: 10px;
+    border-radius: var(--radius-card);
     overflow: hidden;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
     border: 1px solid var(--border-light);
 }
 
 .form-header {
-    background: var(--bg-secondary);
+    background: var(--bg-tertiary);
     padding: 12px 20px;
     display: flex;
     align-items: center;
@@ -2356,27 +2396,6 @@ button:focus-visible,
         gap: 20px;
     }
 
-    .project-card[data-image-type="mobile"] {
-        grid-column: span 1;
-        flex-direction: row;
-    }
-
-    .project-card[data-image-type="mobile"] .project-image-container {
-        width: 40%;
-        height: auto;
-        padding: 0;
-    }
-
-    .project-card[data-image-type="mobile"] .project-content {
-        width: 60%;
-        padding: 15px;
-    }
-
-    .project-card[data-image-type="mobile"] .project-image-glow {
-        background: linear-gradient(to top,
-                var(--bg-card) 0%,
-                transparent 30%);
-    }
 
     .project-image-container {
         aspect-ratio: 16 / 9;
@@ -2501,23 +2520,9 @@ button:focus-visible,
     }
 
     .project-card {
-        border-radius: 10px;
+        border-radius: var(--radius-input);
     }
 
-    .project-card[data-image-type="mobile"] {
-        flex-direction: column;
-    }
-
-    .project-card[data-image-type="mobile"] .project-image-container {
-        width: 100%;
-        height: 200px;
-        border-radius: 10px 10px 0 0;
-    }
-
-    .project-card[data-image-type="mobile"] .project-content {
-        width: 100%;
-        padding: 16px;
-    }
 
     .link-icon {
         width: 28px;
@@ -2979,7 +2984,7 @@ button:focus-visible,
     overflow: hidden;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    background: var(--bg-primary);
+    background: var(--bg-dark);
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
     mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
@@ -3129,7 +3134,7 @@ button:focus-visible,
     padding: 22px 20px 20px;
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
 }
 
@@ -3152,7 +3157,7 @@ button:focus-visible,
     height: 40px;
     display: grid;
     place-items: center;
-    border-radius: 10px;
+    border-radius: var(--radius-input);
     background: var(--accent-dim);
     color: var(--accent);
     margin-bottom: 14px;
@@ -3541,4 +3546,82 @@ body.modal-open {
 
 [data-theme="light"] .pac-eye {
     background: #fff;
+}
+
+
+/* ============================================================
+   16) CAPTURAS EM MOCKUP
+   Cards web ganham uma barra de navegador; cards de app mostram a
+   captura inteira dentro de uma moldura de celular.
+   ============================================================ */
+.project-card .project-image-container > img,
+.project-card .project-video {
+    padding-top: 30px; /* espaço da barra do navegador */
+    background: var(--bg-secondary);
+}
+
+.browser-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.browser-dots {
+    display: inline-flex;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.browser-dots i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-light);
+}
+
+.browser-url {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-pill);
+    padding: 3px 10px;
+    flex: 1;
+}
+
+.project-expand {
+    top: 40px;
+}
+
+/* apps: captura inteira, centralizada, com moldura de celular */
+.project-card[data-image-type="mobile"] .project-image-container {
+    background:
+        radial-gradient(ellipse at 50% 115%, rgba(247, 143, 146, 0.16), transparent 65%),
+        var(--bg-secondary);
+}
+
+.project-card[data-image-type="mobile"] .project-image-container > img,
+.project-card[data-image-type="mobile"] .project-video {
+    object-fit: contain;
+    object-position: center bottom;
+    padding-top: 18px;
+    background: transparent;
+}
+
+.project-card[data-image-type="mobile"] .project-expand {
+    top: 12px;
 }

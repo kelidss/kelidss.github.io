@@ -164,8 +164,10 @@ function initNavigation() {
 
         if (currentScroll > 50) {
             header.classList.add('scrolled');
+            document.body.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
+            document.body.classList.remove('scrolled');
         }
 
         // Active section
@@ -403,6 +405,9 @@ function initProjectFilter() {
             if (collapsed) collapsedAny = true;
             card.classList.toggle('hidden', !matchesFilter || collapsed);
         });
+
+        const grid = document.querySelector('.projects-grid');
+        if (grid) grid.classList.toggle('is-collapsed', collapsedAny);
 
         if (toggleBtn) {
             const t = translations[currentLanguage] || translations.pt;

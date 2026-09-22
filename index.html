@@ -64,6 +64,11 @@
 </head>
 
 <body>
+    <!-- carregamento curto: o features.js remove assim que a página está pronta -->
+    <div class="preloader" id="preloader" aria-hidden="true">
+        <div class="preloader-mark"><span>[</span><b>KS</b><span>]</span></div>
+        <div class="preloader-bar"><i></i></div>
+    </div>
     <div class="read-progress" aria-hidden="true"></div>
     <div class="toast" role="status" aria-live="polite"></div>
     <div class="ambient-bg">
@@ -244,6 +249,22 @@
                         <img src="assets/perfil.webp" width="900" height="1200" alt="Keliane em evento" class="about-image">
                         <div class="image-overlay"></div>
                     </div>
+                    <div class="about-info-grid">
+                        <div class="info-card info-card--compact">
+                            <span class="info-icon"><i class="fas fa-graduation-cap"></i></span>
+                            <div class="info-content">
+                                <span class="info-label" data-i18n="about-formation-label">Formação</span>
+                                <span class="info-value" data-i18n="about-formation-value">Ciência da Computação</span>
+                            </div>
+                        </div>
+                        <div class="info-card info-card--compact">
+                            <span class="info-icon"><i class="fas fa-location-dot"></i></span>
+                            <div class="info-content">
+                                <span class="info-label" data-i18n="contact-location-label">Localização</span>
+                                <span class="info-value"><span data-i18n="about-location-value">Fortaleza, CE · remoto</span> <span class="local-time-wrap">· <span id="local-time"></span></span></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="about-content">
@@ -263,23 +284,6 @@
                             algoritmos de matchmaking até sistemas críticos de saúde. Domínio de bancos relacionais e
                             NoSQL, práticas DevOps (Docker, AWS, CI/CD) e código performático em múltiplas plataformas.
                         </p>
-                    </div>
-
-                    <div class="about-info-grid">
-                        <div class="info-card info-card--compact">
-                            <span class="info-icon"><i class="fas fa-graduation-cap"></i></span>
-                            <div class="info-content">
-                                <span class="info-label" data-i18n="about-formation-label">Formação</span>
-                                <span class="info-value" data-i18n="about-formation-value">Ciência da Computação</span>
-                            </div>
-                        </div>
-                        <div class="info-card info-card--compact">
-                            <span class="info-icon"><i class="fas fa-location-dot"></i></span>
-                            <div class="info-content">
-                                <span class="info-label" data-i18n="contact-location-label">Localização</span>
-                                <span class="info-value"><span data-i18n="about-location-value">Fortaleza, CE · remoto</span> <span class="local-time-wrap">· <span id="local-time"></span></span></span>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="about-tech">
@@ -754,6 +758,7 @@
                 <article class="project-card" data-category="web">
                     <div class="project-card-border"></div>
                     <div class="project-image-container">
+                        <span class="project-expand" aria-hidden="true"><i class="fas fa-expand"></i></span>
                         <img src="assets/orfeu/image.webp" srcset="assets/orfeu/image-640.webp 640w, assets/orfeu/image.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" width="1200" height="632" alt="Orfeu - Orquestrador de inovação" loading="lazy" decoding="async">
                         <video class="project-video" muted loop playsinline preload="none" poster="assets/orfeu/image-640.webp" aria-label="Prévia: Orfeu - Orquestrador de inovação" tabindex="-1">
                             <source src="assets/orfeu/preview.webm" type="video/webm">
@@ -789,6 +794,7 @@
                 <article class="project-card" data-category="web">
                     <div class="project-card-border"></div>
                     <div class="project-image-container">
+                        <span class="project-expand" aria-hidden="true"><i class="fas fa-expand"></i></span>
                         <img src="assets/aquabit/image.webp" srcset="assets/aquabit/image-640.webp 640w, assets/aquabit/image.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" width="1200" height="629" alt="Aquabit System" loading="lazy" decoding="async">
                         <video class="project-video" muted loop playsinline preload="none" poster="assets/aquabit/image-640.webp" aria-label="Prévia: Aquabit System" tabindex="-1">
                             <source src="assets/aquabit/preview.webm" type="video/webm">
@@ -828,6 +834,7 @@
                 <article class="project-card" data-category="mobile" data-image-type="mobile">
                     <div class="project-card-border"></div>
                     <div class="project-image-container">
+                        <span class="project-expand" aria-hidden="true"><i class="fas fa-expand"></i></span>
                         <img src="assets/kompa/unnamed.webp" width="545" height="967" alt="Kompa Saúde" loading="lazy" decoding="async">
                         <video class="project-video" muted loop playsinline preload="none" poster="assets/kompa/unnamed.webp" aria-label="Prévia: Kompa Saúde" tabindex="-1">
                             <source src="assets/kompa/preview.webm" type="video/webm">
@@ -863,6 +870,7 @@
                 <article class="project-card" data-category="mobile" data-image-type="mobile">
                     <div class="project-card-border"></div>
                     <div class="project-image-container">
+                        <span class="project-expand" aria-hidden="true"><i class="fas fa-expand"></i></span>
                         <img src="assets/mentalclean/unnamed (1).webp" width="817" height="1600" alt="MentalClean" loading="lazy" decoding="async">
                         <video class="project-video" muted loop playsinline preload="none" poster="assets/mentalclean/unnamed (1).webp" aria-label="Prévia: MentalClean" tabindex="-1">
                             <source src="assets/mentalclean/preview.webm" type="video/webm">
@@ -901,6 +909,7 @@
                 <article class="project-card" data-category="web">
                     <div class="project-card-border"></div>
                     <div class="project-image-container">
+                        <span class="project-expand" aria-hidden="true"><i class="fas fa-expand"></i></span>
                         <img src="assets/comunidade aqua/image.webp" srcset="assets/comunidade aqua/image-640.webp 640w, assets/comunidade aqua/image.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" width="1200" height="531" alt="Comunidade Aqua" loading="lazy" decoding="async">
                         <video class="project-video" muted loop playsinline preload="none" poster="assets/comunidade aqua/image-640.webp" aria-label="Prévia: Comunidade Aqua" tabindex="-1">
                             <source src="assets/comunidade aqua/preview.webm" type="video/webm">
@@ -937,6 +946,7 @@
                 <article class="project-card" data-category="web">
                     <div class="project-card-border"></div>
                     <div class="project-image-container">
+                        <span class="project-expand" aria-hidden="true"><i class="fas fa-expand"></i></span>
                         <img src="assets/amevi/image.webp" srcset="assets/amevi/image-640.webp 640w, assets/amevi/image.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" width="1200" height="594" alt="Amevis" loading="lazy" decoding="async">
                         <video class="project-video" muted loop playsinline preload="none" poster="assets/amevi/image-640.webp" aria-label="Prévia: Amevis" tabindex="-1">
                             <source src="assets/amevi/preview.webm" type="video/webm">
@@ -971,6 +981,7 @@
                 <article class="project-card" data-category="web">
                     <div class="project-card-border"></div>
                     <div class="project-image-container">
+                        <span class="project-expand" aria-hidden="true"><i class="fas fa-expand"></i></span>
                         <img src="assets/mariliadantas/image.webp" srcset="assets/mariliadantas/image-640.webp 640w, assets/mariliadantas/image.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" width="1200" height="572" alt="Marília Dantas" loading="lazy" decoding="async">
                         <video class="project-video" muted loop playsinline preload="none" poster="assets/mariliadantas/image-640.webp" aria-label="Prévia: Marília Dantas" tabindex="-1">
                             <source src="assets/mariliadantas/preview.webm" type="video/webm">
@@ -1006,6 +1017,7 @@
                 <article class="project-card" data-category="web">
                     <div class="project-card-border"></div>
                     <div class="project-image-container">
+                        <span class="project-expand" aria-hidden="true"><i class="fas fa-expand"></i></span>
                         <img src="assets/blogleticia/image.webp" srcset="assets/blogleticia/image-640.webp 640w, assets/blogleticia/image.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" width="1200" height="560" alt="Letícia Morais - Psicóloga" loading="lazy" decoding="async">
                         <video class="project-video" muted loop playsinline preload="none" poster="assets/blogleticia/image-640.webp" aria-label="Prévia: Letícia Morais" tabindex="-1">
                             <source src="assets/blogleticia/preview.webm" type="video/webm">
@@ -1040,6 +1052,7 @@
                 <article class="project-card" data-category="web">
                     <div class="project-card-border"></div>
                     <div class="project-image-container">
+                        <span class="project-expand" aria-hidden="true"><i class="fas fa-expand"></i></span>
                         <img src="assets/metodoCEV/image.webp" srcset="assets/metodoCEV/image-640.webp 640w, assets/metodoCEV/image.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" width="1200" height="430" alt="Método CEV" loading="lazy" decoding="async">
                         <video class="project-video" muted loop playsinline preload="none" poster="assets/metodoCEV/image-640.webp" aria-label="Prévia: Método CEV" tabindex="-1">
                             <source src="assets/metodoCEV/preview.webm" type="video/webm">
@@ -1073,6 +1086,7 @@
                 <article class="project-card" data-category="web">
                     <div class="project-card-border"></div>
                     <div class="project-image-container">
+                        <span class="project-expand" aria-hidden="true"><i class="fas fa-expand"></i></span>
                         <img src="assets/noticias-acev/image.webp" srcset="assets/noticias-acev/image-640.webp 640w, assets/noticias-acev/image.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" width="1200" height="639" alt="Noticias ACEV" loading="lazy" decoding="async">
                         <video class="project-video" muted loop playsinline preload="none" poster="assets/noticias-acev/image-640.webp" aria-label="Prévia: Noticias ACEV" tabindex="-1">
                             <source src="assets/noticias-acev/preview.webm" type="video/webm">
@@ -1106,6 +1120,7 @@
                 <article class="project-card" data-category="web">
                     <div class="project-card-border"></div>
                     <div class="project-image-container">
+                        <span class="project-expand" aria-hidden="true"><i class="fas fa-expand"></i></span>
                         <img src="assets/movimento-metodo-cev/image.webp" srcset="assets/movimento-metodo-cev/image-640.webp 640w, assets/movimento-metodo-cev/image.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" width="1200" height="639" alt="Movimento Metodo CEV" loading="lazy" decoding="async">
                         <video class="project-video" muted loop playsinline preload="none" poster="assets/movimento-metodo-cev/image-640.webp" aria-label="Prévia: Movimento Metodo CEV" tabindex="-1">
                             <source src="assets/movimento-metodo-cev/preview.webm" type="video/webm">
@@ -1139,6 +1154,7 @@
                 <article class="project-card" data-category="web">
                     <div class="project-card-border"></div>
                     <div class="project-image-container">
+                        <span class="project-expand" aria-hidden="true"><i class="fas fa-expand"></i></span>
                         <img src="assets/imersao-metodo-cev/image.webp" srcset="assets/imersao-metodo-cev/image-640.webp 640w, assets/imersao-metodo-cev/image.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" width="1200" height="596" alt="Imersao Metodo CEV" loading="lazy" decoding="async">
                         <video class="project-video" muted loop playsinline preload="none" poster="assets/imersao-metodo-cev/image-640.webp" aria-label="Prévia: Imersao Metodo CEV" tabindex="-1">
                             <source src="assets/imersao-metodo-cev/preview.webm" type="video/webm">
