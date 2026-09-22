@@ -1140,7 +1140,7 @@ function translateExperience(lang) {
         if (t.items) {
             items.forEach((li, i) => {
                 if (t.items[i] !== undefined) {
-                    li.innerHTML = '<span class="list-marker">▹</span>' + t.items[i];
+                    li.innerHTML = '<span class="list-marker"></span>' + t.items[i];
                 }
             });
         }

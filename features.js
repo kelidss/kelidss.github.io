@@ -204,6 +204,12 @@
         }
     }
 
+    /* ---------- experiência atual em destaque ---------- */
+    function markCurrentExperience() {
+        const current = document.querySelector('.exp-panel .exp-badge');
+        if (current) current.closest('.exp-panel').classList.add('is-current');
+    }
+
     /* ---------- 11) linha do tempo da carreira ---------- */
     const CAREER = [
         { id: 'vida', label: 'Vida Premium', start: '2023-05' },
@@ -277,6 +283,7 @@
         initLastCommit();
         initHeatmap();
         initCareerTimeline();
+        markCurrentExperience();
         document.addEventListener('languagechange-portfolio', () => { renderCommit(); initCareerTimeline(); });
     });
 })();
