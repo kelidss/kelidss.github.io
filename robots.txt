@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kelidss.github.io/sitemap.xml
