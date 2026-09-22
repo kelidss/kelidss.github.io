@@ -876,8 +876,6 @@ section {
 }
 
 .about-image-wrapper {
-    position: sticky;
-    top: 120px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -1547,7 +1545,7 @@ section {
 }
 
 .project-card:hover .project-image-container img {
-    transform: scale(1.05);
+    filter: saturate(1.05);
 }
 
 /* Vídeo de apresentação: fica por cima da imagem (que segue como poster
@@ -1570,7 +1568,7 @@ section {
 }
 
 .project-card:hover .project-video {
-    transform: scale(1.05);
+    filter: saturate(1.05);
 }
 
 .project-card[data-image-type="mobile"] .project-video {
@@ -3111,70 +3109,6 @@ button:focus-visible,
     z-index: 3;
 }
 
-/* 9) como eu trabalho */
-.process {
-    margin-top: 70px;
-}
-
-.process-title {
-    font-size: 0.85rem;
-    margin-bottom: 24px;
-}
-
-.process-steps {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
-    counter-reset: step;
-}
-
-.process-step {
-    position: relative;
-    padding: 22px 20px 20px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-card);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
-}
-
-.process-step:hover {
-    transform: translateY(-4px);
-    border-color: var(--accent);
-}
-
-.process-num {
-    position: absolute;
-    top: 14px;
-    right: 16px;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--text-muted);
-}
-
-.process-icon {
-    width: 40px;
-    height: 40px;
-    display: grid;
-    place-items: center;
-    border-radius: var(--radius-input);
-    background: var(--accent-dim);
-    color: var(--accent);
-    margin-bottom: 14px;
-}
-
-.process-step h4 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.process-step p {
-    font-size: 0.88rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-
 /* 10) métrica de impacto no card */
 .project-metric {
     font-family: var(--font-mono);
@@ -3443,10 +3377,6 @@ body.modal-open {
 
 /* ---- responsivo dos extras ---- */
 @media (max-width: 992px) {
-    .process-steps {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
     .modal-body {
         grid-template-columns: 1fr;
         overflow: auto;
@@ -3463,10 +3393,6 @@ body.modal-open {
 }
 
 @media (max-width: 600px) {
-    .process-steps {
-        grid-template-columns: 1fr;
-    }
-
     .now-list li {
         grid-template-columns: 1fr;
         gap: 2px;

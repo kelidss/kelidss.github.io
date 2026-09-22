@@ -97,19 +97,6 @@
         });
     }
 
-    /* ---------- 15) tilt 3D nos cards de projeto ---------- */
-    function initTilt() {
-        if (!finePointer || reduceMotion) return;
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('pointermove', (e) => {
-                const r = card.getBoundingClientRect();
-                const nx = (e.clientX - r.left) / r.width - 0.5;
-                const ny = (e.clientY - r.top) / r.height - 0.5;
-                card.style.transform = `perspective(900px) rotateX(${(-ny * 4).toFixed(2)}deg) rotateY(${(nx * 4).toFixed(2)}deg) translateY(-10px)`;
-            }, { passive: true });
-            card.addEventListener('pointerleave', () => { card.style.transform = ''; });
-        });
-    }
 
     /* ---------- 14) copiar e-mail ---------- */
     function initCopyEmail() {
@@ -337,7 +324,6 @@
         initReadProgress();
         initTheme();
         initSpotlight();
-        initTilt();
         initCopyEmail();
         initLocalTime();
         initLastCommit();
