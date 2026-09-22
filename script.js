@@ -520,7 +520,7 @@ function initParallax() {
     }
 }
 
-document.querySelectorAll('.btn-primary, .btn-large, .nav-cta').forEach(btn => {
+document.querySelectorAll('.btn-primary').forEach(btn => {
     btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
@@ -581,12 +581,6 @@ techTags.forEach(tag => techObserver.observe(tag));
 
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
-    
-    // Animate scan line
-    const scanLine = document.querySelector('.scan-line');
-    if (scanLine) {
-        scanLine.style.opacity = '0.1';
-    }
 });
 
 

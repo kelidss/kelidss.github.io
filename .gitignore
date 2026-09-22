@@ -1,0 +1,8 @@
+# preview local do Claude Code
+.claude/
+# gravador de prévias
+tools/record-previews/node_modules/
+tools/record-previews/.raw/
+tools/record-previews/.qa/
+tools/record-previews/report.json
+tools/record-previews/package-lock.json

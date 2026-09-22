@@ -1,0 +1,12 @@
+{
+  "name": "record-previews",
+  "private": true,
+  "description": "Grava os vídeos de apresentação dos projetos do portfólio (assets/*/preview.webm)",
+  "scripts": {
+    "setup": "npm install && npx playwright install ffmpeg",
+    "record": "node record.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}
