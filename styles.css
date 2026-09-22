@@ -4057,3 +4057,107 @@ button:focus-visible,
 .exp-panel.is-active:hover {
     background: transparent;
 }
+
+/* ============================================================
+   ÍCONES NAS CORES DAS MARCAS (chips do Sobre e órbita do hero)
+   ============================================================ */
+[data-tech="python"] i { color: #4b8bbe; }
+[data-tech="fastapi"] i { color: #05998b; }
+[data-tech="django"] i { color: #44b78b; }
+[data-tech="flask"] i { color: #e6e6e6; }
+[data-tech="c-net"] i { color: #a78bfa; }
+[data-tech="node-js"] i { color: #8cc84b; }
+[data-tech="php"] i { color: #8892bf; }
+[data-tech="react"] i { color: #61dafb; }
+[data-tech="typescript"] i { color: #3178c6; }
+[data-tech="flutter"] i { color: #54c5f8; }
+[data-tech="postgresql"] i,
+[data-tech="database"] i { color: #6ba0e8; }
+[data-tech="mongodb"] i { color: #47a248; }
+[data-tech="redis"] i { color: #dc382d; }
+[data-tech="sql-server"] i { color: #e5534b; }
+[data-tech="docker"] i { color: #2496ed; }
+[data-tech="aws"] i { color: #ff9900; }
+[data-tech="git"] i { color: #f05032; }
+[data-tech="linux"] i { color: #fcc624; }
+
+.tech-tag:hover i,
+.orbit-item:hover i {
+    color: inherit;
+}
+
+/* ============================================================
+   HERO NO CELULAR — foto 4:5 sem a órbita por cima, altura menor,
+   botões e métricas em grade
+   ============================================================ */
+@media (max-width: 992px) {
+    .hero {
+        min-height: 0;
+        padding: 96px 20px 48px;
+    }
+
+    .hero-container {
+        gap: 28px;
+    }
+
+    .hero-visual {
+        justify-content: center;
+        padding-right: 0;
+    }
+
+    .profile-frame {
+        width: 240px;
+        height: 300px;
+    }
+
+    .tech-orbit {
+        display: none;
+    }
+
+    .hero-cta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 32px;
+    }
+
+    .hero-cta > .btn-primary {
+        grid-column: 1 / -1;
+    }
+
+    .hero-cta > * {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-metrics {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 12px;
+        margin-top: 8px;
+        padding-top: 22px;
+    }
+
+    .hero-metrics .metric-value {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 88px 16px 40px;
+    }
+
+    .profile-frame {
+        width: 208px;
+        height: 260px;
+    }
+
+    .hero-name {
+        font-size: 2.4rem;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+    }
+}
