@@ -1,0 +1,21 @@
+# Cabeçalhos HTTP servidos pela Cloudflare Pages (https://developers.cloudflare.com/pages/configuration/headers/)
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Fotos, vídeos e ícones: uma semana de cache
+/assets/*
+  Cache-Control: public, max-age=604800
+
+/*.png
+  Cache-Control: public, max-age=604800
+
+/*.svg
+  Cache-Control: public, max-age=604800
+
+# A imagem de preview de link é reescrita no lugar, então cache curto
+/og-image.jpg
+  Cache-Control: public, max-age=3600

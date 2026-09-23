@@ -785,7 +785,6 @@ const translations = {
         'form-message-label': 'const mensagem =',
         'form-message-placeholder': '`Escreva sua mensagem aqui...`;',
         'form-submit': 'enviarMensagem()',
-        'footer-tagline': 'Feito à mão, com café e alguns commits de madrugada.',
     },
     en: {
         'nav-home': 'Home',
@@ -895,7 +894,6 @@ const translations = {
         'form-message-label': 'const message =',
         'form-message-placeholder': '`Write your message here...`;',
         'form-submit': 'sendMessage()',
-        'footer-tagline': 'Handmade, with coffee and a few late-night commits.',
     }
 };
 

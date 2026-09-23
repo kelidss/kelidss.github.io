@@ -2040,11 +2040,6 @@ button:focus-visible,
     color: var(--accent);
 }
 
-.footer-tagline {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-top: 10px;
-}
 
 .footer-meta {
     font-family: var(--font-mono);

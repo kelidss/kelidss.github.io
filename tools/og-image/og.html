@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>og-image</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #1f1c2c;
+    --bg-primary: #2a253a;
+    --accent: #8b7ff0;
+    --accent-soft: #b3a9ff;
+    --text-primary: #f2f2f2;
+    --text-secondary: #b3b0c0;
+    --text-muted: #9a95ae;
+    --border: #4a435c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    position: relative;
+    background: radial-gradient(900px 600px at 85% 20%, rgba(139,127,240,0.22), transparent 60%),
+                linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-primary) 100%);
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.25));
+  }
+  .content {
+    position: absolute; left: 88px; top: 0; bottom: 0;
+    width: 640px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 26px;
+  }
+  .kicker b { color: var(--accent-soft); font-weight: 500; }
+  .name {
+    font-weight: 800;
+    font-size: 116px; line-height: 0.92; letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .name span { display: block; }
+  .name .accent { color: var(--accent); }
+  .role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 27px; color: var(--text-primary);
+    margin-top: 34px;
+  }
+  .role::before { content: '> '; color: var(--accent); }
+  .stack {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 21px; color: var(--text-muted);
+    margin-top: 14px; letter-spacing: 0.01em;
+  }
+  .stack i { font-style: normal; color: var(--border); padding: 0 8px; }
+  .footer {
+    position: absolute; left: 88px; bottom: 54px;
+    display: flex; align-items: center; gap: 18px;
+    font-family: 'JetBrains Mono', monospace; font-size: 22px;
+  }
+  .footer .logo { color: var(--accent); font-weight: 700; }
+  .footer .url { color: var(--text-secondary); }
+  .photo {
+    position: absolute; right: 96px; top: 50%; transform: translateY(-50%);
+    width: 310px; height: 388px;
+  }
+  .photo img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%;
+    display: block; border-radius: 6px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+  }
+  .photo .corner {
+    position: absolute; width: 34px; height: 34px;
+    border: 3px solid var(--accent);
+  }
+  .photo .tl { left: -16px; top: -16px; border-right: 0; border-bottom: 0; }
+  .photo .tr { right: -16px; top: -16px; border-left: 0; border-bottom: 0; }
+  .photo .bl { left: -16px; bottom: -16px; border-right: 0; border-top: 0; }
+  .photo .br { right: -16px; bottom: -16px; border-left: 0; border-top: 0; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+
+  <div class="content">
+    <p class="kicker"><b>@keliane.dev</b> &nbsp;|&nbsp; Engenheira de Software</p>
+    <h1 class="name"><span>Keliane</span><span class="accent">Soares</span></h1>
+    <p class="role">Full Stack &amp; IA</p>
+    <p class="stack">Python<i>·</i>C#/.NET<i>·</i>Node.js<i>·</i>React<i>·</i>Flutter</p>
+  </div>
+
+  <div class="photo">
+    <span class="corner tl"></span><span class="corner tr"></span>
+    <span class="corner bl"></span><span class="corner br"></span>
+    <img src="../../assets/eu.webp" alt="">
+  </div>
+
+  <div class="footer">
+    <span class="logo">[KS]</span>
+    <span class="url" id="site-url">kelidss.github.io</span>
+  </div>
+</body>
+</html>
