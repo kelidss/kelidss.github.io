@@ -139,7 +139,6 @@ img {
 .ambient-blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(60px);
     opacity: 0.45;
     will-change: transform;
 }
@@ -2642,7 +2641,6 @@ button:focus-visible,
     /* Lighter background on phones */
     .ambient-blob {
         opacity: 0.4;
-        filter: blur(70px);
     }
 
     /* Services: single column on phones */
@@ -4154,5 +4152,92 @@ button:focus-visible,
 
     .hero-description {
         font-size: 0.95rem;
+    }
+}
+
+/* ============================================================
+   ÓRBITA DO HERO
+   A órbita agora fica dentro de .profile-frame, então gira em
+   volta da foto em qualquer largura. O raio é uma variável (--r)
+   e o container é achatado no eixo Y (--sy) para a órbita ser
+   uma elipse que acompanha a foto 4:5 sem passar por cima dela.
+   ============================================================ */
+.tech-orbit {
+    --r: 215px;      /* raio horizontal */
+    --sy: 1.22;      /* raio vertical = --r * --sy */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--r) * 2 + 60px);
+    height: calc(var(--r) * 2 + 60px);
+    transform: translate(-50%, -50%) scaleY(var(--sy));
+    pointer-events: none;
+}
+
+.orbit-ring.ring-1 {
+    width: calc(var(--r) * 2);
+    height: calc(var(--r) * 2);
+}
+
+.orbit-ring.ring-2 {
+    width: calc(var(--r) * 2 + 50px);
+    height: calc(var(--r) * 2 + 50px);
+}
+
+.orbit-item {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    /* o scaleY final desfaz o achatamento do container no ícone */
+    transform: rotate(var(--angle)) translateX(var(--r)) rotate(calc(-1 * var(--angle))) scaleY(calc(1 / var(--sy)));
+    animation: orbitEllipse 25s linear infinite;
+    /* sem atraso: o --delay do HTML somava mais um giro ao ângulo e os ícones
+       ficavam em pares no mesmo ponto */
+    animation-delay: 0s;
+}
+
+@keyframes orbitEllipse {
+    from {
+        transform: rotate(var(--angle)) translateX(var(--r)) rotate(calc(-1 * var(--angle))) scaleY(calc(1 / var(--sy)));
+    }
+    to {
+        transform: rotate(calc(var(--angle) + 360deg)) translateX(var(--r)) rotate(calc(-1 * (var(--angle) + 360deg))) scaleY(calc(1 / var(--sy)));
+    }
+}
+
+/* Entre 1200 e 1399px a coluna da foto é mais estreita: raio menor */
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .tech-orbit {
+        --r: 195px;
+    }
+}
+
+/* Entre 993 e 1199px: foto e órbita menores para não passar da borda da tela */
+@media (min-width: 993px) and (max-width: 1199px) {
+    .profile-frame {
+        width: 260px;
+        height: 325px;
+    }
+
+    .tech-orbit {
+        --r: 165px;
+    }
+
+    .orbit-item {
+        width: 40px;
+        height: 40px;
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .tech-orbit {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .orbit-item {
+        animation: none !important;
     }
 }

@@ -10,10 +10,9 @@ const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
 
-const siteUrl = process.argv[2] || 'kelidss.github.io';
+const siteUrl = process.argv[2] || 'keliane.dev';
 const dir = __dirname;
-const htmlSrc = path.join(dir, 'og.html');
-const htmlTmp = path.join(dir, 'og.tmp.html');
+const html = 'file:///' + path.join(dir, 'og.html').replace(/\\/g, '/') + '?url=' + encodeURIComponent(siteUrl);
 const png = path.join(dir, 'og.png');
 const jpg = path.join(dir, '..', '..', 'og-image.jpg');
 
@@ -29,19 +28,28 @@ if (!browser) {
     process.exit(1);
 }
 
-// Injeta a URL do rodapé em uma cópia temporária do HTML.
-const html = fs.readFileSync(htmlSrc, 'utf8')
-    .replace(/(<span class="url" id="site-url">)[^<]*(<\/span>)/, `$1${siteUrl}$2`);
-fs.writeFileSync(htmlTmp, html);
-
 try {
+    if (fs.existsSync(png)) fs.unlinkSync(png);
+
     execFileSync(browser, [
         '--headless=new', '--disable-gpu', '--hide-scrollbars',
         '--window-size=1200,630',
         '--virtual-time-budget=8000',      // espera as fontes do Google carregarem
         `--screenshot=${png}`,
-        'file:///' + htmlTmp.replace(/\\/g, '/'),
-    ], { stdio: 'ignore' });
+        html,
+    ], { stdio: 'ignore', timeout: 60000 });
+
+    // Se já houver uma janela do navegador aberta, o comando volta antes da captura
+    // terminar: espera o arquivo aparecer e parar de crescer.
+    const deadline = Date.now() + 30000;
+    let last = -1;
+    while (Date.now() < deadline) {
+        const size = fs.existsSync(png) ? fs.statSync(png).size : -1;
+        if (size > 0 && size === last) break;
+        last = size;
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 500);
+    }
+    if (!fs.existsSync(png)) throw new Error('o navegador não gerou a captura');
 
     execFileSync('python', ['-c', [
         'import sys',
@@ -53,5 +61,5 @@ try {
 
     console.log('gerado:', jpg);
 } finally {
-    for (const f of [htmlTmp, png]) if (fs.existsSync(f)) fs.unlinkSync(f);
+    if (fs.existsSync(png)) fs.unlinkSync(png);
 }

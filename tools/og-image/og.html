@@ -109,7 +109,12 @@
 
   <div class="footer">
     <span class="logo">[KS]</span>
-    <span class="url" id="site-url">kelidss.github.io</span>
+    <span class="url" id="site-url">keliane.dev</span>
   </div>
+  <script>
+    // render.js passa a URL do rodapé em ?url=...
+    const u = new URLSearchParams(location.search).get('url');
+    if (u) document.getElementById('site-url').textContent = u;
+  </script>
 </body>
 </html>

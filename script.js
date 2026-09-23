@@ -109,44 +109,16 @@ function initResumeButton() {
 }
 
 function initAdvancedSmoothScroll() {
+    // Rolagem nativa (scroll-behavior) em vez de um loop de setTimeout a cada 20 ms.
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (!target) return;
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                const offset = 80;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
-                
-                scrollTo(targetPosition, 1000);
-            }
+            const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
+            window.scrollTo({ top, behavior: 'smooth' });
         });
     });
-
-    function scrollTo(to, duration) {
-        const start = window.pageYOffset;
-        const change = to - start;
-        let currentTime = 0;
-        const increment = 20;
-
-        function animateScroll() {
-            currentTime += increment;
-            const val = easeInOutQuad(currentTime, start, change, duration);
-            window.scrollTo(0, val);
-            if (currentTime < duration) {
-                setTimeout(animateScroll, increment);
-            }
-        }
-        animateScroll();
-    }
-
-    function easeInOutQuad(t, b, c, d) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
-        t--;
-        return -c / 2 * (t * (t - 2) - 1) + b;
-    }
 }
 
 function initNavigation() {
