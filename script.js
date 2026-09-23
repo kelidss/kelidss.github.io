@@ -229,12 +229,11 @@ function initTypingEffect() {
     
     const roles = [
         'Full Stack Engineer',
-        'Software Engineer',
-        'Backend Architect',
-        'AI Integration Dev',
-        'Python Specialist',
-        'Tech Lead',
-        'DevOps Enthusiast'
+        'Python Backend Dev',
+        'React + TypeScript',
+        'Flutter Dev',
+        'LLM Integration',
+        'Tech Lead'
     ];
     
     let roleIndex = 0;
@@ -719,7 +718,12 @@ const translations = {
         'svc-auto-1': 'Plataformas de agendamento',
         'svc-auto-2': 'Sistemas de vendas',
         'svc-auto-3': 'Automação de processos',
-        'svc-auto-4': 'Soluções sob demanda',
+        'svc-auto-4': 'Ferramentas internas sob medida',
+        'svc-ai-1': 'Integração de LLMs',
+        'svc-ai-2': 'Chatbots e assistentes',
+        'svc-ai-3': 'Classificação e triagem automática',
+        'svc-ai-4': 'Extração de dados de documentos',
+        'svc-ai-5': 'Automação de rotinas com IA',
         'svc-int': 'Integrações',
         'svc-int-1': 'APIs de terceiros',
         'svc-int-2': 'Gateways de pagamento',
@@ -735,7 +739,7 @@ const translations = {
         'svc-design-3': 'Interfaces responsivas',
         'svc-design-4': 'Design systems',
         'hero-greeting': 'Olá, meu nome é',
-        'hero-description': 'Engenheira de Software <span class="text-accent">Full Stack</span> com Python, C#/.NET, Node.js, React e Flutter. Integro <span class="text-accent">IA em produtos reais</span> — de CRMs sob medida a sistemas críticos de saúde com triagem em tempo real.',
+        'hero-description': 'Engenheira de Software <span class="text-accent">Full Stack</span> com Python, C#/.NET, Node.js, React e Flutter. Criei um <span class="text-accent">algoritmo de matchmaking premiado</span> em congresso latino-americano de inovação e sistemas de triagem em tempo real para a área da saúde.',
         'about-location-value': 'Fortaleza, CE · remoto',
         'gh-title': 'atividade no GitHub',
         'gh-total-label': 'contribuições nos últimos 12 meses',
@@ -759,20 +763,20 @@ const translations = {
         'metric-commits': 'Commits',
         'about-title': 'Sobre Mim',
         'about-image-label': 'Mentora & Dev',
-        'about-intro': '<span class="code-comment">/** Engenheira de Software Full Stack */</span> Priorizo a lógica estrutural e a resolução de problemas, criando soluções escaláveis com <strong>React, TypeScript, Python, C#/.NET e Node.js</strong>. Integro <strong>Inteligência Artificial (LLMs)</strong> em produtos reais — de análise de sentimentos a triagem em tempo real.',
-        'about-details': 'Atuo com desenvolvimento full-stack há mais de 3 anos, entregando desde CRMs sob medida e algoritmos de matchmaking até sistemas críticos de saúde. Domínio de bancos relacionais e NoSQL, práticas DevOps (Docker, AWS, CI/CD) e código performático em múltiplas plataformas.',
+        'about-intro': '<span class="code-comment">/** Engenheira de Software Full Stack */</span> Gosto de entender o problema antes de abrir o editor. No dia a dia uso <strong>React, TypeScript, Python, C#/.NET e Node.js</strong>, e nos últimos anos integrei <strong>LLMs</strong> em sistemas reais: análise de sentimento, triagem de pacientes pela Escala de Manchester e automação de fluxos de inovação.',
+        'about-details': 'Programo profissionalmente desde 2023 e passei por agritech, saúde, indústria e um hub de inovação. Na Orfeu desenhei e construí o algoritmo de matchmaking que conecta demandas do ecossistema de saúde a soluções tecnológicas, premiado no Congresso Latino-Americano de Inovação Aberta. Na ACEV fui tech lead de um CRM sob medida, e na Kompa escrevi as APIs que fazem triagem de pacientes em tempo real. Também cuido do que fica em volta do código: PostgreSQL, MongoDB, Redis, Docker, AWS e CI/CD.',
         'about-formation-label': 'Formação',
         'about-formation-value': 'Ciência da Computação',
         'about-tech-label': 'Tech Stack:',
         'exp-title': 'Experiência',
         'projects-title': 'Projetos',
-        'projects-subtitle': '// Soluções que transformam ideias em realidade digital',
+        'projects-subtitle': '// Alguns dos sistemas que já entreguei',
         'filter-all': 'Todos',
         'btn-view-more': 'Ver Mais',
         'btn-view-less': 'Ver Menos',
         'contact-title': 'Entre em Contato',
-        'contact-heading': 'Vamos construir algo incrível?',
-        'contact-text': 'Estou disponível para novos projetos, consultorias e oportunidades. Se você tem uma ideia inovadora ou precisa de uma solução técnica, mande uma mensagem!',
+        'contact-heading': 'Tem um projeto em mente?',
+        'contact-text': 'Aceito projetos freelance, consultoria e propostas de trabalho. Me conta o que você precisa, mesmo que ainda esteja meio vago, e eu respondo por e-mail ou WhatsApp.',
         'contact-location-label': 'Localização',
         'form-name-label': 'const nome =',
         'form-name-placeholder': '"Seu Nome";',
@@ -781,7 +785,7 @@ const translations = {
         'form-message-label': 'const mensagem =',
         'form-message-placeholder': '`Escreva sua mensagem aqui...`;',
         'form-submit': 'enviarMensagem()',
-        'footer-tagline': 'Building the future, one commit at a time.',
+        'footer-tagline': 'Feito à mão, com café e alguns commits de madrugada.',
     },
     en: {
         'nav-home': 'Home',
@@ -818,7 +822,12 @@ const translations = {
         'svc-auto-1': 'Scheduling platforms',
         'svc-auto-2': 'Sales systems',
         'svc-auto-3': 'Process automation',
-        'svc-auto-4': 'On-demand solutions',
+        'svc-auto-4': 'Custom internal tools',
+        'svc-ai-1': 'LLM integration',
+        'svc-ai-2': 'Chatbots and assistants',
+        'svc-ai-3': 'Automatic classification and triage',
+        'svc-ai-4': 'Data extraction from documents',
+        'svc-ai-5': 'AI-powered routine automation',
         'svc-int': 'Integrations',
         'svc-int-1': 'Third-party APIs',
         'svc-int-2': 'Payment gateways',
@@ -840,7 +849,7 @@ const translations = {
         'svc-support-3': 'Technology consulting',
         'svc-support-4': 'Strategic planning',
         'hero-greeting': 'Hi, my name is',
-        'hero-description': '<span class="text-accent">Full Stack</span> Software Engineer working with Python, C#/.NET, Node.js, React and Flutter. I integrate <span class="text-accent">AI into real products</span> — from tailor-made CRMs to critical healthcare systems with real-time triage.',
+        'hero-description': '<span class="text-accent">Full Stack</span> Software Engineer working with Python, C#/.NET, Node.js, React and Flutter. I built an <span class="text-accent">award-winning matchmaking algorithm</span>, recognized at a Latin American open innovation congress, and real-time triage systems for healthcare.',
         'about-location-value': 'Fortaleza, Brazil · remote',
         'gh-title': 'GitHub activity',
         'gh-total-label': 'contributions in the last 12 months',
@@ -864,20 +873,20 @@ const translations = {
         'metric-commits': 'Commits',
         'about-title': 'About Me',
         'about-image-label': 'Mentor & Dev',
-        'about-intro': '<span class="code-comment">/** Full Stack Software Engineer */</span> I prioritize structural logic and problem-solving, creating scalable solutions with <strong>React, TypeScript, Python, C#/.NET and Node.js</strong>. I integrate <strong>Artificial Intelligence (LLMs)</strong> into real products — from sentiment analysis to real-time triage.',
-        'about-details': 'I\'ve been working with full-stack development for over 3 years, delivering everything from tailor-made CRMs and matchmaking algorithms to critical healthcare systems. Proficient in relational and NoSQL databases, DevOps practices (Docker, AWS, CI/CD), and high-performance code across multiple platforms.',
+        'about-intro': '<span class="code-comment">/** Full Stack Software Engineer */</span> I like to understand the problem before opening the editor. Day to day I work with <strong>React, TypeScript, Python, C#/.NET and Node.js</strong>, and over the last few years I have wired <strong>LLMs</strong> into real systems: sentiment analysis, patient triage based on the Manchester Triage Scale and automation of innovation workflows.',
+        'about-details': 'I have been coding professionally since 2023, across agritech, healthcare, manufacturing and an innovation hub. At Orfeu I designed and built the matchmaking algorithm that connects healthcare ecosystem demands to technology solutions, awarded at the Latin American Open Innovation Congress. At ACEV I was tech lead on a custom CRM, and at Kompa I wrote the APIs that triage patients in real time. I also take care of what surrounds the code: PostgreSQL, MongoDB, Redis, Docker, AWS and CI/CD.',
         'about-formation-label': 'Education',
         'about-formation-value': 'Computer Science',
         'about-tech-label': 'Tech Stack:',
         'exp-title': 'Experience',
         'projects-title': 'Projects',
-        'projects-subtitle': '// Solutions that turn ideas into digital reality',
+        'projects-subtitle': '// Some of the systems I have shipped',
         'filter-all': 'All',
         'btn-view-more': 'View More',
         'btn-view-less': 'View Less',
         'contact-title': 'Get in Touch',
-        'contact-heading': 'Let\'s build something amazing?',
-        'contact-text': 'I\'m available for new projects, consulting, and opportunities. If you have an innovative idea or need a technical solution, send me a message!',
+        'contact-heading': 'Got a project in mind?',
+        'contact-text': 'I take on freelance projects, consulting and job offers. Tell me what you need, even if it is still a bit vague, and I will get back to you by email or WhatsApp.',
         'contact-location-label': 'Location',
         'form-name-label': 'const name =',
         'form-name-placeholder': '"Your Name";',
@@ -886,7 +895,7 @@ const translations = {
         'form-message-label': 'const message =',
         'form-message-placeholder': '`Write your message here...`;',
         'form-submit': 'sendMessage()',
-        'footer-tagline': 'Building the future, one commit at a time.',
+        'footer-tagline': 'Handmade, with coffee and a few late-night commits.',
     }
 };
 
@@ -896,64 +905,64 @@ const expTranslations = {
             date: 'Jul 2026 - Presente',
             badge: 'Atual',
             items: [
-                'Desenvolvimento de sites, landing pages, lojas virtuais e sistemas web completos (SaaS, CRM e ERP sob medida)',
-                'Apps mobile (iOS, Android e multiplataforma), PWAs e dashboards administrativos',
-                'Integrações com APIs de terceiros, gateways de pagamento e WhatsApp Business',
-                'Modernização de sistemas legados, design UX/UI e consultoria em arquitetura de software'
+                'Sites, landing pages, lojas virtuais e sistemas web (SaaS, CRM e ERP) para clientes de vários segmentos',
+                'Apps mobile em Flutter, PWAs e painéis administrativos',
+                'Integração com APIs de terceiros, gateways de pagamento e WhatsApp Business',
+                'Modernização de sistemas legados, design de interface e consultoria de arquitetura'
             ]
         },
         orfeu: {
             date: 'Nov 2025 - Mai 2026',
             items: [
-                'Interfaces ricas e responsivas com React e TypeScript, com foco em UX e tipagem segura',
-                'Serviços backend robustos com Node.js, aplicando boas práticas de arquitetura e design de APIs',
-                'Integração de IA Generativa e programação determinística de LLMs para automação de tarefas',
-                'Otimização de performance front-end e gerenciamento de estados complexos'
+                'Algoritmo de matchmaking que conecta demandas do ecossistema de saúde a soluções tecnológicas, premiado no Congresso Latino-Americano de Inovação Aberta',
+                'Serviços em Node.js e desenho das APIs que o front consome',
+                'Integração de LLMs com saída estruturada para automatizar etapas do fluxo de inovação',
+                'Front-end em React e TypeScript, do componente à tela inteira, com cuidado com a experiência de uso'
             ]
         },
         acev: {
             date: 'Dez 2025 - Abr 2026',
             badge: 'Tech Lead',
             items: [
-                'Liderança técnica no desenvolvimento de CRMs e sistemas sob medida, definindo a arquitetura de software',
-                'Back-end com Python (FastAPI, Django, Flask) e Node.js para APIs RESTful de alta performance',
-                'Interfaces web e mobile com React e Flutter em múltiplas plataformas',
-                'Integração de IA (LLMs) e implementação de cultura DevOps com pipelines de CI/CD'
+                'Liderei a parte técnica de um CRM e de sistemas sob medida, decidindo a arquitetura e revisando o código do time',
+                'Back-end em Python (FastAPI, Django, Flask) e Node.js',
+                'Web em React e mobile em Flutter',
+                'Integração de LLMs e montagem dos pipelines de CI/CD'
             ]
         },
         aquabit: {
             date: 'Mar 2025 - Fev 2026',
             items: [
-                'APIs escaláveis utilizando Python (FastAPI e Django)',
-                'Modelagem avançada de dados e otimização de consultas com PostgreSQL e SQLAlchemy',
-                'Infraestrutura, orquestração e containerização de aplicações com Docker',
-                'Scripts de automação em Python e rotinas de observabilidade (logs e monitoramento)'
+                'APIs em Python com FastAPI e Django',
+                'Modelagem do banco e ajuste de consultas lentas no PostgreSQL com SQLAlchemy',
+                'Containers e orquestração das aplicações com Docker',
+                'Scripts de automação e rotinas de log e monitoramento'
             ]
         },
         kompa: {
             date: 'Ago 2024 - Dez 2025',
             items: [
-                'APIs RESTful em Python/Flask com integração de modelos de IA para análise de risco e triagem de pacientes',
-                'Funcionalidades em tempo real via WebSocketIO e notificações push',
-                'Gerenciamento de dados em PostgreSQL e otimização de performance com SQLAlchemy',
-                'DevOps com deploy em AWS (EC2, S3), secrets e orquestração via Docker Swarm'
+                'APIs em Python/Flask integradas a modelos de IA para triagem e análise de risco de pacientes',
+                'Chat e notificações em tempo real com WebSocket e push',
+                'PostgreSQL com SQLAlchemy, incluindo otimização de consultas',
+                'Deploy em AWS (EC2, S3), gestão de secrets e orquestração com Docker Swarm'
             ]
         },
         passamanaria: {
             date: 'Nov 2023 - Mai 2024',
             items: [
-                'Dashboards gerenciais dinâmicos e relatórios interativos com Flask',
-                'Desenvolvimento e manutenção de aplicativo mobile em Flutter',
-                'Integração e manutenção de banco de dados Microsoft SQL Server',
-                'Scripts de automação para reduzir retrabalho em tarefas repetitivas'
+                'Dashboards e relatórios gerenciais em Flask',
+                'App mobile em Flutter, do zero à manutenção',
+                'Integração e manutenção do banco Microsoft SQL Server',
+                'Scripts para automatizar tarefas repetitivas do setor'
             ]
         },
         vida: {
             date: 'Mai 2023 - Out 2023',
             items: [
-                'Extração e tratamento de dados com SQL',
-                'Relatórios estratégicos e dashboards interativos',
-                'Automações web para otimização de rotinas'
+                'Extração e limpeza de dados com SQL',
+                'Relatórios e dashboards interativos',
+                'Automação de rotinas manuais com scripts web'
             ]
         }
     },
@@ -962,64 +971,64 @@ const expTranslations = {
             date: 'Jul 2026 - Present',
             badge: 'Current',
             items: [
-                'Websites, landing pages, online stores and complete web systems (SaaS, CRM and tailor-made ERP)',
-                'Mobile apps (iOS, Android and cross-platform), PWAs and admin dashboards',
-                'Integrations with third-party APIs, payment gateways and WhatsApp Business',
-                'Legacy system modernization, UX/UI design and software architecture consulting'
+                'Websites, landing pages, online stores and web systems (SaaS, CRM and ERP) for clients across several industries',
+                'Mobile apps in Flutter, PWAs and admin panels',
+                'Integration with third-party APIs, payment gateways and WhatsApp Business',
+                'Legacy system modernization, interface design and architecture consulting'
             ]
         },
         orfeu: {
             date: 'Nov 2025 - May 2026',
             items: [
-                'Rich and responsive interfaces with React and TypeScript, focused on UX and type safety',
-                'Robust backend services with Node.js, applying solid architecture and API design practices',
-                'Integration of Generative AI and deterministic LLM programming for task automation',
-                'Front-end performance optimization and complex state management'
+                'Matchmaking algorithm that connects healthcare ecosystem demands to technology solutions, awarded at the Latin American Open Innovation Congress',
+                'Node.js services and design of the APIs the front-end consumes',
+                'LLM integration with structured output to automate steps of the innovation flow',
+                'React and TypeScript front-end, from single components to full screens, with care for the user experience'
             ]
         },
         acev: {
             date: 'Dec 2025 - Apr 2026',
             badge: 'Tech Lead',
             items: [
-                'Technical leadership building tailor-made CRMs and systems, defining the software architecture',
-                'Back-end with Python (FastAPI, Django, Flask) and Node.js for high-performance RESTful APIs',
-                'Web and mobile interfaces with React and Flutter across multiple platforms',
-                'AI (LLMs) integration and DevOps culture with CI/CD pipelines'
+                'Led the technical side of a CRM and custom systems, deciding on architecture and reviewing the team\'s code',
+                'Back-end in Python (FastAPI, Django, Flask) and Node.js',
+                'Web in React and mobile in Flutter',
+                'LLM integration and setting up the CI/CD pipelines'
             ]
         },
         aquabit: {
             date: 'Mar 2025 - Feb 2026',
             items: [
-                'Scalable APIs using Python (FastAPI and Django)',
-                'Advanced data modeling and query optimization with PostgreSQL and SQLAlchemy',
-                'Infrastructure, orchestration and application containerization with Docker',
-                'Python automation scripts and observability routines (logs and monitoring)'
+                'Python APIs with FastAPI and Django',
+                'Database modeling and tuning slow queries in PostgreSQL with SQLAlchemy',
+                'Containers and orchestration of the applications with Docker',
+                'Automation scripts and logging and monitoring routines'
             ]
         },
         kompa: {
             date: 'Aug 2024 - Dec 2025',
             items: [
-                'RESTful APIs in Python/Flask with AI model integration for risk analysis and patient triage',
-                'Real-time features via WebSocketIO and push notifications',
-                'Data management in PostgreSQL and performance optimization with SQLAlchemy',
-                'DevOps with deployment on AWS (EC2, S3), secrets and orchestration via Docker Swarm'
+                'Python/Flask APIs wired to AI models for patient triage and risk analysis',
+                'Real-time chat and notifications with WebSockets and push',
+                'PostgreSQL with SQLAlchemy, including query optimization',
+                'Deployment on AWS (EC2, S3), secrets management and orchestration with Docker Swarm'
             ]
         },
         passamanaria: {
             date: 'Nov 2023 - May 2024',
             items: [
-                'Dynamic management dashboards and interactive reports with Flask',
-                'Development and maintenance of a mobile app in Flutter',
+                'Management dashboards and reports in Flask',
+                'Flutter mobile app, from scratch to maintenance',
                 'Microsoft SQL Server database integration and maintenance',
-                'Automation scripts to reduce rework on repetitive tasks'
+                'Scripts to automate repetitive tasks in the department'
             ]
         },
         vida: {
             date: 'May 2023 - Oct 2023',
             items: [
-                'Data extraction and processing with SQL',
-                'Strategic reports and interactive dashboards',
-                'Web automations for routine optimization'
+                'Data extraction and cleanup with SQL',
+                'Interactive reports and dashboards',
+                'Automating manual routines with web scripts'
             ]
         }
     }
@@ -1027,32 +1036,32 @@ const expTranslations = {
 
 const projectTranslations = {
     pt: {
-        'Orfeu': { type: '<i class="fas fa-project-diagram"></i> Orquestrador', desc: 'Funciona como um orquestrador de jornadas de inovação corporativa global. A ferramenta ajuda empresas a gerenciar e transformar iniciativas de inovação dispersas em vantagens estratégicas reais.' },
-        'Aquabit': { type: '<i class="fas fa-fish"></i> Agritech', desc: 'Plataforma de inteligência e gestão para aquicultura (produção de peixes e camarões). O site e o aplicativo oferecem controle de biometrias e mortalidade, gestão de estoque por tanques e lotes, além de acompanhar custos e rentabilidade da produção.' },
-        'Comunidade Aqua': { type: '<i class="fas fa-users"></i> Social', desc: 'Plataforma de interação para a comunidade de aquicultura, conectando produtores e técnicos. Desenvolvida em Django, traz autenticação, feed em tempo real e recursos colaborativos para troca de conhecimento e suporte técnico.' },
-        'Amevis': { type: '<i class="fas fa-briefcase"></i> Corporativo', desc: 'Site de e-commerce/loja de perfumes, especializado em fragrâncias similares e orientais. Estruturado para exibir produtos, facilitar compras e promover a marca.' },
-        'Marília Dantas': { type: '<i class="fas fa-palette"></i> Portfolio', desc: 'Site institucional de um estúdio de beleza e estética, apresentando serviços, tratamentos e informações de contato para clientes.' },
-        'Letícia Morais': { type: '<i class="fas fa-brain"></i> Psicologia', desc: 'Site profissional da psicóloga Letícia Morais, especializada em luto: apresentação, metodologia de trabalho, livro e journal com artigos e reflexões sobre perdas.' },
-        'Método CEV': { type: '<i class="fas fa-graduation-cap"></i> Educação', desc: 'Plataforma educacional baseada no Método CEV, voltada para capacitação e desenvolvimento profissional com conteúdos estruturados e acompanhamento de progresso.' },
-        'Kompa Saúde': { type: '<i class="fas fa-heartbeat"></i> HealthTech', desc: 'Ecossistema de saúde digital com APIs Python/Flask, integração para análise preditiva e infraestrutura AWS.' },
-        'MentalClean': { type: '<i class="fas fa-heartbeat"></i> HealthTech', desc: 'Plataforma de saúde e bem-estar focada no ambiente corporativo, oferecida às empresas como canal de suporte emocional para colaboradores. Disponibiliza atendimento psicossocial, central de atendimento 24/7, assessorias especializadas e programas educativos para promoção do equilíbrio emocional e da produtividade.' },
-        'Noticias ACEV': { type: '<i class="fas fa-newspaper"></i> Portal de Notícias', desc: 'Portal de notícias e conteúdo da Associação de Conselheiros e Ex-Conselheiros Tutelares do Estado do Ceará, com foco em direitos da criança e do adolescente.' },
-        'Movimento Metodo CEV': { type: '<i class="fas fa-users"></i> Comunidade', desc: 'Plataforma para a comunidade do Método CEV, promovendo engajamento e desenvolvimento contínuo através de conteúdos e interações exclusivas.' },
-        'Imersao Metodo CEV': { type: '<i class="fas fa-chalkboard-teacher"></i> Evento', desc: 'Landing page para o evento de imersão do Método CEV, projetada para capturar inscrições e fornecer informações detalhadas sobre o programa.' },
+        'Orfeu': { type: '<i class="fas fa-project-diagram"></i> Orquestrador', desc: 'Hub de inovação que conecta demandas do ecossistema de saúde a soluções tecnológicas. Fiz o front em React/TypeScript, o backend em Node e o algoritmo de matchmaking que faz essa conexão, premiado no Congresso Latino-Americano de Inovação Aberta.' },
+        'Aquabit': { type: '<i class="fas fa-fish"></i> Agritech', desc: 'Sistema de gestão para quem cria peixe e camarão. O produtor registra biometria, mortalidade e ração por tanque e lote, e acompanha custo e rentabilidade de cada ciclo. Fui responsável pelas APIs em FastAPI e Django, pela modelagem no PostgreSQL e pela infra em Docker.' },
+        'Comunidade Aqua': { type: '<i class="fas fa-users"></i> Social', desc: 'Rede social da aquicultura: produtores e técnicos tiram dúvidas, publicam no feed e se ajudam com os problemas do dia a dia nos tanques. Fiz o backend, a autenticação e o feed em tempo real.' },
+        'Amevis': { type: '<i class="fas fa-briefcase"></i> Corporativo', desc: 'Loja virtual de perfumes orientais e similares de importados. Catálogo, carrinho e checkout feitos em Next.js.' },
+        'Marília Dantas': { type: '<i class="fas fa-palette"></i> Portfolio', desc: 'Site de um estúdio de beleza e estética: serviços, tratamentos e contato. Feito em Next.js e pensado primeiro para o celular.' },
+        'Letícia Morais': { type: '<i class="fas fa-brain"></i> Psicologia', desc: 'Site da psicóloga Letícia Morais, que trabalha com luto. Além da apresentação e do livro dela, tem um journal onde ela publica textos sobre perdas. Feito em PHP.' },
+        'Método CEV': { type: '<i class="fas fa-graduation-cap"></i> Educação', desc: 'Plataforma de cursos do Método CEV. O aluno acompanha as aulas em módulos e vê o próprio progresso; a equipe gerencia conteúdo e alunos pelo painel. React, TypeScript e Node.' },
+        'Kompa Saúde': { type: '<i class="fas fa-heartbeat"></i> HealthTech', desc: 'Plataforma de saúde digital que atende pacientes de empresas. Escrevi as APIs em Flask, o chat em tempo real com WebSocket e a integração com modelos de IA que classificam o risco de cada atendimento pela Escala de Manchester. Deploy em AWS.' },
+        'MentalClean': { type: '<i class="fas fa-heartbeat"></i> HealthTech', desc: 'App de apoio emocional que empresas oferecem aos funcionários: atendimento psicológico, central 24h e conteúdo educativo. Cuidei do backend em Flask e da infra em Docker.' },
+        'Noticias ACEV': { type: '<i class="fas fa-newspaper"></i> Portal de Notícias', desc: 'Portal de notícias da ACEV, a associação dos conselheiros tutelares do Ceará, com pautas sobre direitos da criança e do adolescente. Feito em PHP.' },
+        'Movimento Metodo CEV': { type: '<i class="fas fa-users"></i> Comunidade', desc: 'Área de membros da comunidade do Método CEV, com conteúdo exclusivo e espaço para os alunos interagirem entre si. Next.js e TypeScript.' },
+        'Imersao Metodo CEV': { type: '<i class="fas fa-chalkboard-teacher"></i> Evento', desc: 'Landing page do evento de imersão do Método CEV: o que é, para quem é e formulário de inscrição. Next.js.' },
     },
     en: {
-        'Orfeu': { type: '<i class="fas fa-project-diagram"></i> Orchestrator', desc: 'Works as an orchestrator for global corporate innovation journeys. The tool helps companies manage and transform scattered innovation initiatives into real strategic advantages.' },
-        'Aquabit': { type: '<i class="fas fa-fish"></i> Agritech', desc: 'Intelligence and management platform for aquaculture (fish and shrimp production). The website and app offer biometrics and mortality control, inventory management by tanks and batches, plus tracking production costs and profitability.' },
-        'Comunidade Aqua': { type: '<i class="fas fa-users"></i> Social', desc: 'Interaction platform for the aquaculture community, connecting producers and technicians. Built with Django, it features authentication, real-time feed, and collaborative resources for knowledge sharing and technical support.' },
-        'Amevis': { type: '<i class="fas fa-briefcase"></i> Corporate', desc: 'E-commerce/perfume store website, specialized in similar and oriental fragrances. Structured to display products, facilitate purchases, and promote the brand.' },
-        'Marília Dantas': { type: '<i class="fas fa-palette"></i> Portfolio', desc: 'Institutional website for a beauty and aesthetics studio, showcasing services, treatments, and contact information for clients.' },
-        'Letícia Morais': { type: '<i class="fas fa-brain"></i> Psychology', desc: 'Professional website of psychologist Letícia Morais, specialized in grief: introduction, working methodology, book, and a journal with articles and reflections on loss.' },
-        'Método CEV': { type: '<i class="fas fa-graduation-cap"></i> Education', desc: 'Educational platform based on the CEV Method, focused on professional training and development with structured content and progress tracking.' },
-        'Kompa Saúde': { type: '<i class="fas fa-heartbeat"></i> HealthTech', desc: 'Digital health ecosystem with Python/Flask APIs, predictive analysis integration, and AWS infrastructure.' },
-        'MentalClean': { type: '<i class="fas fa-heartbeat"></i> HealthTech', desc: 'Corporate wellness platform offered to companies as an emotional support channel for employees. Provides psychosocial care, 24/7 support center, specialized advisory services, and educational programs for promoting emotional balance and productivity.' },
-        'Noticias ACEV': { type: '<i class="fas fa-newspaper"></i> News Portal', desc: 'News and content portal for the Association of Counselors and Former Guardianship Counselors of the State of Ceará, focusing on the rights of children and adolescents.' },
-        'Movimento Metodo CEV': { type: '<i class="fas fa-users"></i> Community', desc: 'Platform for the Método CEV community, promoting engagement and continuous development through exclusive content and interactions.' },
-        'Imersao Metodo CEV': { type: '<i class="fas fa-chalkboard-teacher"></i> Event', desc: 'Landing page for the Método CEV immersion event, designed to capture registrations and provide detailed information about the program.' },
+        'Orfeu': { type: '<i class="fas fa-project-diagram"></i> Orchestrator', desc: 'Innovation hub that connects healthcare ecosystem demands to technology solutions. I built the React/TypeScript front-end, the Node backend and the matchmaking algorithm behind those connections, awarded at the Latin American Open Innovation Congress.' },
+        'Aquabit': { type: '<i class="fas fa-fish"></i> Agritech', desc: 'Management system for fish and shrimp farmers. Producers log biometrics, mortality and feed per tank and batch, and follow the cost and profitability of each cycle. I owned the FastAPI and Django APIs, the PostgreSQL modeling and the Docker infrastructure.' },
+        'Comunidade Aqua': { type: '<i class="fas fa-users"></i> Social', desc: 'Social network for aquaculture: farmers and technicians ask questions, post to the feed and help each other with day-to-day problems in the tanks. I built the backend, authentication and the real-time feed.' },
+        'Amevis': { type: '<i class="fas fa-briefcase"></i> Corporate', desc: 'Online perfume store focused on oriental fragrances and designer-inspired scents. Catalog, cart and checkout built with Next.js.' },
+        'Marília Dantas': { type: '<i class="fas fa-palette"></i> Portfolio', desc: 'Website for a beauty and aesthetics studio: services, treatments and contact. Built with Next.js and designed mobile-first.' },
+        'Letícia Morais': { type: '<i class="fas fa-brain"></i> Psychology', desc: 'Website for psychologist Letícia Morais, who specializes in grief. Besides her introduction and book, it has a journal where she publishes essays on loss. Built with PHP.' },
+        'Método CEV': { type: '<i class="fas fa-graduation-cap"></i> Education', desc: 'Course platform for Método CEV. Students follow lessons in modules and track their progress; the team manages content and students from an admin panel. React, TypeScript and Node.' },
+        'Kompa Saúde': { type: '<i class="fas fa-heartbeat"></i> HealthTech', desc: 'Digital health platform that serves corporate patients. I wrote the Flask APIs, the real-time chat over WebSockets and the integration with AI models that score the risk of each case using the Manchester Triage Scale. Deployed on AWS.' },
+        'MentalClean': { type: '<i class="fas fa-heartbeat"></i> HealthTech', desc: 'Emotional support app that companies offer to their employees: psychological care, a 24-hour help line and educational content. I handled the Flask backend and the Docker infrastructure.' },
+        'Noticias ACEV': { type: '<i class="fas fa-newspaper"></i> News Portal', desc: 'News portal for ACEV, the association of guardianship counselors in Ceará, covering children\'s and adolescents\' rights. Built with PHP.' },
+        'Movimento Metodo CEV': { type: '<i class="fas fa-users"></i> Community', desc: 'Members area for the Método CEV community, with exclusive content and a space for students to interact with each other. Next.js and TypeScript.' },
+        'Imersao Metodo CEV': { type: '<i class="fas fa-chalkboard-teacher"></i> Event', desc: 'Landing page for the Método CEV immersion event: what it is, who it is for and the sign-up form. Next.js.' },
     }
 };
 
