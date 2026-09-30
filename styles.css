@@ -6137,77 +6137,66 @@ button:focus-visible,
     transform: rotate(-4deg);
 }
 
-.ab-award {
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    max-width: 60ch;
-    margin: 32px 0 30px;
-    padding: 22px 24px;
-    border-radius: 20px;
-    background: #9396E6;
-    color: #15151c;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-}
-
-.ab-award-icon {
-    display: grid;
-    place-items: center;
-    width: 52px;
-    height: 52px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: #15151c;
-    color: #FFE14D;
-    font-size: 1.3rem;
-}
-
-.ab-award-body {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    min-width: 0;
-}
-
-.ab-award-kicker {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.75;
-}
-
-.ab-award-title {
-    font-family: 'Anton', Impact, sans-serif;
-    font-weight: 400;
-    font-size: clamp(1.35rem, 2.4vw, 1.75rem);
-    line-height: 1.05;
-    text-transform: uppercase;
-}
-
-.ab-award-sub {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-size: 1.15rem;
-    line-height: 1.2;
-}
-
-.ab-award-text {
-    margin-top: 8px;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: #22223a;
-}
-
 @media (max-width: 600px) {
     .ab-curio {
         flex-direction: column;
         gap: 8px;
     }
+}
 
-    .ab-award {
-        flex-direction: column;
-        gap: 14px;
-        padding: 20px;
-    }
+/* ---------- sobre: prêmio compacto ao lado do "2023" ---------- */
+.ab-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 20px 32px;
+    margin-bottom: 40px;
+}
+
+.ab-head .ab-year {
+    margin-bottom: 0;
+}
+
+.ab-award {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 290px;
+    margin-bottom: 6px;
+    padding: 10px 16px 10px 10px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--bg-card);
+}
+
+.ab-award-icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #15151c;
+    font-size: 0.95rem;
+}
+
+.ab-award-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.ab-award-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text-primary);
+}
+
+.ab-award-sub {
+    font-size: 0.74rem;
+    line-height: 1.35;
+    color: var(--text-muted);
 }
