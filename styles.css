@@ -3131,77 +3131,6 @@ button:focus-visible,
 
 
 /* ============================================================
-   16) CAPTURAS EM MOCKUP
-   Cards web ganham uma barra de navegador; cards de app mostram a
-   captura inteira dentro de uma moldura de celular.
-   ============================================================ */
-.project-card .project-image-container > img,
-.project-card .project-video {
-    padding-top: 30px; /* espaço da barra do navegador */
-    background: var(--bg-secondary);
-}
-
-.browser-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0 12px;
-    background: var(--bg-tertiary);
-    border-bottom: 1px solid var(--border);
-    z-index: 3;
-    pointer-events: none;
-}
-
-.browser-dots {
-    display: inline-flex;
-    gap: 5px;
-    flex-shrink: 0;
-}
-
-.browser-dots i {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--border-light);
-}
-
-.browser-url {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    color: var(--text-muted);
-    letter-spacing: 0.3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-pill);
-    padding: 3px 10px;
-    flex: 1;
-}
-
-/* apps: captura inteira, centralizada, com moldura de celular */
-.project-card[data-image-type="mobile"] .project-image-container {
-    background:
-        radial-gradient(ellipse at 50% 115%, rgba(139, 127, 240, 0.16), transparent 65%),
-        var(--bg-secondary);
-}
-
-.project-card[data-image-type="mobile"] .project-image-container > img,
-.project-card[data-image-type="mobile"] .project-video {
-    object-fit: contain;
-    object-position: center bottom;
-    padding-top: 18px;
-    background: transparent;
-}
-
-
-
-/* ============================================================
    EXPERIÊNCIA — acabamento
    ============================================================ */
 .exp-content {
@@ -4156,88 +4085,318 @@ button:focus-visible,
 }
 
 /* ============================================================
-   ÓRBITA DO HERO
-   A órbita agora fica dentro de .profile-frame, então gira em
-   volta da foto em qualquer largura. O raio é uma variável (--r)
-   e o container é achatado no eixo Y (--sy) para a órbita ser
-   uma elipse que acompanha a foto 4:5 sem passar por cima dela.
+   HERO — foto com um único destaque fixo e selo de disponibilidade
+   O selo fica preso à moldura da foto (posição em relação a ela),
+   então acompanha a foto em qualquer largura de tela.
    ============================================================ */
-.tech-orbit {
-    --r: 215px;      /* raio horizontal */
-    --sy: 1.22;      /* raio vertical = --r * --sy */
+.hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 14px 7px 12px;
+    margin-bottom: 22px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: rgba(139, 127, 240, 0.08);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    animation: fadeInUp 0.8s var(--ease-out) 0.1s backwards;
+}
+
+.status-dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    flex-shrink: 0;
+}
+
+.status-dot::after {
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: calc(var(--r) * 2 + 60px);
-    height: calc(var(--r) * 2 + 60px);
-    transform: translate(-50%, -50%) scaleY(var(--sy));
+    inset: 0;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: statusPulse 2s ease-out infinite;
+}
+
+@keyframes statusPulse {
+    from { transform: scale(1); opacity: 0.7; }
+    to { transform: scale(2.8); opacity: 0; }
+}
+
+/* brilho lilás atrás da foto no lugar da órbita */
+.hero-visual .profile-frame::before {
+    content: '';
+    position: absolute;
+    inset: -18% -22%;
+    background: radial-gradient(closest-side, rgba(139, 127, 240, 0.28), transparent 72%);
+    z-index: -1;
     pointer-events: none;
 }
 
-.orbit-ring.ring-1 {
-    width: calc(var(--r) * 2);
-    height: calc(var(--r) * 2);
+.profile-image {
+    border-radius: 6px;
+    filter: none;
 }
 
-.orbit-ring.ring-2 {
-    width: calc(var(--r) * 2 + 50px);
-    height: calc(var(--r) * 2 + 50px);
+.hero-badge {
+    position: absolute;
+    left: -44px;
+    bottom: 34px;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 250px;
+    padding: 12px 16px 12px 12px;
+    background: rgba(42, 37, 58, 0.92);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    text-align: left;
+    animation: badgeFloat 6s ease-in-out infinite;
 }
 
-.orbit-item {
-    width: 44px;
-    height: 44px;
-    font-size: 1.2rem;
-    /* o scaleY final desfaz o achatamento do container no ícone */
-    transform: rotate(var(--angle)) translateX(var(--r)) rotate(calc(-1 * var(--angle))) scaleY(calc(1 / var(--sy)));
-    animation: orbitEllipse 25s linear infinite;
-    /* sem atraso: o --delay do HTML somava mais um giro ao ângulo e os ícones
-       ficavam em pares no mesmo ponto */
-    animation-delay: 0s;
+.hero-badge-icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--bg-dark);
+    font-size: 1.05rem;
 }
 
-@keyframes orbitEllipse {
-    from {
-        transform: rotate(var(--angle)) translateX(var(--r)) rotate(calc(-1 * var(--angle))) scaleY(calc(1 / var(--sy)));
-    }
-    to {
-        transform: rotate(calc(var(--angle) + 360deg)) translateX(var(--r)) rotate(calc(-1 * (var(--angle) + 360deg))) scaleY(calc(1 / var(--sy)));
-    }
+.hero-badge-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.25;
 }
 
-/* Entre 1200 e 1399px a coluna da foto é mais estreita: raio menor */
-@media (min-width: 1200px) and (max-width: 1399px) {
-    .tech-orbit {
-        --r: 195px;
-    }
+.hero-badge-text strong {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
-/* Entre 993 e 1199px: foto e órbita menores para não passar da borda da tela */
-@media (min-width: 993px) and (max-width: 1199px) {
-    .profile-frame {
-        width: 260px;
-        height: 325px;
-    }
+.hero-badge-text small {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
 
-    .tech-orbit {
-        --r: 165px;
-    }
+@keyframes badgeFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
 
-    .orbit-item {
-        width: 40px;
-        height: 40px;
-        font-size: 1.05rem;
-    }
+[data-theme="light"] .hero-badge {
+    background: rgba(255, 255, 255, 0.95);
 }
 
 @media (max-width: 992px) {
-    .tech-orbit {
-        display: none;
+    .hero-status {
+        margin-bottom: 16px;
+    }
+
+    .hero-badge {
+        left: 50%;
+        bottom: -22px;
+        width: max-content;
+        max-width: min(300px, calc(100vw - 48px));
+        transform: translateX(-50%);
+        animation: none;
+    }
+
+    .hero-visual {
+        margin-bottom: 18px;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .orbit-item {
-        animation: none !important;
+    .hero-badge,
+    .status-dot::after {
+        animation: none;
     }
+}
+
+/* ============================================================
+   PROJETOS — cada projeto dentro de um dispositivo
+   Sites aparecem num notebook prateado; apps, num celular.
+   A captura (e o vídeo de prévia) ocupa a tela do aparelho.
+   ============================================================ */
+.project-image-container {
+    aspect-ratio: 16 / 11;
+    padding: 7% 11% 9%;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse 70% 60% at 50% 45%, rgba(139, 127, 240, 0.30), transparent 70%),
+        linear-gradient(160deg, #3b3553 0%, #262136 100%);
+    overflow: hidden;
+}
+
+.project-image-glow {
+    display: none;
+}
+
+.device {
+    position: relative;
+    transition: transform 0.6s var(--ease-out);
+}
+
+.project-card:hover .device {
+    transform: translateY(-6px) scale(1.02);
+}
+
+.device-display {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #0d0c12;
+}
+
+.device-display > img,
+.device-display > .project-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    object-fit: cover;
+    object-position: top center;
+    background: #0d0c12;
+}
+
+/* --- notebook --- */
+.device--laptop {
+    width: 100%;
+    filter: drop-shadow(0 22px 26px rgba(0, 0, 0, 0.45));
+}
+
+.device--laptop .device-screen {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    padding: 2.6% 2.6% 3.2%;
+    background: #111015;
+    border-radius: 12px 12px 3px 3px;
+    box-shadow:
+        inset 0 0 0 1.5px #3c3b42,
+        inset 0 0 0 3px #111015;
+}
+
+/* câmera no topo da tela */
+.device--laptop .device-screen::before {
+    content: '';
+    position: absolute;
+    top: 1%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #2c2b33;
+    transform: translateX(-50%);
+}
+
+.device--laptop .device-display {
+    border-radius: 2px;
+}
+
+/* base de alumínio com o recorte para abrir a tampa */
+.device-base {
+    position: relative;
+    width: 118%;
+    margin-left: -9%;
+    aspect-ratio: 100 / 4.2;
+    background: linear-gradient(180deg, #e9eaee 0%, #c9cbd1 45%, #9ea1a8 100%);
+    border-radius: 2px 2px 14px 14px / 2px 2px 100% 100%;
+}
+
+.device-base::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 15%;
+    height: 42%;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, #a5a8ae, #c8cad0);
+    border-radius: 0 0 8px 8px;
+}
+
+/* --- celular --- */
+.device--phone {
+    height: 100%;
+    aspect-ratio: 9 / 19;
+    filter: drop-shadow(0 20px 24px rgba(0, 0, 0, 0.45));
+}
+
+.device--phone .device-screen {
+    position: relative;
+    height: 100%;
+    padding: 5%;
+    background: #111015;
+    border-radius: 18% / 8.5%;
+    box-shadow:
+        inset 0 0 0 1.5px #4a4952,
+        inset 0 0 0 3px #111015;
+}
+
+/* ilha da câmera */
+.device--phone .device-screen::before {
+    content: '';
+    position: absolute;
+    top: 3.6%;
+    left: 50%;
+    width: 30%;
+    height: 3%;
+    border-radius: 999px;
+    background: #111015;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.device--phone .device-display {
+    border-radius: 13% / 6%;
+}
+
+.project-card[data-image-type="mobile"] .project-image-container {
+    padding: 6% 0;
+}
+
+.project-card[data-image-type="mobile"] .device-display > img,
+.project-card[data-image-type="mobile"] .device-display > .project-video {
+    object-fit: cover;
+    object-position: top center;
+}
+
+/* os cards de app seguem o mesmo formato dos cards de site */
+@media (max-width: 992px) {
+    .project-card[data-image-type="mobile"] {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .project-card[data-image-type="mobile"] .project-image-container {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+    }
+
+    .project-image-container {
+        padding: 7% 12% 9%;
+    }
+}
+
+[data-theme="light"] .project-image-container {
+    background:
+        radial-gradient(ellipse 70% 60% at 50% 45%, rgba(139, 127, 240, 0.22), transparent 70%),
+        linear-gradient(160deg, #ecebf5 0%, #dcd9ec 100%);
 }

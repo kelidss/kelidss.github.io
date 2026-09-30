@@ -16,22 +16,6 @@
     const t = (key) => ((typeof translations !== 'undefined' && translations[currentLanguage]) || {})[key] || '';
 
     /* ---------- 16) barra de navegador nos cards web ---------- */
-    function initBrowserBars() {
-        document.querySelectorAll('.project-card:not([data-image-type="mobile"])').forEach(card => {
-            const box = card.querySelector('.project-image-container');
-            const link = card.querySelector('.project-links a');
-            if (!box || box.querySelector('.browser-bar')) return;
-            let host = '';
-            try { host = link ? new URL(link.href).hostname.replace(/^www\./, '') : ''; } catch (e) { host = ''; }
-            const bar = document.createElement('div');
-            bar.className = 'browser-bar';
-            bar.setAttribute('aria-hidden', 'true');
-            bar.innerHTML = '<span class="browser-dots"><i></i><i></i><i></i></span>' +
-                (host ? '<span class="browser-url">' + host + '</span>' : '');
-            box.appendChild(bar);
-        });
-    }
-
     /* ---------- 13) progresso de leitura ---------- */
     function initReadProgress() {
         const bar = document.querySelector('.read-progress');
@@ -230,7 +214,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        initBrowserBars();
         initReadProgress();
         initTheme();
         initCopyEmail();
