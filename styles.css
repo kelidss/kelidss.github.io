@@ -4958,60 +4958,297 @@ button:focus-visible,
 }
 
 /* ============================================================
-   SOBRE — TECLADO DE FERRAMENTAS
-   Referência: teclado "Software Proficiency" do portfólio do
-   Rizal Al Fahrie no Behance. Cada tecla é uma ferramenta; as
-   modificadoras levam o nome da categoria. Case fumê, teclas com
-   lateral em 3D que afundam ao passar o mouse, algumas coloridas
-   e uma em forma de peça de LEGO. No celular vira um macropad 4x5.
+   SOBRE — EDITORIAL
+   Referências: WaxyWeb ("2025 ESTD", texto com "(→ nome)",
+   adesivos costurados em leque) e o currículo do Rizal Al Fahrie
+   no Behance (ficha de formação com linhas finas e o canto de um
+   teclado mecânico saindo pela quina da página).
+   ============================================================ */
+.about {
+    position: relative;
+    overflow: hidden;
+}
+
+.ab {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 72px;
+    align-items: stretch;
+}
+
+/* --- coluna da história --- */
+.ab-year {
+    position: relative;
+    display: inline-block;
+    padding-top: 30px;
+    margin-bottom: 26px;
+}
+
+.ab-year-num {
+    display: block;
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(6rem, 13vw, 10.5rem);
+    line-height: 0.78;
+    letter-spacing: -0.04em;
+    color: var(--text-primary);
+}
+
+.ab-year-pill {
+    position: absolute;
+    top: 0;
+    left: 58%;
+    padding: 7px 16px 8px;
+    border-radius: 999px;
+    background: #FF9EDB;
+    color: #16141c;
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.2rem;
+    line-height: 1;
+    white-space: nowrap;
+    transform: rotate(-9deg);
+    outline: 1.5px dashed rgba(22, 20, 28, 0.45);
+    outline-offset: -4px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+.ab-statement {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(2rem, 3.4vw, 2.9rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 26px;
+    max-width: 16ch;
+}
+
+/* marca-texto amarelo */
+.ab-statement .hl {
+    padding: 0 0.12em;
+    background: linear-gradient(transparent 58%, rgba(255, 243, 107, 0.85) 58%, rgba(255, 243, 107, 0.85) 92%, transparent 92%);
+    color: inherit;
+}
+
+.ab-text {
+    max-width: 58ch;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: 18px;
+}
+
+.ab-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.ab-text .ref,
+.hero-description .ref {
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.ab-text .ref::before {
+    content: '(\2192\00a0';
+    color: var(--accent);
+}
+
+.ab-text .ref::after {
+    content: ')';
+    color: var(--accent);
+}
+
+/* --- coluna lateral --- */
+.ab-side {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* adesivos em leque, como os do WaxyWeb */
+.ab-stickers {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 14px 0 34px;
+}
+
+.ab-sticker {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 22px 6px 6px;
+    border-radius: 999px;
+    background: var(--tag);
+    color: #16141c;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.12rem;
+    line-height: 1;
+    white-space: nowrap;
+    outline: 2px dashed color-mix(in srgb, var(--tag) 45%, #16141c);
+    outline-offset: -5px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+    transform-origin: left center;
+    transition: transform 0.4s var(--ease-out);
+}
+
+.ab-sticker:nth-child(1) { transform: rotate(-9deg); }
+.ab-sticker:nth-child(2) { transform: translateX(34px); }
+.ab-sticker:nth-child(3) { transform: translateX(8px) rotate(11deg); }
+
+.ab-sticker:hover { transform: rotate(0) scale(1.04); }
+
+.ab-sticker-icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #16141c;
+    color: var(--tag);
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+/* ficha com linhas finas (currículo do Rizal) */
+.ab-sheet-title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.ab-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.ab-list li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.ab-list-icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+.ab-list-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.ab-list-text strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.ab-list-text small {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.ab-sheet {
+    margin-bottom: 56px;
+}
+
+.ab-sheet-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.ab-sheet-cols p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+.ab-time {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.ab-time #local-time {
+    color: var(--accent);
+}
+
+/* ============================================================
+   CANTO DO TECLADO
+   Só a quina de um teclado aparece: ele é bem maior que a área
+   e sai pela direita e por baixo da seção, que corta o excesso.
+   O rótulo fica dentro do teclado, então segue a mesma inclinação.
    ============================================================ */
 .about-keyboard {
     position: relative;
-    margin-top: 64px;
+    height: 290px;
+    margin-top: auto;
+    margin-bottom: calc(-1 * var(--section-gap));
+    margin-right: -40vw;
+    perspective: 1300px;
+    pointer-events: none;
 }
 
-.kb-label {
-    position: relative;
-    z-index: 2;
-    max-width: 940px;
-    margin: 0 auto -6px;
-    padding-left: 34px;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.5em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    transform: rotate(-4deg);
-    transform-origin: left bottom;
-}
-
-.kb-wrap {
-    container-type: inline-size;
-    max-width: 940px;
-    margin: 0 auto;
-    perspective: 1600px;
-    padding: 10px 0 30px;
-}
-
-.keyboard {
-    --gap: 7px;
-    --pad: 18px;
-    --u: calc((100cqw - 2 * var(--pad) - 10 * var(--gap)) / 11);
+.keyboard--corner {
+    --u: 74px;
+    --gap: 8px;
+    position: absolute;
+    top: 64px;
+    left: 0;
     display: flex;
     flex-direction: column;
-    gap: calc(var(--gap) + 3px);
-    padding: var(--pad);
-    border-radius: 22px;
+    gap: calc(var(--gap) + 4px);
+    padding: 20px;
+    width: 1100px;
+    border-radius: 26px;
     background:
-        linear-gradient(160deg, rgba(255, 255, 255, 0.07), transparent 40%),
-        linear-gradient(160deg, #3a3646 0%, #1d1b25 100%);
-    border: 1px solid rgba(255, 255, 255, 0.09);
+        linear-gradient(160deg, rgba(255, 255, 255, 0.08), transparent 38%),
+        linear-gradient(160deg, #3b3747 0%, #1c1a24 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 -14px 24px rgba(0, 0, 0, 0.35),
-        0 40px 70px rgba(0, 0, 0, 0.45);
-    transform: rotateX(24deg) rotateZ(-4deg);
-    transform-origin: 50% 60%;
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 40px 80px rgba(0, 0, 0, 0.5);
+    transform-origin: 0 0;
+    transform: rotateX(38deg) rotateZ(-14deg) translateY(40px);
+    pointer-events: auto;
+}
+
+.keyboard--corner .kb-label {
+    position: absolute;
+    top: -38px;
+    left: 26px;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--text-secondary);
+    transform: none;
 }
 
 .kb-row {
@@ -5037,16 +5274,14 @@ button:focus-visible,
     border-radius: calc(var(--u) * 0.16);
     background: linear-gradient(180deg, color-mix(in srgb, var(--cap) 82%, #fff) 0%, var(--cap) 55%);
     box-shadow:
-        0 calc(var(--u) * 0.09) 0 var(--edge),
-        0 calc(var(--u) * 0.16) calc(var(--u) * 0.2) rgba(0, 0, 0, 0.45),
+        0 calc(var(--u) * 0.1) 0 var(--edge),
+        0 calc(var(--u) * 0.18) calc(var(--u) * 0.2) rgba(0, 0, 0, 0.45),
         inset 0 1px 0 rgba(255, 255, 255, 0.14);
     color: var(--ink);
     transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.2s ease;
-    cursor: default;
     user-select: none;
 }
 
-/* concavidade do topo da tecla */
 .key::before {
     content: '';
     position: absolute;
@@ -5059,11 +5294,11 @@ button:focus-visible,
 .key img,
 .key > i {
     position: relative;
-    width: calc(var(--u) * 0.4);
-    height: calc(var(--u) * 0.4);
+    width: calc(var(--u) * 0.42);
+    height: calc(var(--u) * 0.42);
     object-fit: contain;
-    font-size: calc(var(--u) * 0.36);
-    line-height: calc(var(--u) * 0.4);
+    font-size: calc(var(--u) * 0.38);
+    line-height: calc(var(--u) * 0.42);
     text-align: center;
 }
 
@@ -5080,7 +5315,7 @@ button:focus-visible,
 .key.is-pressed {
     transform: translateY(calc(var(--u) * 0.07));
     box-shadow:
-        0 calc(var(--u) * 0.02) 0 var(--edge),
+        0 calc(var(--u) * 0.03) 0 var(--edge),
         0 calc(var(--u) * 0.05) calc(var(--u) * 0.08) rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
@@ -5089,34 +5324,18 @@ button:focus-visible,
     filter: brightness(1.25);
 }
 
-/* modificadoras e teclas vazias */
 .key--mod {
     align-items: flex-start;
     justify-content: flex-end;
-    padding: 0 0 calc(var(--u) * 0.16) calc(var(--u) * 0.2);
+    padding: 0 0 calc(var(--u) * 0.16) calc(var(--u) * 0.18);
     --cap: #24222b;
     --ink: var(--text-muted);
-}
-
-.key--mod small {
-    font-size: clamp(8px, calc(var(--u) * 0.14), 12px);
-}
-
-.key--space {
-    align-items: center;
-    padding-left: 0;
-}
-
-.key--space small {
-    color: var(--accent);
-    font-weight: 700;
 }
 
 .key--blank {
     --cap: #26242d;
 }
 
-/* teclas coloridas */
 .key--lilac { --cap: #8B7FF0; --edge: #5a4fc2; --ink: #16141c; }
 .key--yellow { --cap: #FFF36B; --edge: #c2b62c; --ink: #16141c; }
 .key--pink { --cap: #FF9EDB; --edge: #c566a4; --ink: #16141c; }
@@ -5127,7 +5346,6 @@ button:focus-visible,
     color: #16141c;
 }
 
-/* tecla de LEGO: quatro pinos no topo */
 .key--lego {
     display: grid;
     grid-template-columns: repeat(2, calc(var(--u) * 0.22));
@@ -5146,52 +5364,68 @@ button:focus-visible,
     box-shadow: 0 calc(var(--u) * 0.04) 0 #c566a4;
 }
 
-/* --- celular: macropad 4 x 5 só com as ferramentas --- */
-@media (max-width: 640px) {
+/* --- tablet e celular: uma coluna, canto do teclado menor --- */
+@media (max-width: 992px) {
+    .ab {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .ab-stickers {
+        padding-top: 0;
+    }
+
     .about-keyboard {
-        margin-top: 48px;
+        height: 250px;
+        margin-top: 36px;
+        margin-right: -40px;
     }
 
-    .kb-label {
-        padding-left: 8px;
-        font-size: 0.7rem;
-        letter-spacing: 0.35em;
-        transform: rotate(-3deg);
+    .keyboard--corner {
+        --u: 62px;
+        top: 56px;
+    }
+}
+
+@media (max-width: 600px) {
+    .ab-year-pill {
+        left: 46%;
+        font-size: 1rem;
     }
 
-    .keyboard {
-        --gap: 9px;
-        --pad: 14px;
-        --u: calc((100cqw - 2 * var(--pad) - 3 * var(--gap)) / 4);
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: calc(var(--gap) + 2px) var(--gap);
-        transform: rotateX(14deg) rotateZ(-2deg);
+    .ab-sticker {
+        font-size: 0.98rem;
     }
 
-    .kb-row {
-        display: contents;
+    .ab-sticker:nth-child(2) { transform: translateX(22px); }
+
+    .ab-sheet-cols {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 
-    .key--mod,
-    .key--blank {
-        display: none;
+    .about-keyboard {
+        height: 220px;
+        margin-right: -24px;
     }
 
-    .key {
-        width: auto;
+    .keyboard--corner {
+        --u: 54px;
+        --gap: 6px;
+        padding: 14px;
+        transform: rotateX(34deg) rotateZ(-14deg) translateY(30px);
     }
 
-    /* a barra de espaço fecha a última fileira ao lado do Linux */
-    .key--mod.key--space {
-        display: flex;
-        grid-column: span 3;
-        padding: 0;
+    .keyboard--corner .kb-label {
+        top: -30px;
+        font-size: 0.72rem;
+        letter-spacing: 0.4em;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .key {
+    .key,
+    .ab-sticker {
         transition: none;
     }
 }
