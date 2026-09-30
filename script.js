@@ -480,8 +480,9 @@ function initParallax() {
     function onParallaxScroll() {
         const scrolled = window.scrollY;
 
+        // só com a foto ao lado do texto; empilhado, ela desceria por cima dele
         if (heroVisual && scrolled < window.innerHeight) {
-            heroVisual.style.transform = `translateY(${scrolled * 0.2}px)`;
+            heroVisual.style.transform = window.innerWidth > 992 ? `translateY(${scrolled * 0.2}px)` : '';
         }
 
         if (gridBg) {
@@ -761,7 +762,7 @@ const translations = {
         'about-local-time': 'hora local',
         'about-formation-label': 'Formação',
         'about-formation-value': 'Ciência da Computação',
-        'about-tech-label': 'Ferramentas de trabalho',
+        'about-tech-label': 'Ferramentas que uso',
         'exp-title': 'Experiência',
         'projects-title': 'Projetos',
         'projects-subtitle': '// Alguns dos sistemas que já entreguei',
@@ -892,7 +893,7 @@ const translations = {
         'about-local-time': 'local time',
         'about-formation-label': 'Education',
         'about-formation-value': 'Computer Science',
-        'about-tech-label': 'Tools of the trade',
+        'about-tech-label': 'Tools I use',
         'exp-title': 'Experience',
         'projects-title': 'Projects',
         'projects-subtitle': '// Some of the systems I have shipped',
