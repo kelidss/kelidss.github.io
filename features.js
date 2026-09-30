@@ -141,7 +141,7 @@
             btn.innerHTML = theme === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
             btn.setAttribute('aria-label', theme === 'light' ? 'Tema escuro' : 'Tema claro');
             const meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.content = theme === 'light' ? '#f3f4fa' : '#15151c';
+            if (meta) meta.content = theme === 'light' ? '#f3f4fa' : '#0f0f22';
         };
         let saved = null;
         try { saved = localStorage.getItem('ks-theme'); } catch (e) { /* sem storage */ }
@@ -245,6 +245,53 @@
         });
     }
 
+    /* ---------- orçamento pelo WhatsApp ----------
+       Os botões "Pedir orçamento" abrem o WhatsApp com a mensagem pronta
+       no idioma do site; em cada serviço, a mensagem já leva o nome dele. */
+    const WA_NUMBER = '5585921633870';
+    const WA_TEXT = {
+        pt: { quote: 'Olá, Keliane! Vi seu portfólio e quero um orçamento.', service: 'Olá, Keliane! Vi seu portfólio e quero um orçamento de: ' },
+        en: { quote: 'Hi Keliane! I saw your portfolio and I would like a quote.', service: 'Hi Keliane! I saw your portfolio and I would like a quote for: ' },
+    };
+    const waLink = (text) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+
+    function initQuoteLinks() {
+        const apply = () => {
+            const lang = (typeof currentLanguage !== 'undefined' && WA_TEXT[currentLanguage]) ? currentLanguage : 'pt';
+            document.querySelectorAll('[data-wa="quote"]').forEach(a => { a.href = waLink(WA_TEXT[lang].quote); });
+            document.querySelectorAll('.service-item').forEach(item => {
+                const nameEl = item.querySelector('.service-item-name');
+                const body = item.querySelector('.service-item-body');
+                if (!nameEl || !body) return;
+                let a = body.querySelector('.service-cta');
+                if (!a) {
+                    a = document.createElement('a');
+                    a.className = 'service-cta';
+                    a.target = '_blank';
+                    a.rel = 'noopener';
+                    body.appendChild(a);
+                }
+                a.href = waLink(WA_TEXT[lang].service + nameEl.textContent.trim());
+                a.innerHTML = '<span></span><i class="fas fa-arrow-right" aria-hidden="true"></i>';
+                a.querySelector('span').textContent = t('svc-cta') || 'Pedir orçamento';
+            });
+        };
+        apply();
+        document.addEventListener('languagechange-portfolio', apply);
+    }
+
+    /* botão flutuante: aparece depois do hero e some quando o contato está na tela */
+    function initWaFab() {
+        const fab = document.querySelector('.wa-fab');
+        const hero = document.getElementById('home');
+        const contact = document.getElementById('contact');
+        if (!fab || !hero || !contact) return;
+        let heroOut = false, contactIn = false;
+        const update = () => fab.classList.toggle('is-visible', heroOut && !contactIn);
+        new IntersectionObserver(([e]) => { heroOut = !e.isIntersecting; update(); }, { threshold: 0.1 }).observe(hero);
+        new IntersectionObserver(([e]) => { contactIn = e.isIntersecting; update(); }, { threshold: 0.15 }).observe(contact);
+    }
+
     /* ---------- serviços: faixa corrida com os nomes ---------- */
     function initServicesMarquee() {
         const track = document.querySelector('.services-marquee .marquee-track');
@@ -268,5 +315,7 @@
         markCurrentExperience();
         initExperienceAccordion();
         initServicesMarquee();
+        initQuoteLinks();
+        initWaFab();
     });
 })();

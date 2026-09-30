@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initAdvancedSmoothScroll();
     initParallax();
     initContactForm();
-    initResumeButton();
     initLanguageToggle();
 });
 
@@ -40,6 +39,8 @@ function initContactForm() {
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
         const message = document.getElementById('message').value.trim();
+        const needEl = contactForm.querySelector('[name="projeto"]:checked');
+        const need = needEl ? needEl.nextElementSibling.textContent.trim() : '';
         const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
         if (!name || !emailOk || !message) {
@@ -53,8 +54,8 @@ function initContactForm() {
         // sem chave: comportamento antigo (mailto)
         if (!accessKey) {
             const body = isEn
-                ? `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-                : `Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`;
+                ? `Name: ${name}\nEmail: ${email}${need ? `\nProject: ${need}` : ''}\n\nMessage:\n${message}`
+                : `Nome: ${name}\nEmail: ${email}${need ? `\nProjeto: ${need}` : ''}\n\nMensagem:\n${message}`;
             window.location.href = `mailto:keliane.dev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             return;
         }
@@ -70,7 +71,7 @@ function initContactForm() {
             const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify({ access_key: accessKey, subject, name, email, message })
+                body: JSON.stringify({ access_key: accessKey, subject, name, email, projeto: need, message })
             });
             const data = await response.json();
             if (response.ok && data.success) {
@@ -88,14 +89,6 @@ function initContactForm() {
 }
 
 // Botão de currículo: só aparece se o PDF existir em assets/
-function initResumeButton() {
-    const btn = document.querySelector('.btn-cv');
-    if (!btn) return;
-    fetch(btn.getAttribute('href'), { method: 'HEAD' })
-        .then(r => { if (r.ok) btn.hidden = false; })
-        .catch(() => {});
-}
-
 function initAdvancedSmoothScroll() {
     // Rolagem nativa (scroll-behavior) em vez de um loop de setTimeout a cada 20 ms.
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -728,10 +721,10 @@ const translations = {
         'metric-commits': 'Commits',
         'about-title': 'Sobre Mim',
         'about-image-label': 'Mentora & Dev',
-        'about-intro': 'No dia a dia uso <strong>React, TypeScript, Python, C#/.NET e Node.js</strong>, e nos últimos anos integrei <strong>LLMs</strong> em sistemas reais: análise de sentimento, triagem de pacientes pela Escala de Manchester e automação de fluxos de inovação.',
-        'about-details': 'Programo profissionalmente desde 2023 e passei por agritech, saúde, indústria e um hub de inovação. Na <span class="ref">Orfeu</span> desenhei e construí o algoritmo de matchmaking que conecta demandas do ecossistema de saúde a soluções tecnológicas, premiado no Congresso Latino-Americano de Inovação Aberta. Na <span class="ref">ACEV</span> fui tech lead de um CRM sob medida, e na <span class="ref">Kompa</span> escrevi as APIs que fazem triagem de pacientes em tempo real.',
+        'about-intro': 'Para quem me contrata, isso vira método: antes de escrever código, entendo o negócio e o problema, porque a base de um bom software é uma arquitetura capaz de suportar a realidade do mercado.',
+        'about-details': 'Hoje sou engenheira de software full stack com foco em backend. Na <span class="ref">Orfeu</span> desenhei o algoritmo de matchmaking premiado no Congresso Latino-Americano de Inovação Aberta, na <span class="ref">ACEV</span> fui tech lead de um CRM sob medida e na <span class="ref">Kompa</span> escrevi as APIs que fazem triagem de pacientes em tempo real.',
         'about-since': 'no código desde',
-        'about-statement': 'Gosto de entender o <span class="hl">problema</span> antes de abrir o editor.',
+        'about-statement': 'A tecnologia sempre foi a minha <span class="hl">resposta lógica</span>.',
         'about-sticker-1': 'Problema antes do código',
         'about-sticker-2': 'Do banco ao deploy',
         'about-sticker-3': 'IA onde faz sentido',
@@ -749,6 +742,32 @@ const translations = {
         'about-lang-en': 'Inglês · intermediário',
         'about-base-title': 'Base',
         'about-local-time': 'hora local',
+        'btn-quote': 'Pedir orçamento',
+        'nav-process': 'Como funciona',
+        'about-origin': 'Não cresci com um computador em casa. Minha mãe procurava qualquer curso de tecnologia que estivesse ao nosso alcance, e foi meu pai quem me ensinou lógica de programação usando o material do curso que ele fazia na época. Ali eu soube qual caminho seguir. (Minha mãe ainda sonhava com medicina.)',
+        'about-ig-title': 'Conteúdo no Instagram',
+        'about-ig-text': 'Explico arquitetura, padrões de projeto e bastidores da carreira para mais de 1 mil pessoas.',
+        'process-title': 'Como funciona',
+        'process-lead': 'Do primeiro contato à entrega, você sabe o que está acontecendo em cada etapa.',
+        'process-1': 'Conversa',
+        'process-1-text': 'Você me conta a ideia e o objetivo do negócio. Faço as perguntas certas para entender o problema antes de pensar em código.',
+        'process-2': 'Proposta',
+        'process-2-text': 'Envio uma proposta por escrito com escopo, prazo e investimento, para você decidir com tudo claro.',
+        'process-3': 'Desenvolvimento',
+        'process-3-text': 'Construo em etapas e mostro cada entrega. Você acompanha, testa e ajusta junto comigo.',
+        'process-4': 'Entrega e suporte',
+        'process-4-text': 'Publico o projeto, explico como usar e continuo por perto para ajustes e novas funcionalidades.',
+        'process-cta': 'Pronto para começar? <span>Vamos tirar seu projeto do papel.</span>',
+        'cta-whatsapp': 'Chamar no WhatsApp',
+        'cta-proposal': 'Enviar pelo formulário',
+        'svc-cta': 'Pedir orçamento',
+        'wa-fab': 'Orçamento',
+        'form-need-label': 'const projeto =',
+        'need-site': 'Site',
+        'need-system': 'Sistema web',
+        'need-app': 'App',
+        'need-ai': 'IA',
+        'need-other': 'Outro',
         'about-formation-label': 'Formação',
         'about-formation-value': 'Ciência da Computação',
         'about-tech-label': 'Ferramentas que uso',
@@ -860,10 +879,10 @@ const translations = {
         'metric-commits': 'Commits',
         'about-title': 'About Me',
         'about-image-label': 'Mentor & Dev',
-        'about-intro': 'Day to day I work with <strong>React, TypeScript, Python, C#/.NET and Node.js</strong>, and over the last few years I have wired <strong>LLMs</strong> into real systems: sentiment analysis, patient triage based on the Manchester Triage Scale and automation of innovation workflows.',
-        'about-details': 'I have been coding professionally since 2023, across agritech, healthcare, manufacturing and an innovation hub. At <span class="ref">Orfeu</span> I designed and built the matchmaking algorithm that connects healthcare ecosystem demands to technology solutions, awarded at the Latin American Open Innovation Congress. At <span class="ref">ACEV</span> I was tech lead on a custom CRM, and at <span class="ref">Kompa</span> I wrote the APIs that triage patients in real time.',
+        'about-intro': 'For clients, that turns into method: before writing code I understand the business and the problem, because good software stands on an architecture that can handle the reality of the market.',
+        'about-details': 'Today I am a full stack software engineer focused on backend. At <span class="ref">Orfeu</span> I designed the matchmaking algorithm awarded at the Latin American Open Innovation Congress, at <span class="ref">ACEV</span> I was tech lead on a custom CRM and at <span class="ref">Kompa</span> I wrote the APIs that triage patients in real time.',
         'about-since': 'coding since',
-        'about-statement': 'I like to understand the <span class="hl">problem</span> before opening the editor.',
+        'about-statement': 'Technology has always been my <span class="hl">logical answer</span>.',
         'about-sticker-1': 'Problem before code',
         'about-sticker-2': 'From database to deploy',
         'about-sticker-3': 'AI where it makes sense',
@@ -881,6 +900,32 @@ const translations = {
         'about-lang-en': 'English · intermediate',
         'about-base-title': 'Based in',
         'about-local-time': 'local time',
+        'btn-quote': 'Get a quote',
+        'nav-process': 'How it works',
+        'about-origin': 'I did not grow up with a computer at home. My mom looked for any tech course within our reach, and it was my dad who taught me programming logic with the material from the course he was taking at the time. That is when I knew which path to follow. (My mom still dreamed of medicine.)',
+        'about-ig-title': 'Content on Instagram',
+        'about-ig-text': 'I explain architecture, design patterns and career behind the scenes to over 1k people.',
+        'process-title': 'How it works',
+        'process-lead': 'From the first message to launch, you know what is happening at every step.',
+        'process-1': 'Conversation',
+        'process-1-text': 'You tell me the idea and the business goal. I ask the right questions to understand the problem before thinking about code.',
+        'process-2': 'Proposal',
+        'process-2-text': 'I send a written proposal with scope, timeline and investment, so you can decide with everything clear.',
+        'process-3': 'Development',
+        'process-3-text': 'I build in stages and show every delivery. You follow along, test and adjust with me.',
+        'process-4': 'Launch & support',
+        'process-4-text': 'I launch the project, show you how to use it and stay around for adjustments and new features.',
+        'process-cta': 'Ready to start? <span>Let’s make your project real.</span>',
+        'cta-whatsapp': 'Message on WhatsApp',
+        'cta-proposal': 'Use the contact form',
+        'svc-cta': 'Get a quote',
+        'wa-fab': 'Get a quote',
+        'form-need-label': 'const project =',
+        'need-site': 'Website',
+        'need-system': 'Web system',
+        'need-app': 'App',
+        'need-ai': 'AI',
+        'need-other': 'Other',
         'about-formation-label': 'Education',
         'about-formation-value': 'Computer Science',
         'about-tech-label': 'Tools I use',
