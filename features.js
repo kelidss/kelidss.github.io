@@ -7,7 +7,7 @@
    - Relógio local de Fortaleza
    - GitHub ao vivo: último commit e mapa de contribuições
    - Modal de projeto (vídeo grande + detalhes)
-   - Linha do tempo da carreira
+   - Experiência em sanfona e faixa corrida de serviços
    Usa `translations` e `currentLanguage` definidos em script.js.
    ============================================================ */
 (() => {
@@ -19,7 +19,7 @@
        Em cada card monta, a partir do próprio conteúdo:
        - a palavra gigante atrás do aparelho (data-word do <article>);
        - o adesivo costurado com o tipo do projeto e, se houver, o da métrica;
-       - o rótulo em arco com o endereço do projeto;
+       - a barra de navegador com o endereço, dentro da tela do notebook;
        - o endereço ao lado do ícone de link.
        Os adesivos são refeitos na troca de idioma. */
     function projectHost(card) {
@@ -29,37 +29,6 @@
             const host = new URL(link.href).hostname.replace(/^www\./, '');
             return host === 'play.google.com' ? 'Google Play' : host;
         } catch (e) { return ''; }
-    }
-
-    function buildArc(text, id) {
-        const NS = 'http://www.w3.org/2000/svg';
-        const svg = document.createElementNS(NS, 'svg');
-        svg.setAttribute('class', 'stage-arc');
-        svg.setAttribute('viewBox', '0 0 220 120');
-        svg.setAttribute('aria-hidden', 'true');
-        const d = 'M 22,112 A 96,96 0 0,1 198,112';
-        const band = document.createElementNS(NS, 'path');
-        band.setAttribute('d', d);
-        band.setAttribute('class', 'stage-arc-band');
-        const guide = document.createElementNS(NS, 'path');
-        guide.setAttribute('d', d);
-        guide.setAttribute('id', id);
-        guide.setAttribute('fill', 'none');
-        const label = document.createElementNS(NS, 'text');
-        label.setAttribute('class', 'stage-arc-text');
-        const tp = document.createElementNS(NS, 'textPath');
-        tp.setAttribute('href', '#' + id);
-        tp.setAttribute('startOffset', '50%');
-        tp.setAttribute('text-anchor', 'middle');
-        tp.textContent = text + ' \u2197';
-        // endereços longos são comprimidos para caber na faixa
-        if ((text.length + 2) * 8.4 > 176) {
-            tp.setAttribute('textLength', '176');
-            tp.setAttribute('lengthAdjust', 'spacingAndGlyphs');
-        }
-        label.appendChild(tp);
-        svg.append(band, guide, label);
-        return svg;
     }
 
     function syncStickers(card) {
@@ -99,8 +68,16 @@
             stage.prepend(bg);
 
             const host = projectHost(card);
+            const display = card.querySelector('.device--laptop .device-display');
+            if (host && display && !display.querySelector('.screen-bar')) {
+                const bar = document.createElement('div');
+                bar.className = 'screen-bar';
+                bar.setAttribute('aria-hidden', 'true');
+                bar.innerHTML = '<span class="screen-dots"><i></i><i></i><i></i></span><span class="screen-url"></span>';
+                bar.querySelector('.screen-url').textContent = host;
+                display.prepend(bar);
+            }
             if (host) {
-                stage.appendChild(buildArc(host, 'stage-arc-' + i));
                 const link = card.querySelector('.project-links a');
                 if (link && !link.querySelector('.link-host')) {
                     const h = document.createElement('span');
@@ -164,7 +141,7 @@
             btn.innerHTML = theme === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
             btn.setAttribute('aria-label', theme === 'light' ? 'Tema escuro' : 'Tema claro');
             const meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.content = theme === 'light' ? '#f5f2fa' : '#1f1c2c';
+            if (meta) meta.content = theme === 'light' ? '#f3f4fa' : '#15151c';
         };
         let saved = null;
         try { saved = localStorage.getItem('ks-theme'); } catch (e) { /* sem storage */ }
@@ -231,108 +208,54 @@
         if (current) current.closest('.exp-panel').classList.add('is-current');
     }
 
-    /* ---------- experiência: um cargo por vez ---------- */
-    // A linha do tempo é o navegador: clicar num ponto mostra aquele cargo.
-    // Abaixo dela fica um único card compacto, com setas para trocar.
-    let selectExperience = null;   // preenchido pelo switcher, usado pela linha do tempo
-    let setTimelineActive = null;  // preenchido pela linha do tempo, usado pelo switcher
-    let activeExperience = null;
-
-    function initExperienceSwitcher() {
-        const content = document.querySelector('.exp-content');
+    /* ---------- experiência: lista em sanfona ----------
+       Todos os cargos ficam visíveis (data, cargo e empresa). Clicar
+       na linha abre os detalhes; o cargo atual já começa aberto. */
+    function initExperienceAccordion() {
         const panels = [...document.querySelectorAll('.exp-panel')];
-        if (!content || !panels.length || content.querySelector('.exp-nav')) return;
+        panels.forEach((panel, i) => {
+            if (panel.querySelector('.exp-toggle')) return;
+            panel.hidden = false;
+            const body = document.createElement('div');
+            body.className = 'exp-body';
+            body.id = panel.id + '-body';
+            panel.querySelectorAll('.exp-list, .exp-stack').forEach(el => body.appendChild(el));
+            panel.appendChild(body);
 
-        const nav = document.createElement('div');
-        nav.className = 'exp-nav';
-        nav.innerHTML =
-            '<button type="button" class="exp-nav-btn" data-dir="-1" aria-label="Anterior"><i class="fas fa-arrow-left"></i></button>' +
-            '<span class="exp-count" aria-live="polite"></span>' +
-            '<button type="button" class="exp-nav-btn" data-dir="1" aria-label="Próxima"><i class="fas fa-arrow-right"></i></button>';
-        content.prepend(nav);
-        const count = nav.querySelector('.exp-count');
-        const pad = (n) => String(n).padStart(2, '0');
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'exp-toggle';
+            btn.setAttribute('aria-controls', body.id);
+            btn.innerHTML = '<span class="exp-toggle-icon" aria-hidden="true"></span>';
+            const title = panel.querySelector('.exp-title');
+            btn.setAttribute('aria-label', title ? title.textContent.trim() : 'Detalhes');
+            panel.appendChild(btn);
 
-        const select = (id) => {
-            const idx = panels.findIndex(p => p.id === id);
-            if (idx < 0) return;
-            activeExperience = id;
-            panels.forEach(p => {
-                const on = p.id === id;
-                p.classList.toggle('is-active', on);
-                p.hidden = !on;
-            });
-            const active = panels[idx];
-            active.classList.remove('is-entering');
-            void active.offsetWidth; // reinicia a animação de entrada
-            active.classList.add('is-entering');
-            count.textContent = `${pad(idx + 1)} / ${pad(panels.length)}`;
-            if (setTimelineActive) setTimelineActive(id);
-        };
-
-        nav.querySelectorAll('.exp-nav-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const idx = panels.findIndex(p => p.id === activeExperience);
-                const next = (idx + Number(btn.dataset.dir) + panels.length) % panels.length;
-                select(panels[next].id);
+            const set = (open) => {
+                panel.classList.toggle('is-open', open);
+                btn.setAttribute('aria-expanded', String(open));
+            };
+            set(panel.classList.contains('is-current') || (i === 0 && !document.querySelector('.exp-panel.is-current')));
+            // a linha inteira é clicável; o botão é o alvo acessível
+            panel.addEventListener('click', (e) => {
+                if (e.target.closest('.exp-body a')) return;
+                if (e.target.closest('.exp-body') && panel.classList.contains('is-open')) return;
+                set(!panel.classList.contains('is-open'));
             });
         });
-
-        selectExperience = select;
-        select(panels[0].id);
     }
 
-    /* ---------- 11) linha do tempo da carreira ---------- */
-    const CAREER = [
-        { id: 'vida', label: 'Vida Premium', start: '2023-05' },
-        { id: 'passamanaria', label: 'Passamanaria', start: '2023-11' },
-        { id: 'kompa', label: 'Kompa Saúde', start: '2024-08' },
-        { id: 'aquabit', label: 'Aquabit', start: '2025-03' },
-        { id: 'orfeu', label: 'Orfeu', start: '2025-11' },
-        { id: 'acev', label: 'ACEV', start: '2025-12' },
-        { id: 'bluecircuit', label: 'BlueCircuit', start: '2026-07', current: true }
-    ];
-
-    function initCareerTimeline() {
-        const wrap = document.getElementById('career-timeline');
-        if (!wrap) return;
-        const toMonths = (ym) => { const [y, m] = ym.split('-').map(Number); return y * 12 + (m - 1); };
-        const now = new Date();
-        const startM = toMonths(CAREER[0].start) - 1;
-        const endM = now.getFullYear() * 12 + now.getMonth() + 1;
-        const span = endM - startM;
-        const pct = (ym) => ((toMonths(ym) - startM) / span) * 100;
-
-        const years = [];
-        for (let y = Number(CAREER[0].start.slice(0, 4)); y <= now.getFullYear(); y++) years.push(y);
-
-        const monthNames = { pt: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
-                             en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] };
-        const fmtDate = (ym) => {
-            const [y, m] = ym.split('-').map(Number);
-            return `${(monthNames[currentLanguage] || monthNames.pt)[m - 1]}/${String(y).slice(2)}`;
+    /* ---------- serviços: faixa corrida com os nomes ---------- */
+    function initServicesMarquee() {
+        const track = document.querySelector('.services-marquee .marquee-track');
+        if (!track) return;
+        const build = () => {
+            const names = [...document.querySelectorAll('.service-item-name')].map(n => n.textContent.trim());
+            const run = names.map(n => `<span>${n}</span><i>\u2726</i>`).join('');
+            track.innerHTML = run + run; // duas voltas: o loop fica contínuo
         };
-        const yearPct = (y) => Math.max(0, Math.min(100, ((y * 12 - startM) / span) * 100));
-
-        wrap.innerHTML = `
-            <div class="tl-line"></div>
-            ${years.map(y => `<span class="tl-year" style="left:${yearPct(y)}%">${y}</span>`).join('')}
-            ${CAREER.map((c, i) => `
-                <button type="button" class="tl-dot${c.current ? ' is-current' : ''}${i % 2 ? ' is-below' : ''}" style="left:${pct(c.start)}%" data-tab="${c.id}" title="${c.label}">
-                    <span class="tl-label"><span class="tl-name">${c.label}</span><span class="tl-date">${fmtDate(c.start)}${c.current ? ' →' : ''}</span></span>
-                </button>`).join('')}`;
-
-        const dots = [...wrap.querySelectorAll('.tl-dot')];
-        const setActive = (id) => dots.forEach(d => d.classList.toggle('is-active', d.dataset.tab === id));
-
-        dots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                if (selectExperience) selectExperience(dot.dataset.tab);
-            });
-        });
-
-        setTimelineActive = setActive;
-        if (activeExperience) setActive(activeExperience);
+        build();
+        document.addEventListener('languagechange-portfolio', build);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -342,9 +265,8 @@
         initTheme();
         initCopyEmail();
         initLocalTime();
-        initCareerTimeline();
         markCurrentExperience();
-        initExperienceSwitcher();
-        document.addEventListener('languagechange-portfolio', () => { initCareerTimeline(); });
+        initExperienceAccordion();
+        initServicesMarquee();
     });
 })();

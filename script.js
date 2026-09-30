@@ -13,21 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
     initResumeButton();
     initLanguageToggle();
-    initPacman();
 });
 
 // ========== Pac-Man dots ==========
-function initPacman() {
-    const track = document.getElementById('pac-dots');
-    if (!track) return;
-    const total = 60;
-    for (let i = 0; i < total; i++) {
-        const dot = document.createElement('span');
-        dot.className = 'pac-dot' + ((i + 1) % 8 === 0 ? ' power' : '');
-        track.appendChild(dot);
-    }
-}
-
 // Formulário de contato.
 // Com a chave do Web3Forms em data-web3forms-key, envia direto (sem backend)
 // e mostra o resultado. Sem chave, abre o app de e-mail (mailto) como antes.
@@ -692,6 +680,7 @@ const translations = {
         'svc-auto-2': 'Sistemas de vendas',
         'svc-auto-3': 'Automação de processos',
         'svc-auto-4': 'Ferramentas internas sob medida',
+        'svc-ai': 'Soluções com IA',
         'svc-ai-1': 'Integração de LLMs',
         'svc-ai-2': 'Chatbots e assistentes',
         'svc-ai-3': 'Classificação e triagem automática',
@@ -817,6 +806,7 @@ const translations = {
         'svc-auto-2': 'Sales systems',
         'svc-auto-3': 'Process automation',
         'svc-auto-4': 'Custom internal tools',
+        'svc-ai': 'AI Solutions',
         'svc-ai-1': 'LLM integration',
         'svc-ai-2': 'Chatbots and assistants',
         'svc-ai-3': 'Automatic classification and triage',
