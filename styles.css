@@ -4986,29 +4986,6 @@ button:focus-visible,
     background: #e7e5ee;
 }
 
-/* ---------- projetos: número "01." em serifa no painel ---------- */
-.projects-grid {
-    counter-reset: proj;
-}
-
-.project-card {
-    counter-increment: proj;
-}
-
-.project-image-container::after {
-    content: counter(proj, decimal-leading-zero) '.';
-    position: absolute;
-    left: 5%;
-    bottom: 3%;
-    z-index: 3;
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-size: 12cqw;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: #15151c;
-    pointer-events: none;
-}
-
 /* ---------- contato: título em serifa grande ---------- */
 .contact-header-text h3 {
     font-family: 'Instrument Serif', Georgia, serif;
@@ -5577,7 +5554,6 @@ button:focus-visible,
 /* ---------- projetos: notebooks com barra de navegador ---------- */
 .project-card {
     --tag-ink: #15151c;
-    --num: #15151c;
 }
 
 .stage-sticker {
@@ -5592,10 +5568,6 @@ button:focus-visible,
 
 .stage-sticker--metric b {
     color: inherit;
-}
-
-.project-image-container::after {
-    color: var(--num);
 }
 
 .device--laptop {
