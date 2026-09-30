@@ -4956,3 +4956,242 @@ button:focus-visible,
         transition: none;
     }
 }
+
+/* ============================================================
+   SOBRE — TECLADO DE FERRAMENTAS
+   Referência: teclado "Software Proficiency" do portfólio do
+   Rizal Al Fahrie no Behance. Cada tecla é uma ferramenta; as
+   modificadoras levam o nome da categoria. Case fumê, teclas com
+   lateral em 3D que afundam ao passar o mouse, algumas coloridas
+   e uma em forma de peça de LEGO. No celular vira um macropad 4x5.
+   ============================================================ */
+.about-keyboard {
+    position: relative;
+    margin-top: 64px;
+}
+
+.kb-label {
+    position: relative;
+    z-index: 2;
+    max-width: 940px;
+    margin: 0 auto -6px;
+    padding-left: 34px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    transform: rotate(-4deg);
+    transform-origin: left bottom;
+}
+
+.kb-wrap {
+    container-type: inline-size;
+    max-width: 940px;
+    margin: 0 auto;
+    perspective: 1600px;
+    padding: 10px 0 30px;
+}
+
+.keyboard {
+    --gap: 7px;
+    --pad: 18px;
+    --u: calc((100cqw - 2 * var(--pad) - 10 * var(--gap)) / 11);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--gap) + 3px);
+    padding: var(--pad);
+    border-radius: 22px;
+    background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.07), transparent 40%),
+        linear-gradient(160deg, #3a3646 0%, #1d1b25 100%);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -14px 24px rgba(0, 0, 0, 0.35),
+        0 40px 70px rgba(0, 0, 0, 0.45);
+    transform: rotateX(24deg) rotateZ(-4deg);
+    transform-origin: 50% 60%;
+}
+
+.kb-row {
+    display: flex;
+    gap: var(--gap);
+}
+
+/* --- tecla --- */
+.key {
+    --w: 1;
+    --cap: #2b2933;
+    --edge: #121117;
+    --ink: var(--text-secondary);
+    position: relative;
+    flex: none;
+    width: calc(var(--u) * var(--w) + (var(--w) - 1) * var(--gap));
+    height: calc(var(--u) * 0.94);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--u) * 0.06);
+    border-radius: calc(var(--u) * 0.16);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--cap) 82%, #fff) 0%, var(--cap) 55%);
+    box-shadow:
+        0 calc(var(--u) * 0.09) 0 var(--edge),
+        0 calc(var(--u) * 0.16) calc(var(--u) * 0.2) rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    color: var(--ink);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.2s ease;
+    cursor: default;
+    user-select: none;
+}
+
+/* concavidade do topo da tecla */
+.key::before {
+    content: '';
+    position: absolute;
+    inset: 8% 10% 16%;
+    border-radius: calc(var(--u) * 0.12);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.1));
+    pointer-events: none;
+}
+
+.key img,
+.key > i {
+    position: relative;
+    width: calc(var(--u) * 0.4);
+    height: calc(var(--u) * 0.4);
+    object-fit: contain;
+    font-size: calc(var(--u) * 0.36);
+    line-height: calc(var(--u) * 0.4);
+    text-align: center;
+}
+
+.key small {
+    position: relative;
+    font-family: var(--font-mono);
+    font-size: clamp(8px, calc(var(--u) * 0.13), 11px);
+    line-height: 1;
+    white-space: nowrap;
+    color: inherit;
+}
+
+.key[role="listitem"]:hover,
+.key.is-pressed {
+    transform: translateY(calc(var(--u) * 0.07));
+    box-shadow:
+        0 calc(var(--u) * 0.02) 0 var(--edge),
+        0 calc(var(--u) * 0.05) calc(var(--u) * 0.08) rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.key.is-pressed {
+    filter: brightness(1.25);
+}
+
+/* modificadoras e teclas vazias */
+.key--mod {
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0 0 calc(var(--u) * 0.16) calc(var(--u) * 0.2);
+    --cap: #24222b;
+    --ink: var(--text-muted);
+}
+
+.key--mod small {
+    font-size: clamp(8px, calc(var(--u) * 0.14), 12px);
+}
+
+.key--space {
+    align-items: center;
+    padding-left: 0;
+}
+
+.key--space small {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.key--blank {
+    --cap: #26242d;
+}
+
+/* teclas coloridas */
+.key--lilac { --cap: #8B7FF0; --edge: #5a4fc2; --ink: #16141c; }
+.key--yellow { --cap: #FFF36B; --edge: #c2b62c; --ink: #16141c; }
+.key--pink { --cap: #FF9EDB; --edge: #c566a4; --ink: #16141c; }
+.key--white { --cap: #f2efe6; --edge: #b7b2a4; --ink: #16141c; }
+
+.keyboard .key--yellow > i,
+.keyboard .key--white > i {
+    color: #16141c;
+}
+
+/* tecla de LEGO: quatro pinos no topo */
+.key--lego {
+    display: grid;
+    grid-template-columns: repeat(2, calc(var(--u) * 0.22));
+    grid-template-rows: repeat(2, calc(var(--u) * 0.22));
+    gap: calc(var(--u) * 0.1);
+    place-content: center;
+}
+
+.key--lego::before {
+    display: none;
+}
+
+.stud {
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ffd3f0 0%, #FF9EDB 45%, #d97cb6 100%);
+    box-shadow: 0 calc(var(--u) * 0.04) 0 #c566a4;
+}
+
+/* --- celular: macropad 4 x 5 só com as ferramentas --- */
+@media (max-width: 640px) {
+    .about-keyboard {
+        margin-top: 48px;
+    }
+
+    .kb-label {
+        padding-left: 8px;
+        font-size: 0.7rem;
+        letter-spacing: 0.35em;
+        transform: rotate(-3deg);
+    }
+
+    .keyboard {
+        --gap: 9px;
+        --pad: 14px;
+        --u: calc((100cqw - 2 * var(--pad) - 3 * var(--gap)) / 4);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: calc(var(--gap) + 2px) var(--gap);
+        transform: rotateX(14deg) rotateZ(-2deg);
+    }
+
+    .kb-row {
+        display: contents;
+    }
+
+    .key--mod,
+    .key--blank {
+        display: none;
+    }
+
+    .key {
+        width: auto;
+    }
+
+    /* a barra de espaço fecha a última fileira ao lado do Linux */
+    .key--mod.key--space {
+        display: flex;
+        grid-column: span 3;
+        padding: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .key {
+        transition: none;
+    }
+}

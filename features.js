@@ -118,6 +118,26 @@
         document.addEventListener('languagechange-portfolio', () => cards.forEach(syncStickers));
     }
 
+    /* ---------- 17) teclado de ferramentas: alguém digitando ----------
+       Enquanto o teclado está na tela, uma tecla de ferramenta afunda
+       de vez em quando. Desligado com prefers-reduced-motion. */
+    function initKeyboard() {
+        const keys = [...document.querySelectorAll('.keyboard .key[role="listitem"]')];
+        if (!keys.length || reduceMotion) return;
+        let timer = null;
+        const press = () => {
+            const key = keys[Math.floor(Math.random() * keys.length)];
+            key.classList.add('is-pressed');
+            setTimeout(() => key.classList.remove('is-pressed'), 180);
+            timer = setTimeout(press, 450 + Math.random() * 900);
+        };
+        const io = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting && !timer) press();
+            if (!entry.isIntersecting && timer) { clearTimeout(timer); timer = null; }
+        }, { threshold: 0.3 });
+        io.observe(document.querySelector('.keyboard'));
+    }
+
     /* ---------- 13) progresso de leitura ---------- */
     function initReadProgress() {
         const bar = document.querySelector('.read-progress');
@@ -317,6 +337,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         initShowcase();
+        initKeyboard();
         initReadProgress();
         initTheme();
         initCopyEmail();
