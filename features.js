@@ -15,7 +15,109 @@
     const finePointer = window.matchMedia('(pointer: fine)').matches;
     const t = (key) => ((typeof translations !== 'undefined' && translations[currentLanguage]) || {})[key] || '';
 
-    /* ---------- 16) barra de navegador nos cards web ---------- */
+    /* ---------- 16) vitrine dos projetos (visual do WaxyWeb) ----------
+       Em cada card monta, a partir do próprio conteúdo:
+       - a palavra gigante atrás do aparelho (data-word do <article>);
+       - o adesivo costurado com o tipo do projeto e, se houver, o da métrica;
+       - o rótulo em arco com o endereço do projeto;
+       - o endereço ao lado do ícone de link.
+       Os adesivos são refeitos na troca de idioma. */
+    function projectHost(card) {
+        const link = card.querySelector('.project-links a');
+        if (!link) return '';
+        try {
+            const host = new URL(link.href).hostname.replace(/^www\./, '');
+            return host === 'play.google.com' ? 'Google Play' : host;
+        } catch (e) { return ''; }
+    }
+
+    function buildArc(text, id) {
+        const NS = 'http://www.w3.org/2000/svg';
+        const svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('class', 'stage-arc');
+        svg.setAttribute('viewBox', '0 0 220 120');
+        svg.setAttribute('aria-hidden', 'true');
+        const d = 'M 22,112 A 96,96 0 0,1 198,112';
+        const band = document.createElementNS(NS, 'path');
+        band.setAttribute('d', d);
+        band.setAttribute('class', 'stage-arc-band');
+        const guide = document.createElementNS(NS, 'path');
+        guide.setAttribute('d', d);
+        guide.setAttribute('id', id);
+        guide.setAttribute('fill', 'none');
+        const label = document.createElementNS(NS, 'text');
+        label.setAttribute('class', 'stage-arc-text');
+        const tp = document.createElementNS(NS, 'textPath');
+        tp.setAttribute('href', '#' + id);
+        tp.setAttribute('startOffset', '50%');
+        tp.setAttribute('text-anchor', 'middle');
+        tp.textContent = text + ' \u2197';
+        // endereços longos são comprimidos para caber na faixa
+        if ((text.length + 2) * 8.4 > 176) {
+            tp.setAttribute('textLength', '176');
+            tp.setAttribute('lengthAdjust', 'spacingAndGlyphs');
+        }
+        label.appendChild(tp);
+        svg.append(band, guide, label);
+        return svg;
+    }
+
+    function syncStickers(card) {
+        const stage = card.querySelector('.project-image-container');
+        if (!stage) return;
+        stage.querySelectorAll('.stage-sticker').forEach(el => el.remove());
+
+        const type = card.querySelector('.project-type');
+        if (type && type.textContent.trim()) {
+            const tag = document.createElement('span');
+            tag.className = 'stage-sticker stage-sticker--type';
+            tag.textContent = type.textContent.trim();
+            stage.appendChild(tag);
+        }
+        const metric = card.querySelector('.project-metric');
+        if (metric && metric.textContent.trim()) {
+            const m = document.createElement('span');
+            m.className = 'stage-sticker stage-sticker--metric';
+            m.innerHTML = metric.innerHTML;
+            stage.appendChild(m);
+        }
+    }
+
+    function initShowcase() {
+        const cards = document.querySelectorAll('.project-card');
+        cards.forEach((card, i) => {
+            const stage = card.querySelector('.project-image-container');
+            if (!stage || stage.querySelector('.stage-word')) return;
+
+            const word = card.dataset.word ||
+                (card.querySelector('.project-title') || {}).textContent || '';
+            const bg = document.createElement('div');
+            bg.className = 'stage-word';
+            bg.setAttribute('aria-hidden', 'true');
+            bg.innerHTML = '<span></span><span></span><span></span>';
+            bg.querySelectorAll('span').forEach(s => { s.textContent = word.trim().toUpperCase(); });
+            stage.prepend(bg);
+
+            const host = projectHost(card);
+            if (host) {
+                stage.appendChild(buildArc(host, 'stage-arc-' + i));
+                const link = card.querySelector('.project-links a');
+                if (link && !link.querySelector('.link-host')) {
+                    const h = document.createElement('span');
+                    h.className = 'link-host';
+                    h.textContent = host;
+                    link.prepend(h);
+                }
+            }
+            syncStickers(card);
+        });
+        syncOnLanguageChange(cards);
+    }
+
+    function syncOnLanguageChange(cards) {
+        document.addEventListener('languagechange-portfolio', () => cards.forEach(syncStickers));
+    }
+
     /* ---------- 13) progresso de leitura ---------- */
     function initReadProgress() {
         const bar = document.querySelector('.read-progress');
@@ -214,6 +316,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        initShowcase();
         initReadProgress();
         initTheme();
         initCopyEmail();

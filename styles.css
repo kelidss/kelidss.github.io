@@ -4226,32 +4226,86 @@ button:focus-visible,
 }
 
 /* ============================================================
-   PROJETOS — cada projeto dentro de um dispositivo
-   Sites aparecem num notebook prateado; apps, num celular.
-   A captura (e o vídeo de prévia) ocupa a tela do aparelho.
+   PROJETOS — VITRINE (referência: WaxyWeb no Behance)
+   Cada projeto ganha um painel de cor sólida com o nome gigante
+   atrás do aparelho, adesivos costurados, rótulo em arco e o
+   site rodando dentro de um monitor CRT, notebook ou celular.
+   As medidas usam cqw (largura do painel), então tudo escala
+   junto em qualquer tamanho de card.
+   Cores por projeto vêm do <article>: --stage, --ink e --tag.
    ============================================================ */
+@media (min-width: 1100px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+    }
+}
+
+.project-card {
+    --stage: #B3A9FF;
+    --ink: #8B7FF0;
+    --tag: #FFF36B;
+}
+
 .project-image-container {
-    aspect-ratio: 16 / 11;
-    padding: 7% 11% 9%;
-    align-items: center;
-    justify-content: center;
-    background:
-        radial-gradient(ellipse 70% 60% at 50% 45%, rgba(139, 127, 240, 0.30), transparent 70%),
-        linear-gradient(160deg, #3b3553 0%, #262136 100%);
+    container-type: inline-size;
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 5 / 4;
+    padding: 0;
+    background: var(--stage);
     overflow: hidden;
+    isolation: isolate;
 }
 
 .project-image-glow {
     display: none;
 }
 
+/* --- nome gigante atrás do aparelho --- */
+.stage-word {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1cqw;
+    pointer-events: none;
+    user-select: none;
+}
+
+.stage-word span {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 21cqw;
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    color: var(--ink);
+    white-space: nowrap;
+}
+
+.stage-word span:nth-child(1) {
+    align-self: flex-start;
+    margin-left: -2cqw;
+}
+
+.stage-word span:nth-child(2),
+.stage-word span:nth-child(3) {
+    align-self: flex-end;
+    margin-right: -2cqw;
+}
+
+/* --- aparelhos: base comum --- */
 .device {
     position: relative;
+    z-index: 1;
     transition: transform 0.6s var(--ease-out);
 }
 
 .project-card:hover .device {
-    transform: translateY(-6px) scale(1.02);
+    transform: translateY(-1.5cqw) rotate(-1deg);
 }
 
 .device-display {
@@ -4276,8 +4330,8 @@ button:focus-visible,
 
 /* --- notebook --- */
 .device--laptop {
-    width: 100%;
-    filter: drop-shadow(0 22px 26px rgba(0, 0, 0, 0.45));
+    width: 72cqw;
+    filter: drop-shadow(0 3cqw 3cqw rgba(0, 0, 0, 0.28));
 }
 
 .device--laptop .device-screen {
@@ -4285,37 +4339,33 @@ button:focus-visible,
     aspect-ratio: 16 / 10;
     padding: 2.6% 2.6% 3.2%;
     background: #111015;
-    border-radius: 12px 12px 3px 3px;
-    box-shadow:
-        inset 0 0 0 1.5px #3c3b42,
-        inset 0 0 0 3px #111015;
+    border-radius: 2.4cqw 2.4cqw 0.6cqw 0.6cqw;
+    box-shadow: inset 0 0 0 0.3cqw #3c3b42, inset 0 0 0 0.6cqw #111015;
 }
 
-/* câmera no topo da tela */
 .device--laptop .device-screen::before {
     content: '';
     position: absolute;
     top: 1%;
     left: 50%;
-    width: 5px;
-    height: 5px;
+    width: 0.9cqw;
+    height: 0.9cqw;
     border-radius: 50%;
     background: #2c2b33;
     transform: translateX(-50%);
 }
 
 .device--laptop .device-display {
-    border-radius: 2px;
+    border-radius: 0.4cqw;
 }
 
-/* base de alumínio com o recorte para abrir a tampa */
 .device-base {
     position: relative;
     width: 118%;
     margin-left: -9%;
     aspect-ratio: 100 / 4.2;
-    background: linear-gradient(180deg, #e9eaee 0%, #c9cbd1 45%, #9ea1a8 100%);
-    border-radius: 2px 2px 14px 14px / 2px 2px 100% 100%;
+    background: linear-gradient(180deg, #eeeff2 0%, #cfd1d6 45%, #9ea1a8 100%);
+    border-radius: 0.3cqw 0.3cqw 2.4cqw 2.4cqw / 0.3cqw 0.3cqw 100% 100%;
 }
 
 .device-base::before {
@@ -4327,14 +4377,106 @@ button:focus-visible,
     height: 42%;
     transform: translateX(-50%);
     background: linear-gradient(180deg, #a5a8ae, #c8cad0);
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 1.4cqw 1.4cqw;
+}
+
+/* --- monitor CRT retrô (como a TV do WaxyWeb) --- */
+.device--crt {
+    width: 56cqw;
+    padding: 3.6cqw 3.6cqw 0;
+    background: linear-gradient(170deg, #ece5d4 0%, #d7cfbb 55%, #bfb59e 100%);
+    border-radius: 2.6cqw 2.6cqw 1.6cqw 1.6cqw;
+    box-shadow:
+        inset 0 0.4cqw 0 rgba(255, 255, 255, 0.7),
+        inset 0 -0.6cqw 0 rgba(0, 0, 0, 0.12),
+        0 3cqw 4cqw rgba(0, 0, 0, 0.3);
+}
+
+.device--crt .device-screen {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    padding: 2.4cqw;
+    background: #2a2824;
+    border-radius: 2.2cqw;
+    box-shadow: inset 0 0.5cqw 1cqw rgba(0, 0, 0, 0.6);
+}
+
+.device--crt .device-display {
+    border-radius: 3cqw / 3.6cqw;
+    box-shadow: 0 0 0 0.3cqw #121110;
+}
+
+/* linhas de varredura e reflexo do vidro curvo */
+.device--crt .device-display::before,
+.device--crt .device-display::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.device--crt .device-display::before {
+    background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.14) 0 1px, transparent 1px 3px);
+}
+
+.device--crt .device-display::after {
+    background:
+        radial-gradient(120% 90% at 30% 10%, rgba(255, 255, 255, 0.16), transparent 45%),
+        radial-gradient(closest-side, transparent 70%, rgba(0, 0, 0, 0.45));
+}
+
+.crt-panel {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.4cqw;
+    height: 6.4cqw;
+    padding: 0 1.2cqw;
+}
+
+.crt-panel span {
+    order: -1;
+    margin-right: auto;
+    width: 12cqw;
+    height: 1.1cqw;
+    border-radius: 999px;
+    background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.25) 0 0.5cqw, transparent 0.5cqw 1.1cqw);
+}
+
+.crt-panel i {
+    width: 2.4cqw;
+    height: 2.4cqw;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #f3eee2, #a79d86);
+    box-shadow: 0 0.2cqw 0.3cqw rgba(0, 0, 0, 0.3);
+}
+
+/* pezinho do monitor */
+.device--crt::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 30%;
+    height: 2.4cqw;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, #b4aa92, #d5cdb9);
+    clip-path: polygon(12% 0, 88% 0, 100% 100%, 0 100%);
 }
 
 /* --- celular --- */
 .device--phone {
-    height: 100%;
+    width: 30cqw;
+    height: auto;
     aspect-ratio: 9 / 19;
-    filter: drop-shadow(0 20px 24px rgba(0, 0, 0, 0.45));
+    transform: rotate(-5deg);
+    filter: drop-shadow(0 3cqw 3cqw rgba(0, 0, 0, 0.3));
+}
+
+.project-card:hover .device--phone {
+    transform: translateY(-1.5cqw) rotate(-2deg);
 }
 
 .device--phone .device-screen {
@@ -4343,12 +4485,9 @@ button:focus-visible,
     padding: 5%;
     background: #111015;
     border-radius: 18% / 8.5%;
-    box-shadow:
-        inset 0 0 0 1.5px #4a4952,
-        inset 0 0 0 3px #111015;
+    box-shadow: inset 0 0 0 0.3cqw #4a4952, inset 0 0 0 0.6cqw #111015;
 }
 
-/* ilha da câmera */
 .device--phone .device-screen::before {
     content: '';
     position: absolute;
@@ -4367,36 +4506,211 @@ button:focus-visible,
 }
 
 .project-card[data-image-type="mobile"] .project-image-container {
-    padding: 6% 0;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    border-radius: 0;
 }
 
-.project-card[data-image-type="mobile"] .device-display > img,
-.project-card[data-image-type="mobile"] .device-display > .project-video {
-    object-fit: cover;
-    object-position: top center;
+/* --- adesivos costurados --- */
+.stage-sticker {
+    position: absolute;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 1.5cqw 3.2cqw;
+    border-radius: 999px;
+    background: var(--tag);
+    color: #16141c;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(11px, 3.4cqw, 17px);
+    line-height: 1;
+    white-space: nowrap;
+    outline: max(1.5px, 0.35cqw) dashed color-mix(in srgb, var(--tag) 50%, #16141c);
+    outline-offset: calc(-1 * max(4px, 0.9cqw));
+    box-shadow: 0 1cqw 2cqw rgba(0, 0, 0, 0.18);
+    transition: transform 0.5s var(--ease-out);
+    pointer-events: none;
 }
 
-/* os cards de app seguem o mesmo formato dos cards de site */
-@media (max-width: 992px) {
-    .project-card[data-image-type="mobile"] {
-        grid-column: auto;
-    }
+.stage-sticker i {
+    font-size: 0.85em;
+}
+
+.stage-sticker--type {
+    top: 7%;
+    left: 5%;
+    transform: rotate(-7deg);
+}
+
+.stage-sticker--metric {
+    right: 5%;
+    bottom: 8%;
+    background: #fbfaf7;
+    --tag: #fbfaf7;
+    transform: rotate(5deg);
+}
+
+.stage-sticker--metric b {
+    color: #16141c;
+    font-weight: 800;
+}
+
+.project-card:hover .stage-sticker--type {
+    transform: rotate(-11deg) scale(1.04);
+}
+
+.project-card:hover .stage-sticker--metric {
+    transform: rotate(8deg) scale(1.04);
+}
+
+/* --- rótulo em arco com o endereço --- */
+.stage-arc {
+    position: absolute;
+    z-index: 3;
+    top: 3%;
+    right: 2%;
+    width: 36cqw;
+    transform: rotate(16deg);
+    overflow: visible;
+    pointer-events: none;
+}
+
+.stage-arc-band {
+    fill: none;
+    stroke: #16141c;
+    stroke-width: 26;
+    stroke-linecap: round;
+}
+
+.stage-arc-text {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    fill: var(--stage);
+    dominant-baseline: central;
+}
+
+/* --- ficha do projeto: tabela "Info" com linhas finas --- */
+.project-content {
+    padding: 22px 24px 24px;
+    gap: 0;
+}
+
+.project-header {
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.project-type {
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+}
+
+.project-type i {
+    color: var(--accent);
+}
+
+.project-links a.link-icon {
+    width: auto;
+    height: auto;
+    gap: 8px;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+.project-links a.link-icon:hover {
+    background: none;
+    color: var(--accent);
+    transform: none;
+}
+
+.link-host {
+    max-width: 22ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.project-title,
+.project-card .project-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: 2.3rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.project-title::after {
+    content: '*';
+    color: var(--accent);
+    margin-left: 2px;
+}
+
+.project-card:hover .project-title {
+    color: var(--text-primary);
+}
+
+/* a métrica vira adesivo no painel */
+.project-content .project-metric {
+    display: none;
+}
+
+.project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.project-stack::before {
+    content: 'Stack';
+    flex: 0 0 64px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.project-stack span,
+.project-stack span:hover {
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.project-stack span + span::before {
+    content: '\00B7';
+    margin: 0 7px;
+    color: var(--text-muted);
 }
 
 @media (max-width: 600px) {
-    .project-card[data-image-type="mobile"] .project-image-container {
-        width: 100%;
-        height: auto;
-        border-radius: 0;
-    }
-
-    .project-image-container {
-        padding: 7% 12% 9%;
+    .project-title,
+    .project-card .project-title {
+        font-size: 2rem;
     }
 }
 
-[data-theme="light"] .project-image-container {
-    background:
-        radial-gradient(ellipse 70% 60% at 50% 45%, rgba(139, 127, 240, 0.22), transparent 70%),
-        linear-gradient(160deg, #ecebf5 0%, #dcd9ec 100%);
+@media (prefers-reduced-motion: reduce) {
+    .device,
+    .stage-sticker {
+        transition: none;
+    }
 }
