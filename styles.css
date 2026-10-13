@@ -4754,7 +4754,7 @@ button:focus-visible,
     height: auto;
     aspect-ratio: 1 / 1.08;
     object-fit: cover;
-    object-position: center top;
+    object-position: center 22%;
     border-radius: 14px;
     border: 0;
     filter: none;
@@ -6061,4 +6061,83 @@ button:focus-visible,
 
 .hero-cta > a {
     flex-shrink: 0;
+}
+
+/* ---------- crachá: acabamento ---------- */
+.id-badge {
+    transition: transform 0.6s var(--ease-out);
+}
+
+.hero-visual:hover .id-badge {
+    transform: rotate(0.5deg);
+}
+
+.badge-card {
+    background: linear-gradient(168deg, #A6A9F0 0%, #9396E6 42%, #8487DD 100%);
+    border: 1px solid rgba(21, 21, 28, 0.35);
+    box-shadow:
+        inset 0 1.5px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -2px 0 rgba(21, 21, 28, 0.18),
+        0 2px 0 rgba(255, 255, 255, 0.06),
+        0 34px 70px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+/* brilho diagonal de plástico */
+.badge-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(115deg,
+        transparent 32%,
+        rgba(255, 255, 255, 0.17) 44%,
+        rgba(255, 255, 255, 0.05) 52%,
+        transparent 60%);
+    pointer-events: none;
+}
+
+/* furo do clipe mais fundo */
+.badge-card::before {
+    background: #15151c;
+    box-shadow:
+        inset 0 2px 3px rgba(0, 0, 0, 0.55),
+        0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* foto com moldura de documento */
+.badge-card .profile-image {
+    border: 3px solid #15151c;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(21, 21, 28, 0.28);
+}
+
+/* picote de ticket antes do nome */
+.badge-info {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 2px dashed rgba(21, 21, 28, 0.35);
+}
+
+.badge-info strong {
+    font-size: 1.3rem;
+}
+
+.badge-info small {
+    letter-spacing: 0.06em;
+    color: rgba(21, 21, 28, 0.75);
+}
+
+.badge-top {
+    margin: 8px 0 14px;
+}
+
+.badge-kind {
+    padding: 4px 10px;
+    box-shadow: 0 2px 0 rgba(21, 21, 28, 0.3);
+}
+
+.badge-barcode {
+    bottom: 16px;
+    height: 30px;
 }
