@@ -401,9 +401,10 @@ function initProjectFilter() {
 }
 
 // ========== Vídeos de apresentação dos projetos ==========
-// Cada card tem um <video> (webm) por cima da imagem. O vídeo só é
-// carregado e tocado quando o card entra na tela; sai da tela, pausa.
-// Se o navegador não tocar webm ou a rede pedir economia de dados,
+// Cada card tem um <video> por cima da imagem, com MP4 (H.264, que toca
+// em iPhone, iPad e Safari) e WebM de reserva. O vídeo só é carregado e
+// tocado quando o card entra na tela; sai da tela, pausa.
+// Se nenhum formato tocar ou a rede pedir economia de dados,
 // o vídeo some e a imagem continua.
 function initProjectVideos() {
     const videos = document.querySelectorAll('.project-video');

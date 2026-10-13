@@ -4754,7 +4754,7 @@ button:focus-visible,
     height: auto;
     aspect-ratio: 1 / 1.08;
     object-fit: cover;
-    object-position: center 22%;
+    object-position: center top;
     border-radius: 14px;
     border: 0;
     filter: none;
@@ -6051,4 +6051,14 @@ button:focus-visible,
     .hero-description {
         font-size: 1.08rem;
     }
+}
+
+/* ---------- hero: botões nunca espremidos (tablets) ---------- */
+.hero-cta {
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.hero-cta > a {
+    flex-shrink: 0;
 }
